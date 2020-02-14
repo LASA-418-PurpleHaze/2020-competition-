@@ -24,5 +24,12 @@ public class RobotMap   //Static port variables
     public static final int ELBOWTALONPORT = 1;
     public static final int COLORWHEELTALONPORT = 0;
 
+    //PID
     public static final double DEADBAND = 0.02;
+
+    //HazyIntake
+    public static final int LIFTINTAKETALON = 0;
+    public static final int SPININTAKETALON = 0;
+    public static final double LIFTTALONSPEED = 0.3;
+    public static final double SPINTALONSPEED = 0.5;
 }

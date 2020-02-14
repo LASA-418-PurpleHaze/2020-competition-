@@ -30,8 +30,11 @@ public class Robot extends TimedRobot {
 
   public static HazyMecBase hazyMecBase; 
   public static MecanumCommand mecanumCommand;
+
   public static HazyColorSensor colorSensor;
   public static HazyColorArm colorArm;
+
+  public static HazyIntake hazyIntake;
   
   @Override
   public void robotInit() {
@@ -43,6 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+    new DropIntakeCommand().execute();
   }
 
   @Override

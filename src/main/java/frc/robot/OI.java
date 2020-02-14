@@ -31,6 +31,9 @@ public class OI
     public OI(){
         //Set commands to run on button press
         
+        controller.getXButton().whenPressed(new FoldCommand());
+
+        controller.getYButton().whenPressed(new DropIntakeCommand());
         // rightThumbButton.whenPressed(new GoTo());
 
         // leftThumbButton.whenPressed(new GoTo2());
@@ -58,27 +61,41 @@ public class OI
     }
     
     //Getter methods for all our input devices
-    public static double getLeftX()
+    public static double getControllerLeftX()
     {
         return controller.getHazyJoysticks().getLeftXAxis();
     }
 
-    public static double getLeftY()
+    public static double getControllerLeftY()
     {
         return controller.getHazyJoysticks().getLeftYAxis();
     }
 
-    public static double getRightX()
+    public static double getControllerRightX()
     {
         return controller.getHazyJoysticks().getRightXAxis();
     }
 
-    public static double getRightY()
+    public static double getControllerRightY()
     {
         return controller.getHazyJoysticks().getRightYAxis();   
     }
     
+    public static double getLeftX(){
+        return leftJoystick.getX();
+    }
 
+    public static double getLeftY(){
+        return leftJoystick.getY();
+    }
+
+    public static double getRightX(){
+        return rightJoystick.getX();
+    }
+
+    public static double getRightY(){
+        return rightJoystick.getY();
+    }
 
     
     

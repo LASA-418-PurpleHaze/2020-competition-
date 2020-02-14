@@ -1,9 +1,10 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HazyColorArm extends Subsystem {
     private TalonSRX elbowTalon; 
@@ -14,6 +15,7 @@ public class HazyColorArm extends Subsystem {
     private int spinNum; //the number of times the wheel has spun (used in spinWheel())
     private int spinTo;
     private int colorCount;
+    private boolean isUp;
     
     public void initialize () {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
@@ -24,13 +26,28 @@ public class HazyColorArm extends Subsystem {
         candidateColor="";
         spinNum = 0;
         colorCount=0;
+        isUp = false;
     }
     
-    public void fold () {
-        elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
+    public void fold() {
+        if(!isUp){
+            elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
+            isUp = true;
+        }
+
+
+
+        else{
+            elbowTalon.set(ControlMode.Position, 0);
+            isUp = false;
+        }
+
+        
         //elbowTalon.set(ControlMode.PercentOutput, -0.1);
         //elbowTalon.setPosition();
     }
+
+
 
     //when run, this method sees the starting color and records it as the base color
     //always call before spinWheel() so that it does it right
@@ -125,8 +142,6 @@ public class HazyColorArm extends Subsystem {
     }
     
     @Override
-    public void initDefaultCommand()
-    {
-        setDefaultCommand(new FoldCommand());
-    }
+    public void initDefaultCommand(){}
+
 }

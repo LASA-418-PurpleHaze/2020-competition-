@@ -28,8 +28,10 @@ public class Robot extends TimedRobot {
    * for any initialization code.
    */
 
-  public static HazyMecBase HazyMecBase; 
+  public static HazyMecBase hazyMecBase; 
   public static MecanumCommand mecanumCommand;
+  public static HazyColorSensor colorSensor;
+  public static HazyColorArm colorArm;
   
   @Override
   public void robotInit() {

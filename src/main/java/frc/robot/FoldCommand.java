@@ -6,19 +6,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FoldCommand extends Command {
     public FoldCommand()
     {
-        super.requires(Robot.colorArm);
+        super.requires(Robot.hazyColorArm);
     }
     
     @Override
     protected void initialize()
     {
-        Robot.colorArm.initialize();
+        Robot.hazyColorArm.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.colorArm.fold();
+        Robot.hazyColorArm.fold();
     }
 
     @Override

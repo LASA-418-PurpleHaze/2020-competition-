@@ -29,35 +29,22 @@ public class OI
     
 
     public OI(){
-        //Set commands to run on button press
+        //Set commands to run on button press for the XBOX Controller - Operator
         
         controller.getXButton().whenPressed(new FoldCommand());
 
         controller.getYButton().whenPressed(new DropIntakeCommand());
-        // rightThumbButton.whenPressed(new GoTo());
 
-        // leftThumbButton.whenPressed(new GoTo2());
+        controller.getAButton().whenPressed(new GoToColorCommand());
 
-        // controller.getLeftBumper().whenPressed(new GrabberOpenCommand());
-        
-        // controller.getRightBumper().whenPressed(new GrabberCloseCommand());
+        controller.getBButton().whenPressed(new SpinWheelCommand());
 
-        // controller.getLeftBumper().whenPressed(new GrabberOpenCommand());
+        controller.getLeftBumper().whenPressed()
 
-        // rightTrigger.whileHeld(new GrabberIntakeCommand());
+        controller.getLeftBumper().whenPressed()
+        //Set commands to run on the Joysticks - Driver 
+        rightTrigger.whenPressed(new HazyIntake().intakeSwallow()); 
 
-        // //controller.getXButton().whileHeld(new GrabberIntakeCommand());
-
-        // controller.getYButton().whileHeld(new GrabberSpitCommand());
-
-        
-        // if(controller.getHazyTriggers().getLeftAxis())
-        //     new LiftGrabberCommand().execute();
-
-        // if(controller.getHazyTriggers().getRightAxis())
-        //     new LowerGrabberCommand().execute();
-        
-    
     }
     
     //Getter methods for all our input devices
@@ -96,11 +83,6 @@ public class OI
     public static double getRightY(){
         return rightJoystick.getY();
     }
-
-    
-    
-        
-    
 }
 
     

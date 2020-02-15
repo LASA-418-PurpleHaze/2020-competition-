@@ -52,7 +52,7 @@ public class HazyColorArm extends Subsystem {
     //when run, this method sees the starting color and records it as the base color
     //always call before spinWheel() so that it does it right
     public void setInitColor () {
-        initColor = Robot.colorSensor.getColor();
+        initColor = Robot.hazyColorSensor.getColor();
         currentColor = initColor;
     }
 
@@ -72,7 +72,7 @@ public class HazyColorArm extends Subsystem {
         }
 
         //gotten to initColor again - means it's gone half a spin
-        String col = Robot.colorSensor.getColor();
+        String col = Robot.hazyColorSensor.getColor();
         if (!col.equals(candidateColor)){
             System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
             colorCount=0;
@@ -106,8 +106,8 @@ public class HazyColorArm extends Subsystem {
     }
 
     public void testColorWheel () {
-        String theColor = Robot.colorSensor.getColor();
-        if (theColor.equals(Robot.colorSensor.getColor())) {
+        String theColor = Robot.hazyColorSensor.getColor();
+        if (theColor.equals(Robot.hazyColorSensor.getColor())) {
             colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
         } else {
             long mili = System.currentTimeMillis();
@@ -115,7 +115,7 @@ public class HazyColorArm extends Subsystem {
                 colorWheelTalon.set(ControlMode.PercentOutput, 0);
                 mili = System.currentTimeMillis();
             }
-            theColor = Robot.colorSensor.getColor();
+            theColor = Robot.hazyColorSensor.getColor();
             System.out.println(theColor);
         }
     }
@@ -130,8 +130,8 @@ public class HazyColorArm extends Subsystem {
 
     //spins the wheel to a specified color col
     public void goToColor (String col) {
-        System.out.println(Robot.colorSensor.getColor() + "- "+ col);
-        if (!Robot.colorSensor.getColor().equals(col)) {
+        System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
+        if (!Robot.hazyColorSensor.getColor().equals(col)) {
             System.out.println("going!");
             colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
         }

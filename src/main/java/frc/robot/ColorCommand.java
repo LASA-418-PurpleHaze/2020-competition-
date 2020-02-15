@@ -7,17 +7,17 @@ public class ColorCommand extends Command
 {
     public ColorCommand()
     {
-        super.requires(Robot.colorSensor);
+        super.requires(Robot.hazyColorSensor);
     }
     @Override
     protected void initialize()
     {
-        Robot.colorSensor.initialize();
+        Robot.hazyColorSensor.initialize();
     }
     @Override
     protected void execute()
     {
-        System.out.println(Robot.colorSensor.getColor());
+        System.out.println(Robot.hazyColorSensor.getColor());
     }
 
     @Override

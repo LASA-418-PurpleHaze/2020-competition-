@@ -6,23 +6,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GoToColorCommand extends Command {
     public GoToColorCommand()
     {
-        super.requires(Robot.colorArm);
+        super.requires(Robot.hazyColorArm);
     }
     
     @Override
     protected void initialize()
     {
-        Robot.colorArm.initialize();
-        Robot.colorSensor.initialize();
+        Robot.hazyColorArm.initialize();
+        Robot.hazyColorSensor.initialize();
     }
 
     @Override
     protected void execute()
     {
-        //Robot.colorWheelArm.goToColor("Blue");
-        //Robot.colorWheelArm.goToColor("Green");
-        //Robot.colorWheelArm.goToColor("Yellow");
-        //Robot.colorWheelArm.goToColor("Red");
+        //Robot.hazyColorArm.goToColor("Blue");
+        //Robot.hazyColorArm.goToColor("Green");
+        //Robot.hazyColorArm.goToColor("Yellow");
+        //Robot.hazyColorArm.goToColor("Red");
     }
 
     @Override

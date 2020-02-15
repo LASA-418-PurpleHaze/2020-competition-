@@ -27,17 +27,47 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
-
+  //Variables for the Mechanum Drive
   public static HazyMecBase hazyMecBase; 
   public static MecanumCommand mecanumCommand;
 
+  //Variables for the Color Sensor and Arm
   public static HazyColorSensor colorSensor;
   public static HazyColorArm colorArm;
+  public static ColorCommand colorCommand;
+  public static FoldCommand foldCommand;
+  public static SpinWheelCommand goToWeelCommand;
+  public static GoToColorCommand goToColorCommand;
 
+  //Variables for the Intake
   public static HazyIntake hazyIntake;
   
+  //Variables for the End Arm
+  public static HazyEndArm hazyEndArm;
+  public static EndArmCommand endArmCommand;
+
   @Override
   public void robotInit() {
+    //Initialization Code for the Mechanum Drive
+    hazyMecBase = new HazyMechBase();
+    mecanumCommand = new MecanumCommand();
+
+    Scheduler.getInstance().add(mecanumCommand);
+
+    //Initialization Code for the Color Sensor and Arm
+    hazyColorSensor = new new HazyColorSensor();
+    hazyColorArm = new HazyColorArm();
+    colorCommand = new ColorCommand();
+    foldCommand = new FoldCommand();
+    spinWheelCommand = new SpinWheelCommand();
+    goToColorCommand = new GoToColorCommand();
+
+    //Initialization Code for the Intake
+    hazyIntake = new HazyIntake();
+
+    //Initialization Code for End Arm
+    hazyEndArm = new HazyEndArm();
+    endArmCommand = new endArmCommand();
   }
 
   @Override
@@ -55,6 +85,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    Scheduler.getInstance.run();
+    OI hazyOI = new OI();
   }
 
   @Override

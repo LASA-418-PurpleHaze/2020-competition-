@@ -30,7 +30,7 @@ public class OI
 
     public OI(){
         //Set commands to run on button press for the XBOX Controller - Operator
-        
+        //We need to talk with the Operator to see how they want this laid out
         controller.getXButton().whenPressed(new FoldCommand());
 
         controller.getYButton().whenPressed(new DropIntakeCommand());
@@ -39,8 +39,11 @@ public class OI
 
         controller.getBButton().whenPressed(new SpinWheelCommand());
 
+        controller.getLeftBumper().whileHeld(new EndArmCommand());
+
         //Set commands to run on the Joysticks - Driver 
-        //rightTrigger.whenPressed(new HazyIntake().intakeSwallow()); 
+        rightTrigger.whenPressed(new SwallowIntakeCommand());
+        leftTrigger.whenPressed(new SpitIntakeCommand());
 
     }
     

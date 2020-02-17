@@ -39,11 +39,8 @@ public class OI
 
         controller.getBButton().whenPressed(new SpinWheelCommand());
 
-        controller.getLeftBumper().whenPressed()
-
-        controller.getLeftBumper().whenPressed()
         //Set commands to run on the Joysticks - Driver 
-        rightTrigger.whenPressed(new HazyIntake().intakeSwallow()); 
+        //rightTrigger.whenPressed(new HazyIntake().intakeSwallow()); 
 
     }
     

@@ -32,11 +32,11 @@ public class Robot extends TimedRobot {
   public static MecanumCommand mecanumCommand;
 
   //Variables for the Color Sensor and Arm
-  public static HazyColorSensor colorSensor;
-  public static HazyColorArm colorArm;
+  public static HazyColorSensor hazyColorSensor;
+  public static HazyColorArm hazyColorArm;
   public static ColorCommand colorCommand;
   public static FoldCommand foldCommand;
-  public static SpinWheelCommand goToWeelCommand;
+  public static SpinWheelCommand spinWheelCommand;
   public static GoToColorCommand goToColorCommand;
 
   //Variables for the Intake
@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().add(mecanumCommand);
 
     //Initialization Code for the Color Sensor and Arm
-    hazyColorSensor = new new HazyColorSensor();
+    hazyColorSensor = new HazyColorSensor();
     hazyColorArm = new HazyColorArm();
     colorCommand = new ColorCommand();
     foldCommand = new FoldCommand();
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance.run();
+    Scheduler.getInstance().run();
     OI hazyOI = new OI();
   }
 

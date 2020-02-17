@@ -4,7 +4,7 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class EndArmCommand extends Command {
-    public FoldCommand()
+    public void FoldCommand()
     {
         super.requires(Robot.hazyEndArm);
     }

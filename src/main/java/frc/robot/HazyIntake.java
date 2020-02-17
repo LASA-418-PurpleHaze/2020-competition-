@@ -1,3 +1,4 @@
+//Imports fot the Subsystem and its functions
 package frc.robot;
 
 
@@ -5,10 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
-
-
-//import edu.wpi.first.wpilibj.drive.RobotDriveBase;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 
 public class HazyIntake extends Subsystem

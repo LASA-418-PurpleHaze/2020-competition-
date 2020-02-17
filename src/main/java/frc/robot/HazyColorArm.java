@@ -1,3 +1,4 @@
+//Imports fot the Subsystem and its functions
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -15,8 +16,8 @@ public class HazyColorArm extends Subsystem {
     private int spinNum; //the number of times the wheel has spun (used in spinWheel())
     private int spinTo;
     private int colorCount;
-    private boolean isUp;
-    private int colorToTravelTo;
+    private boolean isUp; // Wether or not the arm for the color sensor is up or down on the robot
+    private int colorToTravelTo; //The Color which the color sensor will stop on
     
     public void initialize () {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);

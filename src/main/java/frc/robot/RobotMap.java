@@ -1,3 +1,4 @@
+//Imports fot the Robot Map
 package frc.robot;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -34,5 +35,5 @@ public class RobotMap   //Static port variables
     public static final double SPINTALONSPEED = 0.5;
 
     //End Arm
-    
+
 }

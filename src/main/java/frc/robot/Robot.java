@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+//Imports for the Robot
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    new DropIntakeCommand().execute();
+    new DropIntakeCommand().execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
   }
 
   @Override
@@ -92,8 +93,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-    OI hazyOI = new OI();
+    Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
+    OI hazyOI = new OI(); //OI object for all the buttons and their resulting commands
   }
 
   @Override

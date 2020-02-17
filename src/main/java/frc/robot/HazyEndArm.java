@@ -1,3 +1,4 @@
+//Imports fot the Subsystem and its functions
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -16,7 +17,7 @@ public class HazyEndArm extends Subsystem {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
         isUp = false;
         location = 0; //Used to show the current location the motor is at
-        change = 5; // How much the motor will move every time the fold function is called
+        change = 5; // How much the motor will move every time the fold function is called -> This value needs to be changed so that it works correctly
     }
     //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
     public void fold() {  

@@ -1,3 +1,4 @@
+//Imports fot the OI
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -31,22 +32,22 @@ public class OI
     public OI(){
         //Set commands to run on button press for the XBOX Controller - Operator
         //We need to talk with the Operator to see how they want this laid out
-        controller.getXButton().whenPressed(new FoldCommand());
+        controller.getXButton().whenPressed(new FoldCommand()); //Whenever this button is pushed the color arm is either dropped or pulled up
 
-        controller.getYButton().whenPressed(new DropIntakeCommand()); //Whenever the button is pushed the intake is dropped or pulled up
+        controller.getYButton().whenPressed(new DropIntakeCommand()); //Whenever this button is pushed the intake is dropped or pulled up
 
-        controller.getAButton().whenPressed(new GoToColorCommand());//Whenever this button is pushed it will go to the color based on the number of times the button is pressed
+        controller.getAButton().whenPressed(new GoToColorCommand());//Whenever this button is pushed it will go to the color based on the number of times the button has been previously pressed
 
         controller.getBButton().whenPressed(new SpinWheelCommand());//When this button is pushed it will spin the disk a predeignated amount
 
         controller.getLeftBumper().whileHeld(new EndArmCommand()); //Will run the execute on the command only when the button is being held down
 
-        controller.getRightBumper().whenPressed(new SwitchEndArmCommand());
+        controller.getRightBumper().whenPressed(new SwitchEndArmCommand());//Switches the direction of which the end arm motor is rotating
 
         //Set commands to run on the Joysticks - Driver 
-        rightTrigger.whenPressed(new SwallowIntakeCommand());
+        rightTrigger.whenPressed(new SwallowIntakeCommand()); //Will allow the driver to swallow with the intake whenever the button is pushed
 
-        leftTrigger.whenPressed(new SpitIntakeCommand());
+        leftTrigger.whenPressed(new SpitIntakeCommand()); //Will allow the driver to spit with the intake whenever the button is pushed
 
     }
     

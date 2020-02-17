@@ -33,11 +33,11 @@ public class OI
         //We need to talk with the Operator to see how they want this laid out
         controller.getXButton().whenPressed(new FoldCommand());
 
-        controller.getYButton().whenPressed(new DropIntakeCommand());
+        controller.getYButton().whenPressed(new DropIntakeCommand()); //Whenever the button is pushed the intake is dropped or pulled up
 
-        controller.getAButton().whenPressed(new GoToColorCommand());
+        controller.getAButton().whenPressed(new GoToColorCommand());//Whenever this button is pushed it will go to the color based on the number of times the button is pressed
 
-        controller.getBButton().whenPressed(new SpinWheelCommand());
+        controller.getBButton().whenPressed(new SpinWheelCommand());//When this button is pushed it will spin the disk a predeignated amount
 
         controller.getLeftBumper().whileHeld(new EndArmCommand()); //Will run the execute on the command only when the button is being held down
 
@@ -45,7 +45,7 @@ public class OI
 
         //Set commands to run on the Joysticks - Driver 
         rightTrigger.whenPressed(new SwallowIntakeCommand());
-        
+
         leftTrigger.whenPressed(new SpitIntakeCommand());
 
     }

@@ -16,6 +16,7 @@ public class HazyColorArm extends Subsystem {
     private int spinTo;
     private int colorCount;
     private boolean isUp;
+    private int colorToTravelTo;
     
     public void initialize () {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
@@ -27,6 +28,7 @@ public class HazyColorArm extends Subsystem {
         spinNum = 0;
         colorCount=0;
         isUp = false;
+        colorToTravelTo = 0;
     }
     
     public void fold() {
@@ -139,6 +141,12 @@ public class HazyColorArm extends Subsystem {
             System.out.println("stopped");
             colorWheelTalon.set(ControlMode.PercentOutput, 0);
         }
+    }
+    public int returnColorToTravelTo(){
+        return colorToTravelTo;
+    }
+    public void increaseColorToTravelTo(){
+        colorToTravelTo = (colorToTravelTo+1)%4;
     }
     
     @Override

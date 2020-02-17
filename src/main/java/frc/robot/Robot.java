@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     //Initialization Code for the Mechanum Drive
-    hazyMecBase = new HazyMechBase();
+    hazyMecBase = new HazyMecBase();
     mecanumCommand = new MecanumCommand();
 
     Scheduler.getInstance().add(mecanumCommand);
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
-    endArmCommand = new endArmCommand();
+    endArmCommand = new EndArmCommand();
   }
 
   @Override

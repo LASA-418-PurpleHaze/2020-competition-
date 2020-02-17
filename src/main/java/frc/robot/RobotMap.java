@@ -32,4 +32,7 @@ public class RobotMap   //Static port variables
     public static final int SPININTAKETALON = 0;
     public static final double LIFTTALONSPEED = 0.3;
     public static final double SPINTALONSPEED = 0.5;
+
+    //End Arm
+    
 }

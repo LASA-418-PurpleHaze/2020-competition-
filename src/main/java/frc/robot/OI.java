@@ -39,10 +39,13 @@ public class OI
 
         controller.getBButton().whenPressed(new SpinWheelCommand());
 
-        controller.getLeftBumper().whileHeld(new EndArmCommand());
+        controller.getLeftBumper().whileHeld(new EndArmCommand()); //Will run the execute on the command only when the button is being held down
+
+        controller.getRightBumper().whenPressed(new SwitchEndArmCommand());
 
         //Set commands to run on the Joysticks - Driver 
         rightTrigger.whenPressed(new SwallowIntakeCommand());
+        
         leftTrigger.whenPressed(new SpitIntakeCommand());
 
     }

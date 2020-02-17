@@ -9,24 +9,29 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HazyEndArm extends Subsystem {
     private TalonSRX elbowTalon; 
     private boolean isUp;
+    private int location;
+    private int change;
     
     public void initialize () {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
         isUp = false;
+        location = 0; //Used to show the current location the motor is at
+        change = 5; // How much the motor will move every time the fold function is called
     }
-    /*
-    This is just the code from Color Arm -> This needs to be remade so that it works with then end arm
-    
-    We dicide that we are going to code this so that when the button is held down then it will be running the program.
-    To tell wether or not the they want the arm to go up or down the operator will have a seperate button to choose between if its gonna go up or down.
-    */
+    //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
     public void fold() {  
         if(!isUp){
-            elbowTalon.set(ControlMode.Position, -3700); //These numbers need to be changed inorder to work with the End Arm
+            if(location > -10000){ //This value needs to be changed so that it equals the max distance which the motor can spin
+                location = location-change;
+                elbowTalon.set(ControlMode.Position, location);
+            }
         }
 
         else{
-            elbowTalon.set(ControlMode.Position, 0);//These numbers need to be changed inorder to work with the End Arm
+            if(location < 0){
+                location = location+change;
+                elbowTalon.set(ControlMode.Position, location);
+            }
         }
         //elbowTalon.set(ControlMode.PercentOutput, -0.1);
         //elbowTalon.setPosition();

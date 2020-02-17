@@ -3,8 +3,8 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class EndArmCommand extends Command {
-    public EndArmCommand()
+public class SwitchEndArmCommand extends Command {
+    public SwitchEndArmCommand()
     {
         super.requires(Robot.hazyEndArm);
     }
@@ -18,7 +18,7 @@ public class EndArmCommand extends Command {
     @Override
     protected void execute()
     {
-        Robot.hazyEndArm.fold();
+        Robot.hazyEndArm.changeDirection();
     }
 
     @Override

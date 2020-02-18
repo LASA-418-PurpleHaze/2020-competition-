@@ -48,7 +48,13 @@ public class Robot extends TimedRobot {
   
   //Variables for the End Arm
   public static HazyEndArm hazyEndArm;
-  public static EndArmCommand endArmCommand;
+  public static EndArmUpCommand endArmUpCommand;
+  public static EndArmDownCommand endArmDownCommand;
+
+  //Variables for the Shooter
+  public static HazyShooter hazyShooter;
+  public static ShooterSpitCommand shooterSpitCommand;
+  public static ShooterSwallowCommand shooterSwallowCommand;
 
   @Override
   public void robotInit() {
@@ -72,9 +78,15 @@ public class Robot extends TimedRobot {
     spitIntakeCommand = new SpitIntakeCommand();
     swallowIntakeCommand = new SwallowIntakeCommand();
 
-    //Initialization Code for End Arm
+    //Initialization Code for the End Arm
     hazyEndArm = new HazyEndArm();
-    endArmCommand = new EndArmCommand();
+    endArmUpCommand = new EndArmUpCommand();
+    endArmDownCommand = new EndArmDownCommand();
+
+    //Initialization Code for the Shooter
+    hazyShooter = new HazyShooter();
+    shooterSpitCommand = new ShooterSpitCommand();
+    shooterSwallowCommand = new ShooterSwallowCommand();
 
   }
 

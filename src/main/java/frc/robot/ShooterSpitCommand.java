@@ -4,22 +4,23 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class EndArmCommand extends Command {
-    public EndArmCommand()
+public class ShooterSpitCommand extends Command {
+
+    public ShooterSpitCommand()
     {
-        super.requires(Robot.hazyEndArm);
+        super.requires(Robot.hazyShooter);
     }
     
     @Override
     protected void initialize()
     {
-        Robot.hazyEndArm.initialize();
+        Robot.hazyShooter.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyEndArm.fold();
+        Robot.hazyShooter.shooterSpit();
     }
 
     @Override
@@ -29,8 +30,5 @@ public class EndArmCommand extends Command {
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

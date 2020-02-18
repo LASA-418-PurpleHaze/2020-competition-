@@ -34,16 +34,24 @@ public class OI
         //We need to talk with the Operator to see how they want this laid out
         controller.getXButton().whenPressed(new FoldCommand()); //Whenever this button is pushed the color arm is either dropped or pulled up
 
-        controller.getYButton().whenPressed(new DropIntakeCommand()); //Whenever this button is pushed the intake is dropped or pulled up
+        controller.getBButton().whenPressed(new DropIntakeCommand()); //Whenever this button is pushed the intake is dropped or pulled up
 
         controller.getAButton().whenPressed(new GoToColorCommand());//Whenever this button is pushed it will go to the color based on the number of times the button has been previously pressed
 
-        controller.getBButton().whenPressed(new SpinWheelCommand());//When this button is pushed it will spin the disk a predeignated amount
+        controller.getYButton().whenPressed(new SpinWheelCommand());//When this button is pushed it will spin the disk a predeignated amount
 
-        controller.getLeftBumper().whileHeld(new EndArmCommand()); //Will run the execute on the command only when the button is being held down
+        controller.getLeftBumper().whileHeld(new EndArmUpCommand());
 
-        controller.getRightBumper().whenPressed(new SwitchEndArmCommand());//Switches the direction of which the end arm motor is rotating
+        controller.getRightBumper().whenPressed(new EndArmDownCommand());
 
+        if(controller.getHazyTriggers().getLeftAxis()){ //Shoots the ball with the bottom right trigger
+            new ShooterSpitCommand();
+        }
+
+        if(controller.getHazyTriggers().getRightAxis()){ //Sucks the ball in with bottom left trigger
+            new ShooterSwallowCommand();
+        }
+        
         //Set commands to run on the Joysticks - Driver 
         rightTrigger.whenPressed(new SwallowIntakeCommand()); //Will allow the driver to swallow with the intake whenever the button is pushed
 

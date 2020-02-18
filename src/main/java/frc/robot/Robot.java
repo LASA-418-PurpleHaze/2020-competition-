@@ -8,13 +8,10 @@
 //Imports for the Robot
 package frc.robot;
 
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.TimedRobot;
-
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.OI;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +25,7 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
-  //Variables for the Mechanum Drive
+  //Variables for the Mecanum Drive
   public static HazyMecBase hazyMecBase; 
   public static MecanumCommand mecanumCommand;
 
@@ -45,17 +42,34 @@ public class Robot extends TimedRobot {
   public static DropIntakeCommand dropIntakeCommand;
   public static SpitIntakeCommand spitIntakeCommand;
   public static SwallowIntakeCommand swallowIntakeCommand;
+
+   //Variables for Low Ball Feeder
+   public static LowBallFeeder lowBallFeeder;
+   public static MoveLowFeedCommand moveLowFeedCommand;
+
+  //Variables for High Ball Feeder
+  public static HighBallFeeder highBallFeeder;
+  public static MoveHighFeedCommand moveHighFeedCommand;
+ 
   
   //Variables for the End Arm
   public static HazyEndArm hazyEndArm;
-  public static EndArmCommand endArmCommand;
+  public static EndArmUpCommand endArmUpCommand;
+  public static EndArmDownCommand endArmDownCommand;
+
+  //Variables for the Shooter
+  public static HazyShooter hazyShooter;
+  public static ShooterSpitCommand shooterSpitCommand;
+  public static ShooterSwallowCommand shooterSwallowCommand;
+
+  //Serial Port 
+  public static SerialPort hazyPort;
 
   @Override
   public void robotInit() {
     //Initialization Code for the Mechanum Drive
     hazyMecBase = new HazyMecBase();
     mecanumCommand = new MecanumCommand();
-
     Scheduler.getInstance().add(mecanumCommand);
 
     //Initialization Code for the Color Sensor and Arm
@@ -74,7 +88,25 @@ public class Robot extends TimedRobot {
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
-    endArmCommand = new EndArmCommand();
+    endArmUpCommand = new EndArmUpCommand();
+    endArmDownCommand = new EndArmDownCommand();
+
+    //Initialization Code for Low Ball Feeder
+    lowBallFeeder = new LowBallFeeder();
+    moveLowFeedCommand = new MoveLowFeedCommand();
+
+    //Initialization Code for High Ball Feeder
+    highBallFeeder = new HighBallFeeder();
+    moveHighFeedCommand = new MoveHighFeedCommand();
+
+    //Initialization Code for Shooter
+    hazyShooter = new HazyShooter();
+    shooterSpitCommand = new ShooterSpitCommand();
+    shooterSwallowCommand = new ShooterSwallowCommand();
+
+
+    //Initialization Code for Serial Port
+    hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
 
   }
 
@@ -84,7 +116,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    new DropIntakeCommand().execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
+    Robot.dropIntakeCommand.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
   }
 
   @Override

@@ -34,6 +34,19 @@ public class RobotMap   //Static port variables
     public static final double LIFTTALONSPEED = 0.3;
     public static final double SPINTALONSPEED = 0.5;
 
+    //Ball Feeders
+    public static final int LOWFEEDERTALON = 0;
+    public static final int HIGHFEEDERTALON = 0;
+
+    //Shooter
+    public static final int SHOOTERTALONPORT = 0;
+    public static final double SHOOTERSPEED = 0;
+    
+
     //End Arm
+    public static final int ENDARMTALONPORT = 0;
+
+    //Serial Port
+    public static final int SERIALPORTNUMBER = 0;
 
 }

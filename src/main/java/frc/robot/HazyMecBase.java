@@ -17,19 +17,19 @@ public class HazyMecBase extends Subsystem
     private TalonSRX leftBackTalon;
 
     public static HazyMecBase instance;
-    public static boolean initialized = false;
     
-    public HazyMecBase(){}
+    public HazyMecBase(){
+      rightFrontTalon = new TalonSRX(RobotMap.RIGHTFRONTTALONPORT);
+      leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
+      rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
+      leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);      
+      //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
+    }
 
     public void initialize(){
       //all initialization code should be done in this initialize function and not the default constructor
-      if(!initialized){
-        rightFrontTalon = new TalonSRX(RobotMap.RIGHTFRONTTALONPORT);
-        leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
-        rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
-        leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);      
-        //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
-      }
+      
+      
     }
 
 

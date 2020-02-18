@@ -13,7 +13,7 @@ public class ColorCommand extends Command
     @Override
     protected void initialize()
     {
-        Robot.hazyColorSensor.initialize();
+        // Robot.hazyColorSensor.initialize();
     }
     @Override
     protected void execute()

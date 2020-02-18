@@ -17,9 +17,9 @@ public class HazyColorArm extends Subsystem {
     private int spinTo;
     private int colorCount;
     private boolean isUp; // Wether or not the arm for the color sensor is up or down on the robot
-    private int colorToTravelTo; //The Color which the color sensor will stop on
-    
-    public void initialize () {
+    private int colorToTravelTo; //The Color which the color sensor will stop onHaz
+
+    public HazyColorArm(){
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
         colorWheelTalon = new TalonSRX(RobotMap.COLORWHEELTALONPORT);
         elbowTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -31,6 +31,10 @@ public class HazyColorArm extends Subsystem {
         isUp = false;
         colorToTravelTo = 0;
     }
+    
+    // public void initialize () {
+        
+    // }
     
     public void fold() {
         if(!isUp){

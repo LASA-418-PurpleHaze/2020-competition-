@@ -9,11 +9,14 @@ public class HazyColorSensor extends Subsystem {
     
     private Double [] colors = new Double[3];
 
-    //use instead of constructor
-    public void initialize ()
-    {
+    public HazyColorSensor(){
+
         sensor = new ColorSensorV3(RobotMap.COLORSENSORPORT);
+
     }
+
+
+    //public void initialize (){}
 
     //converts rgb (from color sensor) to hsv for easier color detection
     static Double[] rgbToHsv(double r, double g, double b) 

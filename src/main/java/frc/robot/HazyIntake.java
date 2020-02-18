@@ -22,7 +22,6 @@ public class HazyIntake extends Subsystem
 
     
     public HazyIntake(){
-
         isUp = true;
         liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?
         spinTalon = new TalonSRX(RobotMap.SPININTAKETALON);

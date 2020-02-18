@@ -13,8 +13,8 @@ public class GoToColorCommand extends Command {
     @Override
     protected void initialize()
     {
-        Robot.hazyColorArm.initialize();
-        Robot.hazyColorSensor.initialize();
+        // Robot.hazyColorArm.initialize();
+        // Robot.hazyColorSensor.initialize();
     }
 
     @Override

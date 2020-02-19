@@ -1,8 +1,7 @@
 //Imports fot the Command
 package frc.robot;
-import frc.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 
 public class MecanumCommand extends Command
 {

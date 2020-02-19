@@ -1,7 +1,6 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class SwallowIntakeCommand extends Command {

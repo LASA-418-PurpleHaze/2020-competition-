@@ -20,6 +20,7 @@ public class CommandEndArmUp extends Command {
     protected void execute()
     {
         Robot.hazyEndArm.foldUp();
+        //System.out.println("Pressed End Arm Up");
     }
 
     @Override

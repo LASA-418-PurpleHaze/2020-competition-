@@ -9,7 +9,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -36,31 +35,37 @@ public class Robot extends TimedRobot {
   public static CommandFold commandFold;
   public static CommandSpinWheel commandSpinWheel;
   public static CommandGoToColor commandGoToColor;
+  public static CommandColorArmDefault commandColorArmDefault;
 
   //Variables for the Intake
   public static HazyIntake hazyIntake;
   public static CommandDropIntake commandDropIntake;
   public static CommandSpitIntake commandSpitIntake;
   public static CommandSwallowIntake commandSwallowIntake;
+  public static CommandIntakeDefault commandIntakeDefault;
+  //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
 
    //Variables for Low Ball Feeder
    public static HazyLowFeeder hazyLowFeeder;
    public static CommandMoveLowFeed commandmoveLowFeed;
+   public static CommandLowFeedDefault commandLowFeedDefault;
 
   //Variables for High Ball Feeder
   public static HazyHighFeeder hazyHighFeeder;
   public static CommandMoveHighFeed commandMoveHighFeed;
+  public static CommandHighFeedDefault commandHighFeedDefault;
  
-  
   //Variables for the End Arm
   public static HazyEndArm hazyEndArm;
   public static CommandEndArmUp commandEndArmUp;
   public static CommandEndArmDown commandEndArmDown;
+  public static CommandEndArmDefault commandEndArmDefault;
 
   //Variables for the Shooter
   public static HazyShooter hazyShooter;
   public static CommandShooterSpit commandShooterSpit;
   public static CommandShooterSwallow commandShooterSwallow;
+  public static CommandShooterDefault commandShooterDefault;
 
   //Serial Port 
   public static SerialPort hazyPort;
@@ -79,34 +84,42 @@ public class Robot extends TimedRobot {
     commandFold = new CommandFold();
     commandSpinWheel = new CommandSpinWheel();
     commandGoToColor = new CommandGoToColor();
+    commandColorArmDefault = new CommandColorArmDefault();
+
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
     commandDropIntake = new CommandDropIntake();
     commandSpitIntake = new CommandSpitIntake();
     commandSwallowIntake = new CommandSwallowIntake();
+    commandIntakeDefault = new CommandIntakeDefault();
+    //commandSpinIntakeDefault = new CommandSpinIntakeDefault();
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
     commandEndArmUp = new CommandEndArmUp();
     commandEndArmDown = new CommandEndArmDown();
+    commandEndArmDefault = new CommandEndArmDefault();
 
     //Initialization Code for Low Ball Feeder
     hazyLowFeeder = new HazyLowFeeder();
     commandmoveLowFeed = new CommandMoveLowFeed();
+    commandLowFeedDefault = new CommandLowFeedDefault();
 
     //Initialization Code for High Ball Feeder
     hazyHighFeeder = new HazyHighFeeder();
     commandMoveHighFeed = new CommandMoveHighFeed();
+    commandHighFeedDefault = new CommandHighFeedDefault();
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
     commandShooterSpit = new CommandShooterSpit();
     commandShooterSwallow = new CommandShooterSwallow();
+    commandShooterDefault =  new CommandShooterDefault();
 
 
     //Initialization Code for Serial Port
-    hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
+    //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
 
   }
 

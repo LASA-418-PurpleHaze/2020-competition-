@@ -20,6 +20,7 @@ public class CommandEndArmDown extends Command {
     protected void execute()
     {
         Robot.hazyEndArm.foldDown();
+        //System.out.println("Pressed End Arm Down");
     }
 
     @Override

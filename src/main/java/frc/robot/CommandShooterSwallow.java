@@ -21,6 +21,7 @@ public class CommandShooterSwallow extends Command {
     protected void execute()
     {
         Robot.hazyShooter.shooterSwallow();
+        //System.out.println("Pressed Shooter Swallow");
     }
 
     @Override

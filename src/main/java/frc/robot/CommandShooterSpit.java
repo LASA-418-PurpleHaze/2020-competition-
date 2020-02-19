@@ -21,6 +21,7 @@ public class CommandShooterSpit extends Command {
     protected void execute()
     {
         Robot.hazyShooter.shooterSpit();
+        //System.out.println("Pressed Shooter Spit");
     }
 
     @Override

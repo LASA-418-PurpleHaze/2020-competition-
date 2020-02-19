@@ -36,6 +36,10 @@ public class HazyColorArm extends Subsystem {
         
     // }
     
+    public void defaultColorSpin(){
+        colorWheelTalon.set(ControlMode.PercentOutput, 0);
+    }
+
     public void fold() {
         if(!isUp){
             elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
@@ -64,6 +68,8 @@ public class HazyColorArm extends Subsystem {
     }
 
     //spins the wheel a specified number of times spinTo
+
+   
     public void spinWheel (int spinTo) {
         this.spinTo = spinTo;
         //hasn't spun spinTo times yet, keep motor going
@@ -155,6 +161,8 @@ public class HazyColorArm extends Subsystem {
     }
     
     @Override
-    public void initDefaultCommand(){}
+    public void initDefaultCommand(){
+        setDefaultCommand(Robot.commandColorArmDefault);
+    }
 
 }

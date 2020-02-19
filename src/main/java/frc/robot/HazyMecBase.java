@@ -88,10 +88,10 @@ public class HazyMecBase extends Subsystem
     
         normalize(wheelSpeeds);
     
-        leftFrontTalon.set(ControlMode.PercentOutput, wheelSpeeds[0] );
-        rightFrontTalon.set(ControlMode.PercentOutput, wheelSpeeds[1] * -1);
-        leftBackTalon.set(ControlMode.PercentOutput, wheelSpeeds[2]);
-        rightBackTalon.set(ControlMode.PercentOutput, wheelSpeeds[3]*-1);
+        leftFrontTalon.set(ControlMode.PercentOutput, -wheelSpeeds[0] );
+        rightFrontTalon.set(ControlMode.PercentOutput, -wheelSpeeds[1] * -1);
+        leftBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[2]);
+        rightBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[3]*-1);
     
     }
 
@@ -99,7 +99,7 @@ public class HazyMecBase extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(new CommandMecanum());
+        setDefaultCommand(Robot.commandMecanum);
     }
 
 

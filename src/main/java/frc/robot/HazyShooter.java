@@ -37,8 +37,14 @@ public class HazyShooter extends Subsystem
         shooterTalon.set(ControlMode.PercentOutput, RobotMap.SHOOTERSPEED);
     }
 
+    public void stopShooter(){
+        shooterTalon.set(ControlMode.PercentOutput, 0);
+    }
+
     @Override
-    public void initDefaultCommand(){}
+    public void initDefaultCommand(){
+        setDefaultCommand(Robot.commandShooterDefault);
+    }
 
 
 }

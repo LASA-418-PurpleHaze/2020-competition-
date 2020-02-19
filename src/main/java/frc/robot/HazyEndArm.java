@@ -9,21 +9,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HazyEndArm extends Subsystem {
     private TalonSRX endArmTalon; 
     
-    public void initialize () {
+    public HazyEndArm() {
         endArmTalon = new TalonSRX(RobotMap.ENDARMTALONPORT);
     }
     //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
     public void foldUp() {  
         endArmTalon.set(ControlMode.PercentOutput, 1);
-        //elbowTalon.set(ControlMode.PercentOutput, -0.1);
-        //elbowTalon.setPosition();
     }
     public void foldDown() {  
-        endArmTalon.set(ControlMode.PercentOutput, 1);
-        //elbowTalon.set(ControlMode.PercentOutput, -0.1);
-         //elbowTalon.setPosition();
+        endArmTalon.set(ControlMode.PercentOutput, -1);
+    }
+    public void stopMotors(){
+        endArmTalon.set(ControlMode.PercentOutput, 0);
     }
     @Override
-    public void initDefaultCommand(){}
+    public void initDefaultCommand(){
+        setDefaultCommand(Robot.commandEndArmDefault);
+    }
 
 }

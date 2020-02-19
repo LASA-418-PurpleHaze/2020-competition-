@@ -21,8 +21,14 @@ public class HazyHighFeeder extends Subsystem {
     public void move() {
         highFeederTalon.set(ControlMode.PercentOutput, .4);
     }
+
+    public void stop(){
+        highFeederTalon.set(ControlMode.PercentOutput, 0);
+    }
     
     @Override
-    public void initDefaultCommand(){}
+    public void initDefaultCommand(){
+        setDefaultCommand(Robot.commandHighFeedDefault);
+    }
 
 }

@@ -21,6 +21,7 @@ public class CommandSwallowIntake extends Command {
     protected void execute()
     {
         Robot.hazyIntake.intakeSwallow();
+        //System.out.println("Pressed Swallow intake");
     }
 
     @Override

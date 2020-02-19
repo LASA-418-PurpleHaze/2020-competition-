@@ -21,6 +21,7 @@ public class CommandSpitIntake extends Command {
     protected void execute()
     {
         Robot.hazyIntake.intakeSpit();
+        //System.out.println("Pressed Spit Intake");
     }
 
     @Override

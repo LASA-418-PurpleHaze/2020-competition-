@@ -42,7 +42,7 @@ public class HazyController extends Joystick{
     }
 
     public JoystickButton getBButton(){
-        return xButton;
+        return bButton;
     }
 
     public JoystickButton getRightBumper(){

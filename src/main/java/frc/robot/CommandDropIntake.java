@@ -21,6 +21,7 @@ public class CommandDropIntake extends Command {
     protected void execute()
     {
         Robot.hazyIntake.moveIntake();
+        //System.out.println("Pressed Drop Intake");
     }
 
     @Override

@@ -20,6 +20,7 @@ public class CommandFold extends Command {
     protected void execute()
     {
         Robot.hazyColorArm.fold();
+        //System.out.println("Pressed Command Fold");
     }
 
     @Override

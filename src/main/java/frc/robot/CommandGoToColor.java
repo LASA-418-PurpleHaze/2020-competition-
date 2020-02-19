@@ -33,6 +33,8 @@ public class CommandGoToColor extends Command {
             Robot.hazyColorArm.goToColor("Red");
 
         Robot.hazyColorArm.increaseColorToTravelTo(); //Increase the color to travel to so that if the function is called again then it will go to the next color wanted by the user
+
+        //System.out.println("Pressed Go To Color");
     }
 
     @Override

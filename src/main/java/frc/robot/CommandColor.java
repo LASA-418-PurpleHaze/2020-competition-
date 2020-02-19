@@ -18,7 +18,7 @@ public class CommandColor extends Command
     @Override
     protected void execute()
     {
-        System.out.println(Robot.hazyColorSensor.getColor());
+        //System.out.println(Robot.hazyColorSensor.getColor());
     }
 
     @Override

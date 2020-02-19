@@ -18,6 +18,7 @@ public class CommandMoveHighFeed extends Command {
     protected void execute()
     {
         Robot.hazyHighFeeder.move();
+        //System.out.println("Pressed Move High Feed");
     }
 
     @Override

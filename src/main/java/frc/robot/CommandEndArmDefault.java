@@ -4,31 +4,28 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandSpinWheel extends Command {
-    public CommandSpinWheel()
+public class CommandEndArmDefault extends Command
+{
+    public CommandEndArmDefault()
     {
-        super.requires(Robot.hazyColorArm);
+        super.requires(Robot.hazyEndArm);
     }
-    
     @Override
     protected void initialize()
     {
-        // Robot.hazyColorArm.initialize();
         // Robot.hazyColorSensor.initialize();
-        Robot.hazyColorArm.setInitColor();
     }
-
     @Override
     protected void execute()
     {
-        Robot.hazyColorArm.spinWheel(4);
-        //System.out.println("Pressed Spin Color Wheel");
+        Robot.hazyEndArm.stopMotors();
+   
     }
 
     @Override
     protected boolean isFinished()
     {
-        return Robot.hazyColorArm.spinWheelIsFinished();
+        return false;
     }
 
     @Override

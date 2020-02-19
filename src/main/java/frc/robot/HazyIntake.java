@@ -8,10 +8,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 
+public class HazyIntake extends Subsystem {
 
-public class HazyIntake extends Subsystem
-{
-    
     private TalonSRX liftTalon, spinTalon;
     private static HazyIntake instance;
     DigitalInput inputLow = new DigitalInput(0);
@@ -19,8 +17,6 @@ public class HazyIntake extends Subsystem
     private boolean isUp;
 
  
-
-    
     public HazyIntake(){
         isUp = true;
         liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?

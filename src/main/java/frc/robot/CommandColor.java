@@ -1,32 +1,30 @@
 //Imports fot the Command
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SpinWheelCommand extends Command {
-    public SpinWheelCommand ()
+public class CommandColor extends Command
+{
+    public CommandColor()
     {
-        super.requires(Robot.hazyColorArm);
+        super.requires(Robot.hazyColorSensor);
     }
-    
     @Override
     protected void initialize()
     {
-        // Robot.hazyColorArm.initialize();
         // Robot.hazyColorSensor.initialize();
-        Robot.hazyColorArm.setInitColor();
     }
-
     @Override
     protected void execute()
     {
-        Robot.hazyColorArm.spinWheel(4);
+        System.out.println(Robot.hazyColorSensor.getColor());
     }
 
     @Override
     protected boolean isFinished()
     {
-        return Robot.hazyColorArm.spinWheelIsFinished();
+        return false;
     }
 
     @Override

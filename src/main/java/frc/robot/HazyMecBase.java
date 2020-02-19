@@ -99,7 +99,7 @@ public class HazyMecBase extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(new MecanumCommand());
+        setDefaultCommand(new CommandMecanum());
     }
 
 

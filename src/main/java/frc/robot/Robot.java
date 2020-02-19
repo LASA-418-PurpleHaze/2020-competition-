@@ -27,40 +27,40 @@ public class Robot extends TimedRobot {
    */
   //Variables for the Mecanum Drive
   public static HazyMecBase hazyMecBase; 
-  public static MecanumCommand mecanumCommand;
+  public static CommandMecanum commandMecanum;
 
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
   public static HazyColorArm hazyColorArm;
-  public static ColorCommand colorCommand;
-  public static FoldCommand foldCommand;
-  public static SpinWheelCommand spinWheelCommand;
-  public static GoToColorCommand goToColorCommand;
+  public static CommandColor commandColor;
+  public static CommandFold commandFold;
+  public static CommandSpinWheel commandSpinWheel;
+  public static CommandGoToColor commandGoToColor;
 
   //Variables for the Intake
   public static HazyIntake hazyIntake;
-  public static DropIntakeCommand dropIntakeCommand;
-  public static SpitIntakeCommand spitIntakeCommand;
-  public static SwallowIntakeCommand swallowIntakeCommand;
+  public static CommandDropIntake commandDropIntake;
+  public static CommandSpitIntake commandSpitIntake;
+  public static CommandSwallowIntake commandSwallowIntake;
 
    //Variables for Low Ball Feeder
-   public static LowBallFeeder lowBallFeeder;
-   public static MoveLowFeedCommand moveLowFeedCommand;
+   public static HazyLowFeeder hazyLowFeeder;
+   public static CommandMoveLowFeed commandmoveLowFeed;
 
   //Variables for High Ball Feeder
-  public static HighBallFeeder highBallFeeder;
-  public static MoveHighFeedCommand moveHighFeedCommand;
+  public static HazyHighFeeder hazyHighFeeder;
+  public static CommandMoveHighFeed commandMoveHighFeed;
  
   
   //Variables for the End Arm
   public static HazyEndArm hazyEndArm;
-  public static EndArmUpCommand endArmUpCommand;
-  public static EndArmDownCommand endArmDownCommand;
+  public static CommandEndArmUp commandEndArmUp;
+  public static CommandEndArmDown commandEndArmDown;
 
   //Variables for the Shooter
   public static HazyShooter hazyShooter;
-  public static ShooterSpitCommand shooterSpitCommand;
-  public static ShooterSwallowCommand shooterSwallowCommand;
+  public static CommandShooterSpit commandShooterSpit;
+  public static CommandShooterSwallow commandShooterSwallow;
 
   //Serial Port 
   public static SerialPort hazyPort;
@@ -69,40 +69,40 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Initialization Code for the Mechanum Drive
     hazyMecBase = new HazyMecBase();
-    mecanumCommand = new MecanumCommand();
-    Scheduler.getInstance().add(mecanumCommand);
+    commandMecanum = new CommandMecanum();
+    Scheduler.getInstance().add(commandMecanum);
 
     //Initialization Code for the Color Sensor and Arm
     hazyColorSensor = new HazyColorSensor();
     hazyColorArm = new HazyColorArm();
-    colorCommand = new ColorCommand();
-    foldCommand = new FoldCommand();
-    spinWheelCommand = new SpinWheelCommand();
-    goToColorCommand = new GoToColorCommand();
+    commandColor = new CommandColor();
+    commandFold = new CommandFold();
+    commandSpinWheel = new CommandSpinWheel();
+    commandGoToColor = new CommandGoToColor();
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
-    dropIntakeCommand = new DropIntakeCommand();
-    spitIntakeCommand = new SpitIntakeCommand();
-    swallowIntakeCommand = new SwallowIntakeCommand();
+    commandDropIntake = new CommandDropIntake();
+    commandSpitIntake = new CommandSpitIntake();
+    commandSwallowIntake = new CommandSwallowIntake();
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
-    endArmUpCommand = new EndArmUpCommand();
-    endArmDownCommand = new EndArmDownCommand();
+    commandEndArmUp = new CommandEndArmUp();
+    commandEndArmDown = new CommandEndArmDown();
 
     //Initialization Code for Low Ball Feeder
-    lowBallFeeder = new LowBallFeeder();
-    moveLowFeedCommand = new MoveLowFeedCommand();
+    hazyLowFeeder = new HazyLowFeeder();
+    commandmoveLowFeed = new CommandMoveLowFeed();
 
     //Initialization Code for High Ball Feeder
-    highBallFeeder = new HighBallFeeder();
-    moveHighFeedCommand = new MoveHighFeedCommand();
+    hazyHighFeeder = new HazyHighFeeder();
+    commandMoveHighFeed = new CommandMoveHighFeed();
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
-    shooterSpitCommand = new ShooterSpitCommand();
-    shooterSwallowCommand = new ShooterSwallowCommand();
+    commandShooterSpit = new CommandShooterSpit();
+    commandShooterSwallow = new CommandShooterSwallow();
 
 
     //Initialization Code for Serial Port
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    Robot.dropIntakeCommand.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
+    Robot.commandDropIntake.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
   }
 
   @Override

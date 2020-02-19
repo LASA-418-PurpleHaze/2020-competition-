@@ -3,9 +3,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MecanumCommand extends Command
+public class CommandMecanum extends Command
 {
-    public MecanumCommand()
+    public CommandMecanum()
     {
         super.requires(Robot.hazyMecBase);
     }

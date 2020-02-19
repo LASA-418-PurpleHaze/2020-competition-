@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GoToColorCommand extends Command {
-    public GoToColorCommand()
+public class CommandGoToColor extends Command {
+    public CommandGoToColor()
     {
         super.requires(Robot.hazyColorArm);
     }

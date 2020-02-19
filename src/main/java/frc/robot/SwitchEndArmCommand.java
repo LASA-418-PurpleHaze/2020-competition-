@@ -1,24 +1,25 @@
 //Imports fot the Command
 package frc.robot;
 
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FoldCommand extends Command {
-    public FoldCommand()
+public class SwitchEndArmCommand extends Command {
+    public SwitchEndArmCommand()
     {
-        super.requires(Robot.hazyColorArm);
+        super.requires(Robot.hazyEndArm);
     }
     
     @Override
     protected void initialize()
     {
-        // Robot.hazyColorArm.initialize();
+        // Robot.hazyEndArm.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyColorArm.fold();
+        Robot.hazyEndArm.changeDirection();
     }
 
     @Override

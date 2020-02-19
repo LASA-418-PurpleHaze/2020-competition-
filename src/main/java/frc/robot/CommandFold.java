@@ -1,34 +1,35 @@
 //Imports fot the Command
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShooterSwallowCommand extends Command {
-
-    public ShooterSwallowCommand()
+public class CommandFold extends Command {
+    public CommandFold()
     {
-        super.requires(Robot.hazyShooter);
+        super.requires(Robot.hazyColorArm);
     }
     
     @Override
     protected void initialize()
     {
-        // Robot.hazyShooter.initialize();
+        // Robot.hazyColorArm.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyShooter.shooterSwallow();
+        Robot.hazyColorArm.fold();
     }
 
     @Override
     protected boolean isFinished()
     {
-        return true;
+        return false;
     }
 
     @Override
-    protected void interrupted(){}
+    protected void interrupted()
+    {
+        
+    }
 }

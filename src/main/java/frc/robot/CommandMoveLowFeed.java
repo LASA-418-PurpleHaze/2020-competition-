@@ -4,28 +4,26 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SwitchEndArmCommand extends Command {
-    public SwitchEndArmCommand()
+public class CommandMoveLowFeed extends Command {
+    public CommandMoveLowFeed ()
     {
-        super.requires(Robot.hazyEndArm);
+        super.requires(Robot.hazyLowFeeder);
     }
     
     @Override
-    protected void initialize()
-    {
-        // Robot.hazyEndArm.initialize();
-    }
+    protected void initialize(){}
+    
 
     @Override
     protected void execute()
     {
-        Robot.hazyEndArm.changeDirection();
+        Robot.hazyLowFeeder.move();
     }
 
     @Override
     protected boolean isFinished()
     {
-        return false;
+        return true;
     }
 
     @Override

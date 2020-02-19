@@ -3,7 +3,6 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -100,7 +99,7 @@ public class HazyMecBase extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(new MecanumCommand());
+        setDefaultCommand(new CommandMecanum());
     }
 
 

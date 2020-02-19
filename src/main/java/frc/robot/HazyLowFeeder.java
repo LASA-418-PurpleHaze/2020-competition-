@@ -2,23 +2,21 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class HighBallFeeder extends Subsystem {
+public class HazyLowFeeder extends Subsystem {
 
-    private TalonSRX highFeederTalon; 
-
-    public HighBallFeeder(){
-        highFeederTalon = new TalonSRX(RobotMap.HIGHFEEDERTALON);
+    private TalonSRX lowFeederTalon; 
+    
+    public HazyLowFeeder(){
+        lowFeederTalon = new TalonSRX(RobotMap.LOWFEEDERTALON);
     }
-    
 
-    
     public void move() {
-        highFeederTalon.set(ControlMode.PercentOutput, .4);
+        lowFeederTalon.set(ControlMode.PercentOutput, .4);
     }
     
     @Override

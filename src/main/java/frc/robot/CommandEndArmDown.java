@@ -1,29 +1,31 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveLowFeedCommand extends Command {
-    public MoveLowFeedCommand ()
+public class CommandEndArmDown extends Command {
+    public CommandEndArmDown()
     {
-        super.requires(Robot.lowBallFeeder);
+        super.requires(Robot.hazyEndArm);
     }
     
     @Override
-    protected void initialize(){}
-    
+    protected void initialize()
+    {
+        // Robot.hazyEndArm.initialize();
+    }
 
     @Override
     protected void execute()
     {
-        Robot.lowBallFeeder.move();
+        Robot.hazyEndArm.foldDown();
     }
 
     @Override
     protected boolean isFinished()
     {
-        return true;
+        return false;
     }
 
     @Override

@@ -4,8 +4,8 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SpinWheelCommand extends Command {
-    public SpinWheelCommand ()
+public class CommandSpinWheel extends Command {
+    public CommandSpinWheel()
     {
         super.requires(Robot.hazyColorArm);
     }

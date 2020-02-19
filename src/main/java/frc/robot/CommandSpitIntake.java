@@ -1,26 +1,26 @@
 //Imports fot the Command
 package frc.robot;
 
-
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ShooterSpitCommand extends Command {
+public class CommandSpitIntake extends Command {
 
-    public ShooterSpitCommand()
+    public CommandSpitIntake()
     {
-        super.requires(Robot.hazyShooter);
+        super.requires(Robot.hazyIntake);
     }
     
     @Override
     protected void initialize()
     {
-        // Robot.hazyShooter.initialize();
+        Robot.hazyIntake.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyShooter.shooterSpit();
+        Robot.hazyIntake.intakeSpit();
     }
 
     @Override

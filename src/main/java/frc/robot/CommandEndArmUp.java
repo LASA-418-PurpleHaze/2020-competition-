@@ -1,24 +1,25 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ColorCommand extends Command
-{
-    public ColorCommand()
+public class CommandEndArmUp extends Command {
+    public CommandEndArmUp()
     {
-        super.requires(Robot.hazyColorSensor);
+        super.requires(Robot.hazyEndArm);
     }
+    
     @Override
     protected void initialize()
     {
-        // Robot.hazyColorSensor.initialize();
+        // Robot.hazyEndArm.initialize();
     }
+
     @Override
     protected void execute()
     {
-        System.out.println(Robot.hazyColorSensor.getColor());
+        Robot.hazyEndArm.foldUp();
     }
 
     @Override

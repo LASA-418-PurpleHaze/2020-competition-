@@ -1,26 +1,26 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SwallowIntakeCommand extends Command {
+public class CommandShooterSwallow extends Command {
 
-    public SwallowIntakeCommand()
+    public CommandShooterSwallow()
     {
-        super.requires(Robot.hazyIntake);
+        super.requires(Robot.hazyShooter);
     }
     
     @Override
     protected void initialize()
     {
-        Robot.hazyIntake.initialize();
+        // Robot.hazyShooter.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyIntake.intakeSwallow();
+        Robot.hazyShooter.shooterSwallow();
     }
 
     @Override

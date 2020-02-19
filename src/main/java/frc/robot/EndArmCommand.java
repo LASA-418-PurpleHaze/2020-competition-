@@ -13,7 +13,7 @@ public class EndArmCommand extends Command {
     @Override
     protected void initialize()
     {
-        Robot.hazyEndArm.initialize();
+        // Robot.hazyEndArm.initialize();
     }
 
     @Override

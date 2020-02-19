@@ -4,31 +4,32 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SpitIntakeCommand extends Command {
-
-    public SpitIntakeCommand()
+public class CommandColor extends Command
+{
+    public CommandColor()
     {
-        super.requires(Robot.hazyIntake);
+        super.requires(Robot.hazyColorSensor);
     }
-    
     @Override
     protected void initialize()
     {
-        Robot.hazyIntake.initialize();
+        // Robot.hazyColorSensor.initialize();
     }
-
     @Override
     protected void execute()
     {
-        Robot.hazyIntake.intakeSpit();
+        System.out.println(Robot.hazyColorSensor.getColor());
     }
 
     @Override
     protected boolean isFinished()
     {
-        return true;
+        return false;
     }
 
     @Override
-    protected void interrupted(){}
+    protected void interrupted()
+    {
+        
+    }
 }

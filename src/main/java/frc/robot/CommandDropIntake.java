@@ -4,22 +4,23 @@ package frc.robot;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FoldCommand extends Command {
-    public FoldCommand()
+public class CommandDropIntake extends Command {
+
+    public CommandDropIntake()
     {
-        super.requires(Robot.hazyColorArm);
+        super.requires(Robot.hazyIntake);
     }
     
     @Override
     protected void initialize()
     {
-        // Robot.hazyColorArm.initialize();
+        Robot.hazyIntake.initialize();
     }
 
     @Override
     protected void execute()
     {
-        Robot.hazyColorArm.fold();
+        Robot.hazyIntake.moveIntake();
     }
 
     @Override
@@ -29,8 +30,5 @@ public class FoldCommand extends Command {
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

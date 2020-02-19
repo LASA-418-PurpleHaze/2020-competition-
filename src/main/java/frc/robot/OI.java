@@ -4,7 +4,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 
 
@@ -32,35 +31,30 @@ public class OI
     public OI(){
         //Set commands to run on button press for the XBOX Controller - Operator
         //We need to talk with the Operator to see how they want this laid out
-        controller.getXButton().whenPressed(Robot.foldCommand); //Whenever this button is pushed the color arm is either dropped or pulled up
+        controller.getXButton().whenPressed(Robot.commandFold); //Whenever this button is pushed the color arm is either dropped or pulled up
 
-        controller.getBButton().whenPressed(Robot.dropIntakeCommand); //Whenever this button is pushed the intake is dropped or pulled up
+        controller.getBButton().whenPressed(Robot.commandDropIntake); //Whenever this button is pushed the intake is dropped or pulled up
 
-        controller.getAButton().whenPressed(Robot.goToColorCommand);//Whenever this button is pushed it will go to the color based on the number of times the button has been previously pressed
+        controller.getAButton().whenPressed(Robot.commandGoToColor);//Whenever this button is pushed it will go to the color based on the number of times the button has been previously pressed
 
-        controller.getYButton().whenPressed(Robot.spinWheelCommand);//When this button is pushed it will spin the disk a predeignated amount
+        controller.getYButton().whenPressed(Robot.commandSpinWheel);//When this button is pushed it will spin the disk a predeignated amount
 
-        controller.getLeftBumper().whileHeld(Robot.endArmUpCommand); //Will run the execute on the command only when the button is being held down
+        controller.getLeftBumper().whileHeld(Robot.commandEndArmUp); //Will run the execute on the command only when the button is being held down
 
-        controller.getRightBumper().whileHeld(Robot.endArmDownCommand);//Switches the direction of which the end arm motor is rotating
+        controller.getRightBumper().whileHeld(Robot.commandEndArmDown);//Switches the direction of which the end arm motor is rotating
 
         //Set commands to run on the Joysticks - Driver 
-        rightTrigger.whenPressed(Robot.swallowIntakeCommand); //Will allow the driver to swallow with the intake whenever the button is pushed
+        rightTrigger.whenPressed(Robot.commandSwallowIntake); //Will allow the driver to swallow with the intake whenever the button is pushed
 
-        leftTrigger.whenPressed(Robot.spitIntakeCommand); //Will allow the driver to spit with the intake whenever the button is pushed
+        leftTrigger.whenPressed(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
 
         if(controller.getHazyTriggers().getLeftAxis()){ //Shoots the ball with the bottom right trigger
-            Robot.shooterSpitCommand.execute();
+            Robot.commandShooterSpit.execute();
         }
 
         if(controller.getHazyTriggers().getRightAxis()){ //Sucks the ball in with bottom left trigger
-            Robot.shooterSwallowCommand.execute();
+            Robot.commandShooterSwallow.execute();
         }
-        
-        //Set commands to run on the Joysticks - Driver 
-        rightTrigger.whenPressed(Robot.swallowIntakeCommand); //Will allow the driver to swallow with the intake whenever the button is pushed
-
-        leftTrigger.whenPressed(Robot.spitIntakeCommand); //Will allow the driver to spit with the intake whenever the button is pushed
 
     }
     

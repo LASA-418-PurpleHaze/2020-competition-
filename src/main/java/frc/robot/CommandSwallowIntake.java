@@ -14,7 +14,7 @@ public class CommandSwallowIntake extends Command {
     @Override
     protected void initialize()
     {
-        Robot.hazyIntake.initialize();
+        // Robot.hazyIntake.initialize();
     }
 
     @Override

@@ -24,10 +24,6 @@ public class HazyIntake extends Subsystem {
         spinVictor = new Victor(RobotMap.SPININTAKEVICTOR);
     }
     
-    public void initialize(){
-        //all initialization code should be done in this initialize function and not the default constructor
-    }
-    
     public static HazyIntake getInstance(){
         if (instance==null)
             instance = new HazyIntake();
@@ -44,16 +40,30 @@ public class HazyIntake extends Subsystem {
         else
             System.out.println("Not Pressed");
     }
+
     //Functions actually used by commands
     public void moveIntake(){
-        if(isUp && inputLow.get()){
-            liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
-            isUp = false;
+        if(isUp){
+            
+            if(inputLow.get())
+                liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
+            
+            else if(!inputLow.get()){
+                liftTalon.set(ControlMode.PercentOutput, 0);
+                isUp = false;
+            } 
         }  
         
-        else if(!isUp && inputHigh.get()){
-            liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
-            isUp = true;
+        else if(!isUp){
+
+            if(inputHigh.get())
+                liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
+            
+            else if(!inputHigh.get()){
+                liftTalon.set(ControlMode.PercentOutput, 0);
+                isUp = true;
+            }
+            
         }
     }
 
@@ -75,7 +85,7 @@ public class HazyIntake extends Subsystem {
 
     @Override
     public void initDefaultCommand(){
-        setDefaultCommand(Robot.commandIntakeDefault);
+        //setDefaultCommand(Robot.commandIntakeDefault);
     }
 
 

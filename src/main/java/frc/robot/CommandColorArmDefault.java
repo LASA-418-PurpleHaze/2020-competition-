@@ -18,7 +18,7 @@ public class CommandColorArmDefault extends Command
     @Override
     protected void execute()
     {
-        Robot.hazyColorArm.defaultColorSpin();
+        Robot.hazyColorArm.stopSpin();
        
     }
 

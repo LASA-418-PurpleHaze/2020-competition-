@@ -14,7 +14,7 @@ public class CommandSpitIntake extends Command {
     @Override
     protected void initialize()
     {
-        Robot.hazyIntake.initialize();
+        // Robot.hazyIntake.initialize();
     }
 
     @Override

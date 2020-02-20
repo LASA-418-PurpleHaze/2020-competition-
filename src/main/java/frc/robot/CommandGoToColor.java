@@ -38,8 +38,7 @@ public class CommandGoToColor extends Command {
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return true;
     }
 

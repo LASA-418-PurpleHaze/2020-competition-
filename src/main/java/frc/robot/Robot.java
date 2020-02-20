@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
     commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
 
-
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
     commandDropIntake = new CommandDropIntake();
@@ -117,10 +116,8 @@ public class Robot extends TimedRobot {
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
 
-
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
-
   }
 
   @Override
@@ -149,5 +146,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-
 }

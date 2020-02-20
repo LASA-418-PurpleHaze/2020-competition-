@@ -1,37 +1,29 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandFold extends Command {
-    public CommandFold()
-    {
+    public CommandFold(){
         super.requires(Robot.hazyColorArm);
     }
     
     @Override
-    protected void initialize()
-    {
+    protected void initialize(){
         // Robot.hazyColorArm.initialize();
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute(){
         Robot.hazyColorArm.fold();
         //System.out.println("Pressed Command Fold");
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return true;
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

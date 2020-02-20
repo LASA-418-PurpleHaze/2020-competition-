@@ -1,35 +1,27 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandMoveLowFeed extends Command {
-    public CommandMoveLowFeed ()
-    {
+    public CommandMoveLowFeed (){
         super.requires(Robot.hazyLowFeeder);
     }
     
     @Override
     protected void initialize(){}
     
-
     @Override
-    protected void execute()
-    {
+    protected void execute(){
         Robot.hazyLowFeeder.move();
         //System.out.println("Pressed Move Low Feed");
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return true;
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

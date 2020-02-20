@@ -3,10 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 
-
 public class HazyJoysticks extends XboxController{
     
-
     public HazyJoysticks(int p){
         super(p);
     }
@@ -26,7 +24,4 @@ public class HazyJoysticks extends XboxController{
     public double getLeftYAxis(){
         return this.getY(Hand.kLeft);
     }
-
-    
-
 }

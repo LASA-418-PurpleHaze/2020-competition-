@@ -7,8 +7,7 @@ import edu.wpi.first.wpiutil.math.MathUtil;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-public class HazyMecBase extends Subsystem
-{
+public class HazyMecBase extends Subsystem{
     
     private TalonSRX rightFrontTalon;
     private TalonSRX leftFrontTalon;
@@ -27,10 +26,7 @@ public class HazyMecBase extends Subsystem
 
     public void initialize(){
       //all initialization code should be done in this initialize function and not the default constructor
-      
-      
     }
-
 
     public static HazyMecBase getInstance(){
       if (instance==null)
@@ -38,17 +34,14 @@ public class HazyMecBase extends Subsystem
       return instance;
     }
     
-
     protected void normalize(double[] wheelSpeeds) {
       double maxMagnitude = Math.abs(wheelSpeeds[0]);
-
       for (int i = 1; i < wheelSpeeds.length; i++) {
         double temp = Math.abs(wheelSpeeds[i]);
         if (maxMagnitude < temp) {
           maxMagnitude = temp;
         }
       }
-
       if (maxMagnitude > 1.0) {
         for (int i = 0; i < wheelSpeeds.length; i++) {
         wheelSpeeds[i] = wheelSpeeds[i] / maxMagnitude;
@@ -56,20 +49,16 @@ public class HazyMecBase extends Subsystem
       }
     }
 
-
     private double applyDeadband(double value, double deadband) {
       if (Math.abs(value) > deadband) {
         if (value > 0.0) 
           return (value - deadband) / (1.0 - deadband);
-        
         else 
           return (value + deadband) / (1.0 - deadband);  
       } 
-
       else 
         return 0.0;
     }
-
 
     public void driveCartesian(double x, double y, double angle){
       
@@ -78,8 +67,7 @@ public class HazyMecBase extends Subsystem
     
         x = MathUtil.clamp(x, -1.0, 1.0);
         x = applyDeadband(x, RobotMap.DEADBAND);
-    
-    
+      
         double[] wheelSpeeds = new double[4];
         wheelSpeeds[0] = x + y + angle;
         wheelSpeeds[1] = -x + y - angle;
@@ -92,15 +80,11 @@ public class HazyMecBase extends Subsystem
         rightFrontTalon.set(ControlMode.PercentOutput, -wheelSpeeds[1] * -1);
         leftBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[2]);
         rightBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[3]*-1);
-    
     }
 
-    
     @Override
     public void initDefaultCommand()
     {
         setDefaultCommand(Robot.commandMecanum);
     }
-
-
 }

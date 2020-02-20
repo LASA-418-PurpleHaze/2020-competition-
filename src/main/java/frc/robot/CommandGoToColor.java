@@ -1,25 +1,22 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandGoToColor extends Command {
-    public CommandGoToColor()
-    {
+    public CommandGoToColor(){
         super.requires(Robot.hazyColorArm);
     }
     
     @Override
-    protected void initialize()
-    {
+    protected void initialize(){
         // Robot.hazyColorArm.initialize();
         // Robot.hazyColorSensor.initialize();
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute(){ 
+        /*
         if(Robot.hazyColorArm.returnColorToTravelTo() == 0)
             Robot.hazyColorArm.goToColor("Blue");
             
@@ -33,8 +30,9 @@ public class CommandGoToColor extends Command {
             Robot.hazyColorArm.goToColor("Red");
 
         Robot.hazyColorArm.increaseColorToTravelTo(); //Increase the color to travel to so that if the function is called again then it will go to the next color wanted by the user
-
+        */
         //System.out.println("Pressed Go To Color");
+        Robot.hazyColorArm.goToColor("Red");
     }
 
     @Override
@@ -43,8 +41,5 @@ public class CommandGoToColor extends Command {
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

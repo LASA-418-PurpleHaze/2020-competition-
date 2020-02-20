@@ -27,7 +27,6 @@ public class OI
     
     public static HazyController controller = new HazyController(RobotMap.CONTROLLERPORT);
     
-
     public OI(){
         //Set commands to run on button press for the XBOX Controller - Operator
         //We need to talk with the Operator to see how they want this laid out
@@ -48,34 +47,29 @@ public class OI
 
         leftTrigger.whenPressed(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
 
-        if(controller.getHazyTriggers().getLeftAxis()){ //Shoots the ball with the bottom right trigger
+        if(controller.getHazyTriggers().getRightAxis()){ //Shoots the ball with the bottom right trigger
             Robot.commandShooterSpit.execute();
         }
 
-        if(controller.getHazyTriggers().getRightAxis()){ //Sucks the ball in with bottom left trigger
+        if(controller.getHazyTriggers().getLeftAxis()){ //Sucks the ball in with bottom left trigger
             Robot.commandShooterSwallow.execute();
         }
-
     }
     
     //Getter methods for all our input devices
-    public static double getControllerLeftX()
-    {
+    public static double getControllerLeftX(){
         return controller.getHazyJoysticks().getLeftXAxis();
     }
 
-    public static double getControllerLeftY()
-    {
+    public static double getControllerLeftY(){
         return controller.getHazyJoysticks().getLeftYAxis();
     }
 
-    public static double getControllerRightX()
-    {
+    public static double getControllerRightX(){
         return controller.getHazyJoysticks().getRightXAxis();
     }
 
-    public static double getControllerRightY()
-    {
+    public static double getControllerRightY(){
         return controller.getHazyJoysticks().getRightYAxis();   
     }
     

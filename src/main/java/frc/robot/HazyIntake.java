@@ -1,7 +1,6 @@
 //Imports fot the Subsystem and its functions
 package frc.robot;
 
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +16,6 @@ public class HazyIntake extends Subsystem {
     DigitalInput inputHigh = new DigitalInput(2);
     private boolean isUp;
 
- 
     public HazyIntake(){
         isUp = true;
         liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?
@@ -33,36 +31,28 @@ public class HazyIntake extends Subsystem {
     public void printButtons(){
         if(!inputLow.get())
             System.out.println("Low Pressed");
-
         else if(!inputHigh.get())
             System.out.println("High Pressed");
-        
         else
             System.out.println("Not Pressed");
     }
 
-    //Functions actually used by commands
-    public void moveIntake(){
+    public void moveIntake(){ //Functions actually used by commands
         if(isUp){
             if(inputLow.get())
                 liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
-            
             else if(!inputLow.get()){
                 liftTalon.set(ControlMode.PercentOutput, 0);
                 isUp = false;
             } 
         }  
-        
         else if(!isUp){
-
             if(inputHigh.get())
                 liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
-            
             else if(!inputHigh.get()){
                 liftTalon.set(ControlMode.PercentOutput, 0);
                 isUp = true;
             }
-            
         }
     }
 
@@ -86,6 +76,4 @@ public class HazyIntake extends Subsystem {
     public void initDefaultCommand(){
         //setDefaultCommand(Robot.commandIntakeDefault);
     }
-
-
 }

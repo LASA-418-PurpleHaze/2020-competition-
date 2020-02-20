@@ -1,37 +1,31 @@
 //Imports fot the Command
 package frc.robot;
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 
-public class CommandMecanum extends Command
-{
-    public CommandMecanum()
-    {
+public class CommandMecanum extends Command {
+    public CommandMecanum(){
         super.requires(Robot.hazyMecBase);
     }
+
     @Override
-    protected void initialize()
-    {
+    protected void initialize(){
         //Doesn't actually do anything right now, look into whether or not we even need an intialization command
         Robot.hazyMecBase.initialize();
     }
+
     @Override
-    protected void execute()
-    {
+    protected void execute(){
         Robot.hazyMecBase.driveCartesian(-1* OI.getRightX(), OI.getLeftY(), -1 * OI.getLeftX());
 
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return false;
     }
 
     @Override
-    protected void interrupted()
-    {
+    protected void interrupted(){
         Robot.hazyMecBase.driveCartesian(0, 0, 0);
     }
 }

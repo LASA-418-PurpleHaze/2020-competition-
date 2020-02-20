@@ -10,17 +10,11 @@ public class HazyColorSensor extends Subsystem {
     private Double [] colors = new Double[3];
 
     public HazyColorSensor(){
-
         sensor = new ColorSensorV3(RobotMap.COLORSENSORPORT);
-
     }
-
-
     //public void initialize (){}
 
-    //converts rgb (from color sensor) to hsv for easier color detection
-    static Double[] rgbToHsv(double r, double g, double b) 
-    {
+    static Double[] rgbToHsv(double r, double g, double b) { //converts rgb (from color sensor) to hsv for easier color detection
         // h, s, v = hue, saturation, value 
         double cmax = Math.max(r, Math.max(g, b)); // maximum of r, g, b 
         double cmin = Math.min(r, Math.min(g, b)); // minimum of r, g, b 
@@ -45,13 +39,9 @@ public class HazyColorSensor extends Subsystem {
         Double[] out = {h,s,v};
         return out;
     } 
-        
-    //returns a string of the color detected
-    public String getColor ()
-    {
-	    //if there is a color detected (to reduce error)
-        if (sensor.getColor() != null) 
-        {
+    
+    public String getColor (){ //returns a string of the color detected\
+        if (sensor.getColor() != null) { //if there is a color detected (to reduce error)
             colors = rgbToHsv(sensor.getColor().red, sensor.getColor().green, sensor.getColor().blue); //converts to hsv format for easier detection
             //System.out.println(colors[0]);
             String col = "Blue";

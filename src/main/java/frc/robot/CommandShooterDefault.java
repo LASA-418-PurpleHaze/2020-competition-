@@ -1,35 +1,28 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandShooterDefault extends Command
-{
-    public CommandShooterDefault()
-    {
+public class CommandShooterDefault extends Command {
+    public CommandShooterDefault(){
         super.requires(Robot.hazyShooter);
     }
+
     @Override
-    protected void initialize()
-    {
+    protected void initialize(){
         // Robot.hazyColorSensor.initialize();
     }
+
     @Override
-    protected void execute()
-    {
+    protected void execute(){
         Robot.hazyShooter.stopShooter();
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return false;
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

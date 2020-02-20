@@ -3,8 +3,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-
 //import edu.wpi.first.wpilibj.hal.HAL;
 
 public class HazyController extends Joystick{
@@ -76,5 +74,4 @@ public class HazyController extends Joystick{
     public HazyJoysticks getHazyJoysticks(){
         return joysticks;
     }
-
 }

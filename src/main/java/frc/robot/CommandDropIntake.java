@@ -1,32 +1,26 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandDropIntake extends Command {
-
-    public CommandDropIntake()
-    {
+    public CommandDropIntake(){
         super.requires(Robot.hazyIntake);
     }
     
     @Override
-    protected void initialize()
-    {
+    protected void initialize(){
         // Robot.hazyIntake.initialize();
     }
 
     @Override
-    protected void execute()
-    {
+    protected void execute(){
         Robot.hazyIntake.moveIntake();
         //System.out.println("Pressed Drop Intake");
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected boolean isFinished(){
         return true;
     }
 

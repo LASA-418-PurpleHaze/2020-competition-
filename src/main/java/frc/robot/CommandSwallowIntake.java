@@ -1,11 +1,9 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandSwallowIntake extends Command {
-
     public CommandSwallowIntake()
     {
         super.requires(Robot.hazyIntake);

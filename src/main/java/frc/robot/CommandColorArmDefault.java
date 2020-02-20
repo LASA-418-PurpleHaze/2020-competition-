@@ -1,36 +1,28 @@
 //Imports fot the Command
 package frc.robot;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandColorArmDefault extends Command
-{
-    public CommandColorArmDefault()
-    {
+public class CommandColorArmDefault extends Command {
+    public CommandColorArmDefault(){
         super.requires(Robot.hazyColorArm);
-    }
-    @Override
-    protected void initialize()
-    {
-        // Robot.hazyColorSensor.initialize();
-    }
-    @Override
-    protected void execute()
-    {
-        Robot.hazyColorArm.stopSpin();
-       
     }
 
     @Override
-    protected boolean isFinished()
-    {
+    protected void initialize(){
+        // Robot.hazyColorSensor.initialize();
+    }
+
+    @Override
+    protected void execute(){
+        Robot.hazyColorArm.stopSpin();
+    }
+
+    @Override
+    protected boolean isFinished(){
         return false;
     }
 
     @Override
-    protected void interrupted()
-    {
-        
-    }
+    protected void interrupted(){}
 }

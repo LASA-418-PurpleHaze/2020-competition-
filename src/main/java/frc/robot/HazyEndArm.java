@@ -3,7 +3,6 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HazyEndArm extends Subsystem {
@@ -12,19 +11,21 @@ public class HazyEndArm extends Subsystem {
     public HazyEndArm() {
         endArmTalon = new TalonSRX(RobotMap.ENDARMTALONPORT);
     }
-    //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
-    public void foldUp() {  
+    
+    public void foldUp() {  //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
         endArmTalon.set(ControlMode.PercentOutput, 1);
     }
+
     public void foldDown() {  
         endArmTalon.set(ControlMode.PercentOutput, -1);
     }
+
     public void stopMotors(){
         endArmTalon.set(ControlMode.PercentOutput, 0);
     }
+    
     @Override
     public void initDefaultCommand(){
         setDefaultCommand(Robot.commandEndArmDefault);
     }
-
 }

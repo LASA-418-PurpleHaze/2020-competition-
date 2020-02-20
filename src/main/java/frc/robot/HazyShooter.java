@@ -7,13 +7,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 
-public class HazyShooter extends Subsystem
-{
-    
+public class HazyShooter extends Subsystem {
+
     private TalonSRX shooterTalon;
     private static HazyIntake instance;
 
-    
     public HazyShooter(){
         shooterTalon = new TalonSRX(RobotMap.SHOOTERTALONPORT);
     }
@@ -28,8 +26,7 @@ public class HazyShooter extends Subsystem
         return instance;
     }
 
-    //Functions actually used by commands
-    public void shooterSpit(){
+    public void shooterSpit(){ //Functions actually used by commands
         shooterTalon.set(ControlMode.PercentOutput, -RobotMap.SHOOTERSPEED);
     }
 
@@ -45,6 +42,4 @@ public class HazyShooter extends Subsystem
     public void initDefaultCommand(){
         setDefaultCommand(Robot.commandShooterDefault);
     }
-
-
 }

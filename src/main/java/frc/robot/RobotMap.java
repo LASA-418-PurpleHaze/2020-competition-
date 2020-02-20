@@ -2,9 +2,7 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.I2C;
 
-public class RobotMap   //Static port variables
-
-{
+public class RobotMap { //Static port variables
     //Joysticks 
     public static final int LEFTJOYSTICKPORT = 2;
     public static final int RIGHTJOYSTICKPORT = 1;
@@ -41,12 +39,10 @@ public class RobotMap   //Static port variables
     //Shooter
     public static final int SHOOTERTALONPORT = 12;
     public static final double SHOOTERSPEED = 0.7;
-    
 
     //End Arm
     public static final int ENDARMTALONPORT = 3;
 
     //Serial Port
     public static final int SERIALPORTNUMBER = 0;
-
 }

@@ -44,7 +44,6 @@ public class HazyIntake extends Subsystem {
     //Functions actually used by commands
     public void moveIntake(){
         if(isUp){
-            
             if(inputLow.get())
                 liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
             

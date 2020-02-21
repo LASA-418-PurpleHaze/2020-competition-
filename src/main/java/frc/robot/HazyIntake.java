@@ -15,11 +15,13 @@ public class HazyIntake extends Subsystem {
     DigitalInput inputLow = new DigitalInput(0);
     DigitalInput inputHigh = new DigitalInput(2);
     private boolean isUp;
+    private boolean shouldMove;
 
     public HazyIntake(){
         isUp = true;
         liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?
         spinVictor = new Victor(RobotMap.SPININTAKEVICTOR);
+        shouldMove = false;
     }
     
     public static HazyIntake getInstance(){
@@ -38,21 +40,24 @@ public class HazyIntake extends Subsystem {
     }
 
     public void moveIntake(){ //Functions actually used by commands
+        shouldMove = true;
         if(isUp){
-            if(inputLow.get())
-                liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
-            else if(!inputLow.get()){
-                liftTalon.set(ControlMode.PercentOutput, 0);
-                isUp = false;
-            } 
-        }  
-        else if(!isUp){
-            if(inputHigh.get())
+            while(shouldMove){
+                if(!inputLow.get()){
+                    shouldMove = false;
+                    isUp = false;
+                }
                 liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
-            else if(!inputHigh.get()){
-                liftTalon.set(ControlMode.PercentOutput, 0);
-                isUp = true;
             }
+        }
+        if(!isUp){
+            while(shouldMove){
+                if(!inputHigh.get()){
+                    shouldMove = false;
+                    isUp = true;
+                }
+                liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
+            }         
         }
     }
 

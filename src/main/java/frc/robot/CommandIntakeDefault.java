@@ -17,7 +17,7 @@ public class CommandIntakeDefault extends Command {
     protected void execute(){
         Robot.hazyIntake.intakeStopLift();
         Robot.hazyIntake.intakeStopSpin();
-        //Robot.hazyIntake.printButtons();
+        Robot.hazyIntake.printButtons();
     }
 
     @Override

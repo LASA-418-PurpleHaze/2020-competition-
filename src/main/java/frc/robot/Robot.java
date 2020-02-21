@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
    //Variables for Low Ball Feeder
    public static HazyLowFeeder hazyLowFeeder;
-   public static CommandMoveLowFeed commandmoveLowFeed;
+   public static CommandMoveLowFeed commandMoveLowFeed;
    public static CommandLowFeedDefault commandLowFeedDefault;
 
   //Variables for High Ball Feeder
@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
     commandSpinWheel = new CommandSpinWheel();
     commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
+    Scheduler.getInstance().add(commandColor);
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
@@ -99,22 +100,26 @@ public class Robot extends TimedRobot {
     commandEndArmUp = new CommandEndArmUp();
     commandEndArmDown = new CommandEndArmDown();
     commandEndArmDefault = new CommandEndArmDefault();
+    Scheduler.getInstance().add(commandEndArmDefault);
 
     //Initialization Code for Low Ball Feeder
     hazyLowFeeder = new HazyLowFeeder();
-    commandmoveLowFeed = new CommandMoveLowFeed();
+    commandMoveLowFeed = new CommandMoveLowFeed();
     commandLowFeedDefault = new CommandLowFeedDefault();
+    Scheduler.getInstance().add(commandLowFeedDefault);
 
     //Initialization Code for High Ball Feeder
     hazyHighFeeder = new HazyHighFeeder();
     commandMoveHighFeed = new CommandMoveHighFeed();
     commandHighFeedDefault = new CommandHighFeedDefault();
+    Scheduler.getInstance().add(commandLowFeedDefault);
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
     commandShooterSpit = new CommandShooterSpit();
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
+    Scheduler.getInstance().add(commandShooterDefault);
 
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);

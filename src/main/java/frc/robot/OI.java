@@ -47,6 +47,10 @@ public class OI
 
         leftTrigger.whenPressed(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
 
+        leftMidButton.whileHeld(Robot.commandMoveLowFeed);
+
+        rightMidButton.whileHeld(Robot.commandMoveHighFeed);
+
         if(controller.getHazyTriggers().getRightAxis()){ //Shoots the ball with the bottom right trigger
             Robot.commandShooterSpit.execute();
         }

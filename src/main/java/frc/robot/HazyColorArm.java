@@ -36,9 +36,11 @@ public class HazyColorArm extends Subsystem {
     public void fold(){
         if(!isUp){
             elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
+            System.out.println("Color Arm Going Up");
             isUp = true;
-        }else{
+        }else if(isUp){
             elbowTalon.set(ControlMode.Position, 0);
+            System.out.println("Color Arm Going Down");
             isUp = false;
         }
     }

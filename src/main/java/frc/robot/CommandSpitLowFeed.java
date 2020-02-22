@@ -3,21 +3,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandFold extends Command {
-    public CommandFold(){
-        super.requires(Robot.hazyColorArm);
+public class CommandSpitLowFeed extends Command {
+    public CommandSpitLowFeed(){
+        super.requires(Robot.hazyLowFeeder);
     }
     
     @Override
-    protected void initialize(){
-        // Robot.hazyColorArm.initialize();
-
-    }
-
+    protected void initialize(){}
+    
     @Override
     protected void execute(){
-        System.out.println("Pressed Command Fold");
-        Robot.hazyColorArm.fold();
+        Robot.hazyLowFeeder.spit();
+        //System.out.println("Pressed Move Low Feed");
     }
 
     @Override

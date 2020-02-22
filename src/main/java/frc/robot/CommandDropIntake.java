@@ -16,12 +16,13 @@ public class CommandDropIntake extends Command {
     @Override
     protected void execute(){
         Robot.hazyIntake.moveIntake();
+        Robot.hazyIntake.intakeStopSpin();
         //System.out.println("Pressed Drop Intake");
     }
 
     @Override
     protected boolean isFinished(){
-        return true;
+        return false;
     }
 
     @Override

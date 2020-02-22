@@ -15,7 +15,7 @@ public class CommandHighFeedDefault extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyLowFeeder.stop();
+        Robot.hazyHighFeeder.stop();
 
     }
 

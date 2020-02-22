@@ -29,12 +29,14 @@ public class RobotMap { //Static port variables
     //HazyIntake
     public static final int LIFTINTAKETALON = 4;
     public static final int SPININTAKEVICTOR = 5;
-    public static final double LIFTTALONSPEED = 0.3;
+    public static final double LIFTTALONSPEED = 0.2;
     public static final double SPINVICTORSPEED = 0.5;
 
     //Ball Feeders
     public static final int LOWFEEDERTALON = 15;
     public static final int HIGHFEEDERTALON = 14;
+    public static final double FEEDERSPEED = .27;
+
 
     //Shooter
     public static final int SHOOTERTALONPORT = 12;

@@ -34,11 +34,12 @@ public class HazyColorArm extends Subsystem {
     }
 
     public void fold(){
+        System.out.println("Running");
         if(!isUp){
             elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
             System.out.println("Color Arm Going Up");
             isUp = true;
-        }else if(isUp){
+        }else {
             elbowTalon.set(ControlMode.Position, 0);
             System.out.println("Color Arm Going Down");
             isUp = false;
@@ -74,22 +75,22 @@ public class HazyColorArm extends Subsystem {
         String col = Robot.hazyColorSensor.getColor();
         
         if(!col.equals(candidateColor)){
-            System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
+            //System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
             colorCount = 0;
             candidateColor = col;
         }else{
             colorCount++;
-            System.out.println(colorCount+" "+ col+" current:"+currentColor);
+            //System.out.println(colorCount+" "+ col+" current:"+currentColor);
         }
         if(!candidateColor.equals(currentColor)){
             if(colorCount > 6){
                 if(col.equals(initColor) && !(col.equals(currentColor))){
-                    System.out.println("spins ++++");
+                   // System.out.println("spins ++++");
                     spinNum++;
                 }
-                System.out.println("new color: " + col);
+               // System.out.println("new color: " + col);
                 currentColor = col;
-                System.out.println("spins: " + spinNum);
+                //System.out.println("spins: " + spinNum);
             }
         }
         if(spinNum >= spinTo*2 ){ //has spun spinTo times, turn motor off

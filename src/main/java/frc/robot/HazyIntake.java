@@ -2,26 +2,27 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.Victor;
+
 
 public class HazyIntake extends Subsystem {
 
     private TalonSRX liftTalon;
-    public Victor spinVictor;
+    public VictorSPX spinVictor;
     private static HazyIntake instance;
     DigitalInput inputLow = new DigitalInput(0);
     DigitalInput inputHigh = new DigitalInput(2);
     private boolean isUp;
-    private boolean shouldMove;
+    private boolean  shouldMove;
 
     public HazyIntake(){
         isUp = true;
-        liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?
-        spinVictor = new Victor(RobotMap.SPININTAKEVICTOR);
         shouldMove = false;
+        liftTalon = new TalonSRX(RobotMap.LIFTINTAKETALON); //change ports after testing?
+        spinVictor = new VictorSPX(RobotMap.SPININTAKEVICTOR);
     }
     
     public static HazyIntake getInstance(){
@@ -38,27 +39,38 @@ public class HazyIntake extends Subsystem {
         else
             System.out.println("Not Pressed");
     }
+    public void switchDir (){
+        shouldMove = true;
+    }
 
     public void moveIntake(){ //Functions actually used by commands
-        shouldMove = true;
-        if(isUp){
-            while(shouldMove){
-                if(!inputLow.get()){
-                    shouldMove = false;
-                    isUp = false;
-                }
-                liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
+
+        if(shouldMove && isUp){
+            if(inputLow.get()){
+                liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);   
+            }
+            
+            if(!inputLow.get() && isUp){
+                shouldMove = false;
+                isUp = false;
             }
         }
-        if(!isUp){
-            while(shouldMove){
-                if(!inputHigh.get()){
-                    shouldMove = false;
-                    isUp = true;
-                }
+        else if(shouldMove && !isUp){
+            if(inputHigh.get())
                 liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
-            }         
+            
+            if(!inputHigh.get()){
+                shouldMove = false;
+                isUp = true;     
+            }    
         }
+
+
+        if(!shouldMove){
+            liftTalon.set(ControlMode.PercentOutput, 0); 
+        }
+   
+
     }
 
     public void intakeStopLift(){
@@ -66,19 +78,20 @@ public class HazyIntake extends Subsystem {
     }
 
     public void intakeSwallow(){
-        spinVictor.set(RobotMap.SPINVICTORSPEED);
+        System.out.println("Swallowing");
+        spinVictor.set(ControlMode.PercentOutput, RobotMap.SPINVICTORSPEED);
     }
 
     public void intakeSpit(){
-        spinVictor.set(-RobotMap.SPINVICTORSPEED);
+        spinVictor.set(ControlMode.PercentOutput, -RobotMap.SPINVICTORSPEED);
     }
 
     public void intakeStopSpin(){
-        spinVictor.set(0);
+        spinVictor.set(ControlMode.PercentOutput, 0);
     }
 
     @Override
     public void initDefaultCommand(){
-        //setDefaultCommand(Robot.commandIntakeDefault);
+        setDefaultCommand(new CommandDropIntake());
     }
 }

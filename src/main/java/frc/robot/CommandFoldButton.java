@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandFold extends Command {
-    public CommandFold(){
+public class CommandFoldButton extends Command {
+    public CommandFoldButton(){
         super.requires(Robot.hazyColorArm);
     }
     
@@ -17,7 +17,7 @@ public class CommandFold extends Command {
     @Override
     protected void execute(){
         System.out.println("Pressed Command Fold");
-        Robot.hazyColorArm.fold();
+        Robot.hazyIntake.switchDir();
     }
 
     @Override

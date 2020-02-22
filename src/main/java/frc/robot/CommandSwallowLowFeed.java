@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandMoveLowFeed extends Command {
-    public CommandMoveLowFeed (){
+public class CommandSwallowLowFeed extends Command {
+    public CommandSwallowLowFeed(){
         super.requires(Robot.hazyLowFeeder);
     }
     
@@ -13,7 +13,7 @@ public class CommandMoveLowFeed extends Command {
     
     @Override
     protected void execute(){
-        Robot.hazyLowFeeder.move();
+        Robot.hazyLowFeeder.swallow();
         //System.out.println("Pressed Move Low Feed");
     }
 

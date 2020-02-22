@@ -3,26 +3,25 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandFold extends Command {
-    public CommandFold(){
-        super.requires(Robot.hazyColorArm);
+public class CommandStopSpinning extends Command {
+    public CommandStopSpinning(){
+        super.requires(Robot.hazyIntake);
     }
     
     @Override
     protected void initialize(){
-        // Robot.hazyColorArm.initialize();
-
+        // Robot.hazyIntake.initialize();
     }
 
     @Override
     protected void execute(){
-        System.out.println("Pressed Command Fold");
-        Robot.hazyColorArm.fold();
+        Robot.hazyIntake.intakeStopSpin();
+        //System.out.println("Pressed Drop Intake");
     }
 
     @Override
     protected boolean isFinished(){
-        return true;
+        return false;
     }
 
     @Override

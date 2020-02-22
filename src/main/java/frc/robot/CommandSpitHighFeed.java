@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandMoveHighFeed extends Command {
-    public CommandMoveHighFeed(){
+public class CommandSpitHighFeed extends Command {
+    public CommandSpitHighFeed(){
         super.requires(Robot.hazyHighFeeder);
     }
     
@@ -13,7 +13,7 @@ public class CommandMoveHighFeed extends Command {
     
     @Override
     protected void execute(){
-        Robot.hazyHighFeeder.move();
+        Robot.hazyHighFeeder.spit();
         //System.out.println("Pressed Move High Feed");
     }
 

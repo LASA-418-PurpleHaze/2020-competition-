@@ -43,16 +43,21 @@ public class Robot extends TimedRobot {
   public static CommandSpitIntake commandSpitIntake;
   public static CommandSwallowIntake commandSwallowIntake;
   public static CommandIntakeDefault commandIntakeDefault;
+  public static CommandFoldButton commandFoldButton;
+  public static CommandStopSpinning commandStopSpinning;
   //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
 
    //Variables for Low Ball Feeder
    public static HazyLowFeeder hazyLowFeeder;
-   public static CommandMoveLowFeed commandMoveLowFeed;
+   public static CommandSwallowLowFeed commandSwallowLowFeed;
+   public static CommandSpitLowFeed commandSpitLowFeed;
    public static CommandLowFeedDefault commandLowFeedDefault;
 
   //Variables for High Ball Feeder
   public static HazyHighFeeder hazyHighFeeder;
-  public static CommandMoveHighFeed commandMoveHighFeed;
+  public static CommandSwallowHighFeed commandSwallowHighFeed;
+
+  public static CommandSpitHighFeed commandSpitHighFeed;
   public static CommandHighFeedDefault commandHighFeedDefault;
  
   //Variables for the End Arm
@@ -69,6 +74,8 @@ public class Robot extends TimedRobot {
 
   //Serial Port 
   public static SerialPort hazyPort;
+
+  OI hazyOI; //OI object for all the buttons and their resulting commands
 
   @Override
   public void robotInit() {
@@ -93,6 +100,10 @@ public class Robot extends TimedRobot {
     commandSpitIntake = new CommandSpitIntake();
     commandSwallowIntake = new CommandSwallowIntake();
     commandIntakeDefault = new CommandIntakeDefault();
+    commandFoldButton = new CommandFoldButton();
+    commandStopSpinning = new CommandStopSpinning();
+    Scheduler.getInstance().add(commandDropIntake);
+    
     //commandSpinIntakeDefault = new CommandSpinIntakeDefault();
 
     //Initialization Code for End Arm
@@ -104,15 +115,17 @@ public class Robot extends TimedRobot {
 
     //Initialization Code for Low Ball Feeder
     hazyLowFeeder = new HazyLowFeeder();
-    commandMoveLowFeed = new CommandMoveLowFeed();
+    commandSwallowLowFeed = new CommandSwallowLowFeed();
+    commandSpitLowFeed = new CommandSpitLowFeed();
     commandLowFeedDefault = new CommandLowFeedDefault();
     Scheduler.getInstance().add(commandLowFeedDefault);
 
     //Initialization Code for High Ball Feeder
     hazyHighFeeder = new HazyHighFeeder();
-    commandMoveHighFeed = new CommandMoveHighFeed();
+    commandSwallowHighFeed = new CommandSwallowHighFeed();
+    commandSpitHighFeed = new CommandSpitHighFeed();
     commandHighFeedDefault = new CommandHighFeedDefault();
-    Scheduler.getInstance().add(commandLowFeedDefault);
+    Scheduler.getInstance().add(commandHighFeedDefault);
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
@@ -123,6 +136,8 @@ public class Robot extends TimedRobot {
 
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
+
+    hazyOI = new OI(); //OI object for all the buttons and their resulting commands
   }
 
   @Override
@@ -141,7 +156,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
-    OI hazyOI = new OI(); //OI object for all the buttons and their resulting commands
+    hazyOI.runAllMethods();
+    
   }
 
   @Override

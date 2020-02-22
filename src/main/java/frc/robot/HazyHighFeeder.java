@@ -14,8 +14,12 @@ public class HazyHighFeeder extends Subsystem {
         highFeederTalon = new TalonSRX(RobotMap.HIGHFEEDERTALON);
     }
     
-    public void move() {
-        highFeederTalon.set(ControlMode.PercentOutput, .4);
+    public void spit() {
+        highFeederTalon.set(ControlMode.PercentOutput, RobotMap.FEEDERSPEED);
+    }
+
+    public void swallow() {
+        highFeederTalon.set(ControlMode.PercentOutput, -RobotMap.FEEDERSPEED);
     }
 
     public void stop(){

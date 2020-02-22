@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
     commandShooterSpit = new CommandShooterSpit();
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
-    Scheduler.getInstance().add(commandShooterDefault);
+    //Scheduler.getInstance().add(commandShooterDefault);
 
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);

@@ -22,6 +22,9 @@ public class RobotMap { //Static port variables
     //ColorArm
     public static final int ELBOWTALONPORT = 10;
     public static final int COLORWHEELTALONPORT = 11;
+    public static final Double ELBOWP = 2.0;
+    public static final Double ELBOWI = 0.0;
+    public static final Double ELBOWD = 0.0;
 
     //PID
     public static final double DEADBAND = 0.02;
@@ -35,12 +38,12 @@ public class RobotMap { //Static port variables
     //Ball Feeders
     public static final int LOWFEEDERTALON = 15;
     public static final int HIGHFEEDERTALON = 14;
-    public static final double FEEDERSPEED = .27;
+    public static final double FEEDERSPEED = .5;
 
 
     //Shooter
     public static final int SHOOTERTALONPORT = 12;
-    public static final double SHOOTERSPEED = 0.7;
+    public static final double SHOOTERSPEED = 1;
 
     //End Arm
     public static final int ENDARMTALONPORT = 3;

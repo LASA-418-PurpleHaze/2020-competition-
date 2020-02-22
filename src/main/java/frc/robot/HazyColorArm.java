@@ -24,6 +24,9 @@ public class HazyColorArm extends Subsystem {
         elbowTalon = new TalonSRX(RobotMap.ELBOWTALONPORT);
         colorWheelTalon = new TalonSRX(RobotMap.COLORWHEELTALONPORT);
         elbowTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+		elbowTalon.config_kP(0, RobotMap.ELBOWP, 30);
+		elbowTalon.config_kI(0, RobotMap.ELBOWI, 30);
+        elbowTalon.config_kD(0, RobotMap.ELBOWD, 30);
         initColor = "";
         currentColor = "";
         candidateColor="";
@@ -34,16 +37,17 @@ public class HazyColorArm extends Subsystem {
     }
 
     public void fold(){
-        System.out.println("Running");
+        System.out.println(isUp);
         if(!isUp){
             elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
-            System.out.println("Color Arm Going Up");
             isUp = true;
-        }else {
-            elbowTalon.set(ControlMode.Position, 0);
-            System.out.println("Color Arm Going Down");
+
+        }else if(isUp){
+            elbowTalon.set(ControlMode.Position, 0); //negative goes up (-3700)
             isUp = false;
         }
+        
+        
     }
 
     //when run, this method sees the starting color and records it as the base color

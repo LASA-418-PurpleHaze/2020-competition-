@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandFoldButton extends Command {
     public CommandFoldButton(){
-        super.requires(Robot.hazyColorArm);
+        super.requires(Robot.hazyIntake);
     }
     
     @Override

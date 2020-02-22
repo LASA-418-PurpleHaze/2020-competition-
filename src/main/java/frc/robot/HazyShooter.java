@@ -40,6 +40,6 @@ public class HazyShooter extends Subsystem {
 
     @Override
     public void initDefaultCommand(){
-        setDefaultCommand(Robot.commandShooterDefault);
+        //setDefaultCommand(Robot.commandShooterDefault);
     }
 }

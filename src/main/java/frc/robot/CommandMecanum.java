@@ -15,7 +15,7 @@ public class CommandMecanum extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyMecBase.driveCartesian(-1* OI.getRightX(), OI.getLeftY(), -1 * OI.getLeftX());
+        Robot.hazyMecBase.driveCartesian(-1* OI.getLeftX(), OI.getLeftY(), -1 * OI.getRightX());
 
     }
 

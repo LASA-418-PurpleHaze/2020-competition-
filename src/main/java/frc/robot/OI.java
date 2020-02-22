@@ -63,6 +63,9 @@ public class OI
             Robot.commandShooterSwallow.execute();
         }
 
+        else if(!controller.getHazyTriggers().getRightAxis() && !controller.getHazyTriggers().getLeftAxis())
+            Robot.commandShooterDefault.execute();
+
         controller.getXButton().whenPressed(Robot.commandFold); //Whenever this button is pushed the color arm is either dropped or pulled up
         controller.getBButton().whenPressed(Robot.commandFoldButton); //Whenever this button is pushed the intake is dropped or pulled up
     }

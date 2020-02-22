@@ -106,19 +106,19 @@ public class PathMecBase extends Subsystem
 
     }
     public void Auto() {
-      //positions are from left to right on the perspective of the driver
+      //starting positions are from left to right on the perspective of the driver
       int position = 0;
       if (position == 0) {
-        //go left
+        //move from left pos
       }
       if (position == 1) {
-        //go middle
+        //move from middle pos
       }
       if (position == 2) {
-        //go right
+        //move from right pos
       }
 
-      //spinny spin?
+      //below to put the code to spin and shoot
 
     }
     

@@ -28,6 +28,10 @@ public class Robot extends TimedRobot {
   public static HazyMecBase hazyMecBase; 
   public static CommandMecanum commandMecanum;
 
+  //Variables for paths
+  public static HazyPathBase hazyPathBase;
+  public static CommandAutonomous commandAutonomous;
+
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
   public static HazyColorArm hazyColorArm;

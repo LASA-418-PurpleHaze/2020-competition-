@@ -32,75 +32,56 @@ public class OI
         //We need to talk with the Operator to see how they want this laid out
 
     public void runAllMethods(){
-
-
-        controller.getAButton().whenPressed(Robot.commandGoToColor);//Whenever this button is pushed it will go to the color based on the number of times the button has been previously pressed
-
-        controller.getYButton().whenPressed(Robot.commandSpinWheel);//When this button is pushed it will spin the disk a predeignated amount
-
         controller.getLeftBumper().whileHeld(Robot.commandEndArmUp); //Will run the execute on the command only when the button is being held down
-
         controller.getRightBumper().whileHeld(Robot.commandEndArmDown);//Switches the direction of which the end arm motor is rotating
 
         //Set commands to run on the Joysticks - Driver 
         rightTrigger.whileHeld(Robot.commandSwallowIntake); //Will allow the driver to swallow with the intake whenever the button is pushed
-
         rightTrigger.whileHeld(Robot.commandSwallowLowFeed);
-
         leftTrigger.whileHeld(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
-
         leftTrigger.whileHeld(Robot.commandSpitLowFeed);
-
+        controller.getBButton().whenPressed(Robot.commandSwitchIntakeDir); //Whenever this button is pushed the intake is dropped or pulled up
+        
         rightMidButton.whileHeld(Robot.commandSwallowHighFeed);
-
         leftMidButton.whileHeld(Robot.commandSpitHighFeed);
 
-        if(controller.getHazyTriggers().getRightAxis()){ //Shoots the ball with the bottom right trigger
-            Robot.commandShooterSpit.execute();
-        }
-
-        if(controller.getHazyTriggers().getLeftAxis()){ //Sucks the ball in with bottom left trigger
-            Robot.commandShooterSwallow.execute();
-        }
-
+        //Logic for the Shooter
+        if(controller.getHazyTriggers().getRightAxis()) //Shoots the ball with the bottom right trigger
+            Robot.commandShooterSpit.execute(); 
+        if(controller.getHazyTriggers().getLeftAxis()) //Sucks the ball in with bottom left trigger
+            Robot.commandShooterSwallow.execute();      
         else if(!controller.getHazyTriggers().getRightAxis() && !controller.getHazyTriggers().getLeftAxis())
             Robot.commandShooterDefault.execute();
 
-        controller.getXButton().whenPressed(Robot.commandFold); //Whenever this button is pushed the color arm is either dropped or pulled up
-        controller.getBButton().whenPressed(Robot.commandFoldButton); //Whenever this button is pushed the intake is dropped or pulled up
-    }
-            
-        
+        //Logic for the Color Arm
+        if(controller.getHazyDPad().getTop())
+            Robot.commandFoldUp.execute();
+        if(controller.getHazyDPad().getBot())
+            Robot.commandFoldDown.execute();
+    }   
     
     //Getter methods for all our input devices
     public static double getControllerLeftX(){
         return controller.getHazyJoysticks().getLeftXAxis();
     }
-
     public static double getControllerLeftY(){
         return controller.getHazyJoysticks().getLeftYAxis();
     }
-
     public static double getControllerRightX(){
         return controller.getHazyJoysticks().getRightXAxis();
     }
-
     public static double getControllerRightY(){
         return controller.getHazyJoysticks().getRightYAxis();   
     }
-    
     public static double getLeftX(){
         return leftJoystick.getX();
     }
-
     public static double getLeftY(){
         return leftJoystick.getY();
     }
-
     public static double getRightX(){
         return rightJoystick.getX();
     }
-
     public static double getRightY(){
         return rightJoystick.getY();
     }

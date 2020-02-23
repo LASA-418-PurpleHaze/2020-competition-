@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class HazyController extends Joystick{
     int p;
-
 	public HazyController(int port) {
         super(port);
         p = port;
@@ -26,6 +25,7 @@ public class HazyController extends Joystick{
     public JoystickButton rightStickButton = new JoystickButton(this, 10);
     public HazyTriggers triggers = new HazyTriggers(p);
     public HazyJoysticks joysticks = new HazyJoysticks(p);
+    public HazyDPad dPad = new HazyDPad(p);
 
     public JoystickButton getXButton(){
         return xButton;
@@ -73,5 +73,9 @@ public class HazyController extends Joystick{
 
     public HazyJoysticks getHazyJoysticks(){
         return joysticks;
+    }
+
+    public HazyDPad getHazyDPad(){
+        return dPad;
     }
 }

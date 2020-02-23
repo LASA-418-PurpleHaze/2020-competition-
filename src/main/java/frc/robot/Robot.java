@@ -32,18 +32,19 @@ public class Robot extends TimedRobot {
   public static HazyColorSensor hazyColorSensor;
   public static HazyColorArm hazyColorArm;
   public static CommandColor commandColor;
-  public static CommandFold commandFold;
+  public static CommandFoldUp commandFoldUp;
+  public static CommandFoldDown commandFoldDown;
   public static CommandSpinWheel commandSpinWheel;
   public static CommandGoToColor commandGoToColor;
   public static CommandColorArmDefault commandColorArmDefault;
 
   //Variables for the Intake
   public static HazyIntake hazyIntake;
-  public static CommandDropIntake commandDropIntake;
+  public static CommandMoveIntakeDefault commandMoveIntakeDefault;
   public static CommandSpitIntake commandSpitIntake;
   public static CommandSwallowIntake commandSwallowIntake;
   public static CommandIntakeDefault commandIntakeDefault;
-  public static CommandFoldButton commandFoldButton;
+  public static CommandSwitchIntakeDir commandSwitchIntakeDir;
   public static CommandStopSpinning commandStopSpinning;
   //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
 
@@ -88,23 +89,24 @@ public class Robot extends TimedRobot {
     hazyColorSensor = new HazyColorSensor();
     hazyColorArm = new HazyColorArm();
     commandColor = new CommandColor();
-    commandFold = new CommandFold();
+    commandFoldUp = new CommandFoldUp();
+    commandFoldDown = new CommandFoldDown();
     commandSpinWheel = new CommandSpinWheel();
     commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
-    Scheduler.getInstance().add(commandColor);
+    //Scheduler.getInstance().add(commandColor);
+    //Scheduler.getInstance().add(commandColorArmDefault);
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
-    commandDropIntake = new CommandDropIntake();
+    commandMoveIntakeDefault = new CommandMoveIntakeDefault();
     commandSpitIntake = new CommandSpitIntake();
     commandSwallowIntake = new CommandSwallowIntake();
     commandIntakeDefault = new CommandIntakeDefault();
-    commandFoldButton = new CommandFoldButton();
+    commandSwitchIntakeDir = new CommandSwitchIntakeDir();
     commandStopSpinning = new CommandStopSpinning();
-    Scheduler.getInstance().add(commandDropIntake);
+    Scheduler.getInstance().add(commandMoveIntakeDefault);
     
-    //commandSpinIntakeDefault = new CommandSpinIntakeDefault();
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
@@ -132,7 +134,7 @@ public class Robot extends TimedRobot {
     commandShooterSpit = new CommandShooterSpit();
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
-    //Scheduler.getInstance().add(commandShooterDefault);
+ 
 
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
@@ -142,11 +144,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    Robot.commandSwitchIntakeDir.execute();
+    Robot.commandMoveIntakeDefault.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
+
   }
 
   @Override
   public void autonomousPeriodic() {
-    Robot.commandDropIntake.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
+    
   }
 
   @Override

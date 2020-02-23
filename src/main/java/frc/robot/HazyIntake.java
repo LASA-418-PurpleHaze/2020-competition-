@@ -92,6 +92,6 @@ public class HazyIntake extends Subsystem {
 
     @Override
     public void initDefaultCommand(){
-        setDefaultCommand(new CommandDropIntake());
+        setDefaultCommand(Robot.commandMoveIntakeDefault);
     }
 }

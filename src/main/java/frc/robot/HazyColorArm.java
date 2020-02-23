@@ -17,7 +17,7 @@ public class HazyColorArm extends Subsystem {
     private int spinNum; //the number of times the wheel has spun (used in spinWheel())
     private int spinTo;
     private int colorCount;
-    private boolean isUp; // Wether or not the arm for the color sensor is up or down on the robot
+
     private int colorToTravelTo; //The Color which the color sensor will stop onHaz
 
     public HazyColorArm(){
@@ -32,22 +32,17 @@ public class HazyColorArm extends Subsystem {
         candidateColor="";
         spinNum = 0;
         colorCount=0;
-        isUp = false;
+
         colorToTravelTo = 0;
+        System.out.println("Created New Object");
     }
 
-    public void fold(){
-        System.out.println(isUp);
-        if(!isUp){
-            elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
-            isUp = true;
+    public void foldUp(){
+        elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
+    }
 
-        }else if(isUp){
-            elbowTalon.set(ControlMode.Position, 0); //negative goes up (-3700)
-            isUp = false;
-        }
-        
-        
+    public void foldDown(){
+        elbowTalon.set(ControlMode.Position, 0); //negative goes up (-3700)
     }
 
     //when run, this method sees the starting color and records it as the base color
@@ -102,20 +97,20 @@ public class HazyColorArm extends Subsystem {
         }
     }
 
-    public void testColorWheel () {
-        String theColor = Robot.hazyColorSensor.getColor();
-        if(theColor.equals(Robot.hazyColorSensor.getColor())){
-            colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
-        }else{
-            long mili = System.currentTimeMillis();
-            while(mili < 500){
-                colorWheelTalon.set(ControlMode.PercentOutput, 0);
-                mili = System.currentTimeMillis();
-            }
-            theColor = Robot.hazyColorSensor.getColor();
-            System.out.println(theColor);
-        }
-    }
+    // public void testColorWheel () {
+    //     String theColor = Robot.hazyColorSensor.getColor();
+    //     if(theColor.equals(Robot.hazyColorSensor.getColor())){
+    //         colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
+    //     }else{
+    //         long mili = System.currentTimeMillis();
+    //         while(mili < 500){
+    //             colorWheelTalon.set(ControlMode.PercentOutput, 0);
+    //             mili = System.currentTimeMillis();
+    //         }
+    //         theColor = Robot.hazyColorSensor.getColor();
+    //         System.out.println(theColor);
+    //     }
+    // }
 
     public boolean spinWheelIsFinished () {
         int temp = spinNum;
@@ -146,6 +141,6 @@ public class HazyColorArm extends Subsystem {
     
     @Override
     public void initDefaultCommand(){
-        //setDefaultCommand(Robot.commandColorArmDefault);
+        setDefaultCommand(Robot.commandColorArmDefault);
     }
 }

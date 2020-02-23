@@ -3,26 +3,24 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandDropIntake extends Command {
-    public CommandDropIntake(){
+public class CommandSwitchIntakeDir extends Command {
+    public CommandSwitchIntakeDir(){
         super.requires(Robot.hazyIntake);
     }
     
     @Override
     protected void initialize(){
-        // Robot.hazyIntake.initialize();
+        // Robot.hazyColorArm.initialize();
     }
 
     @Override
     protected void execute(){
-        Robot.hazyIntake.moveIntake();
-        Robot.hazyIntake.intakeStopSpin();
-        //System.out.println("Pressed Drop Intake");
+        Robot.hazyIntake.switchDir();
     }
 
     @Override
     protected boolean isFinished(){
-        return false;
+        return true;
     }
 
     @Override

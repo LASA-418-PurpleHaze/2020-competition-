@@ -27,11 +27,7 @@ public class OI
     
     public static HazyController controller = new HazyController(RobotMap.CONTROLLERPORT);
     
-    public OI(){}
-        //Set commands to run on button press for the XBOX Controller - Operator
-        //We need to talk with the Operator to see how they want this laid out
-
-    public void runAllMethods(){
+    public OI(){
         controller.getLeftBumper().whileHeld(Robot.commandEndArmUp); //Will run the execute on the command only when the button is being held down
         controller.getRightBumper().whileHeld(Robot.commandEndArmDown);//Switches the direction of which the end arm motor is rotating
 
@@ -44,7 +40,11 @@ public class OI
         
         rightMidButton.whileHeld(Robot.commandSwallowHighFeed);
         leftMidButton.whileHeld(Robot.commandSpitHighFeed);
+    }
+        //Set commands to run on button press for the XBOX Controller - Operator
+        //We need to talk with the Operator to see how they want this laid out
 
+    public void runAllMethods(){
         //Logic for the Shooter
         if(controller.getHazyTriggers().getRightAxis()) //Shoots the ball with the bottom right trigger
             Robot.commandShooterSpit.execute(); 

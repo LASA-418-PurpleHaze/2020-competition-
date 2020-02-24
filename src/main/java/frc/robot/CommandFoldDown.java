@@ -16,7 +16,6 @@ public class CommandFoldDown extends Command {
 
     @Override
     protected void execute(){
-        System.out.println("Pressed Command FoldDown");
         Robot.hazyColorArm.foldDown();
     }
 

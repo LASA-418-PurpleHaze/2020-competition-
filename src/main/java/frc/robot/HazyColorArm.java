@@ -17,6 +17,7 @@ public class HazyColorArm extends Subsystem {
     private int spinNum; //the number of times the wheel has spun (used in spinWheel())
     private int spinTo;
     private int colorCount;
+    private boolean shouldMove;
 
     private int colorToTravelTo; //The Color which the color sensor will stop onHaz
 
@@ -32,6 +33,7 @@ public class HazyColorArm extends Subsystem {
         candidateColor="";
         spinNum = 0;
         colorCount=0;
+        shouldMove = false;
 
         colorToTravelTo = 0;
         System.out.println("Created New Object");
@@ -120,13 +122,21 @@ public class HazyColorArm extends Subsystem {
         return temp == spinTo*2;
     }
 
+    public void moveToggle(){
+        System.out.println("Move Toggle");
+        shouldMove = true;
+    }
+
     public void goToColor (String col) { //spins the wheel to a specified color col
+        
         System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
-        if (!Robot.hazyColorSensor.getColor().equals(col)) {
-            System.out.println("going!");
-            colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
-        }else{
-            System.out.println("stopped");
+        if(shouldMove){
+            if (!Robot.hazyColorSensor.getColor().equals(col)) 
+                colorWheelTalon.set(ControlMode.PercentOutput, 0.2);
+            if(Robot.hazyColorSensor.getColor().equals(col))
+                shouldMove = false;
+        }
+        else{
             colorWheelTalon.set(ControlMode.PercentOutput, 0);
         }
     }
@@ -141,6 +151,6 @@ public class HazyColorArm extends Subsystem {
     
     @Override
     public void initDefaultCommand(){
-        setDefaultCommand(Robot.commandColorArmDefault);
+        setDefaultCommand(Robot.commandGoToColor);
     }
 }

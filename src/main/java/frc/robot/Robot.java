@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   public static CommandSpinWheel commandSpinWheel;
   public static CommandGoToColor commandGoToColor;
   public static CommandColorArmDefault commandColorArmDefault;
+  public static CommandToggleColorArm commandToggleColorArm;
 
   //Variables for the Intake
   public static HazyIntake hazyIntake;
@@ -94,8 +95,8 @@ public class Robot extends TimedRobot {
     commandSpinWheel = new CommandSpinWheel();
     commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
-    //Scheduler.getInstance().add(commandColor);
-    //Scheduler.getInstance().add(commandColorArmDefault);
+    commandToggleColorArm = new CommandToggleColorArm();
+    Scheduler.getInstance().add(commandGoToColor);
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();

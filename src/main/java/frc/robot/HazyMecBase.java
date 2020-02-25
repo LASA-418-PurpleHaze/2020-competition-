@@ -1,11 +1,15 @@
 //Imports fot the Subsystem and its functions
 package frc.robot;
 
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
+import java.util.*;
 
 public class HazyMecBase extends Subsystem{
     
@@ -80,6 +84,58 @@ public class HazyMecBase extends Subsystem{
         rightFrontTalon.set(ControlMode.PercentOutput, -wheelSpeeds[1] * -1);
         leftBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[2]);
         rightBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[3]*-1);
+    }
+    
+    @Override
+    public void Auto() {
+      private PigeonIMU pigeon;
+      pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
+      pigeon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      ArrayList<Double> ypr_deg = new ArrayList<Double>();
+      //starting positions are from left to right on the perspective of the driver
+      int position = 0;
+      if (position == 0) {
+        leftBackEncoder.set(ControlMode.Position, -8957.83);
+        while ( pigeon.getYawPitchRoll(ypr_deg) != 180) {
+          leftBackEncoder.set(ControlMode.Position, -8957.83);
+          rightFrontEncoder.set(ControlMode.Position, -8957.83);
+        }
+       //turn around
+       long t= System.currentTimeMillis();
+      long end = t+10000;
+      while(System.currentTimeMillis() < end) {
+        Robot.commandShooterSpit.execute();
+      }
+      leftBackEncoder.set(ControlMode.Position, -3839.07);
+
+
+      }
+      if (position == 1) {
+
+
+        leftBackEncoder.set(ControlMode.Position, -8957.83);
+        while ( pigeon.getYawPitchRoll(ypr_deg) != 45) {
+          leftBackEncoder.set(ControlMode.Position, -8957.83);
+          rightFrontEncoder.set(ControlMode.Position, -8957.83);
+        }
+        leftBackEncoder.set(ControlMode.Position, -8957.83);
+        while ( pigeon.getYawPitchRoll(ypr_deg) != -45) {
+          leftBackEncoder.set(ControlMode.Position, -8957.83);
+          rightFrontEncoder.set(ControlMode.Position, -8957.83);
+        }
+        long t= System.currentTimeMillis();
+        long end = t+10000;
+        while(System.currentTimeMillis() < end) {
+          Robot.commandShooterSpit.execute();
+        }
+
+
+      }
+      if (position == 2) {
+        leftBackEncoder.set(ControlMode.Position, -3839.07);
+
+      }
+
     }
 
     @Override

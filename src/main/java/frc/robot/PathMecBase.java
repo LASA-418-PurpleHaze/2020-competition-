@@ -5,6 +5,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpiutil.math.MathUtil;
+import com.ctre.phoenix.sensors.PigeonIMU;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class PathMecBase extends Subsystem
 {
@@ -109,16 +114,37 @@ public class PathMecBase extends Subsystem
       //starting positions are from left to right on the perspective of the driver
       int position = 0;
       if (position == 0) {
-        //move from left pos
+
+
+        leftBackEncoder.set(ControlMode.Position, -8957.83);
+       //turn around
+       FeedbackDevice.pig
+       long t= System.currentTimeMillis();
+      long end = t+10000;
+      while(System.currentTimeMillis() < end) {
+        Robot.commandShooterSpit.execute();
+      }
+      leftBackEncoder.set(ControlMode.Position, -3839.07);
+
+
       }
       if (position == 1) {
-        //move from middle pos
+
+
+        leftBackEncoder.set(ControlMode.Position, -8957.83);
+        //turn 45 degrees 
+        long t= System.currentTimeMillis();
+        long end = t+10000;
+        while(System.currentTimeMillis() < end) {
+          Robot.commandShooterSpit.execute();
+        }
+
+
       }
       if (position == 2) {
-        //move from right pos
-      }
+        leftBackEncoder.set(ControlMode.Position, -3839.07);
 
-      //below to put the code to spin and shoot
+      }
 
     }
     

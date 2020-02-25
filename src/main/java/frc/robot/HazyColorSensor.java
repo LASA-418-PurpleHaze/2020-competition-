@@ -40,21 +40,21 @@ public class HazyColorSensor extends Subsystem {
         return out;
     } 
     
-    public String getColor (){ //returns a string of the color detected\
+    public char getColor (){ //returns a string of the color detected\
         if (sensor.getColor() != null) { //if there is a color detected (to reduce error)
             colors = rgbToHsv(sensor.getColor().red, sensor.getColor().green, sensor.getColor().blue); //converts to hsv format for easier detection
             //System.out.println(colors[0]);
-            String col = "Blue";
+            char col = 'B';
             if (colors[0] < 85.0)
-                col = "Red";
+                col = 'R';
             else if (colors[0] < 100.0)
-                col = "Yellow";
+                col = 'Y';
             else if(colors[0] < 150.0)
-                col = "Green";
+                col = 'G';
             return col;
         }
         System.out.println("icky bad no color");
-        return ""; 
+        return ' '; 
     }
     
     @Override

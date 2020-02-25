@@ -11,9 +11,9 @@ public class HazyColorArm extends Subsystem {
     
     private TalonSRX elbowTalon; 
     private TalonSRX colorWheelTalon;
-    private String initColor; //the color the wheel starts on (set using setInitColor())
-    private String currentColor;
-    private String candidateColor;
+    private char initColor; //the color the wheel starts on (set using setInitColor())
+    private char currentColor;
+    private char candidateColor;
     private int spinNum; //the number of times the wheel has spun (used in spinWheel())
     private int spinTo;
     private int colorCount;
@@ -28,9 +28,9 @@ public class HazyColorArm extends Subsystem {
 		elbowTalon.config_kP(0, RobotMap.ELBOWP, 30);
 		elbowTalon.config_kI(0, RobotMap.ELBOWI, 30);
         elbowTalon.config_kD(0, RobotMap.ELBOWD, 30);
-        initColor = "";
-        currentColor = "";
-        candidateColor="";
+        initColor = ' ';
+        currentColor = ' ';
+        candidateColor = ' ';
         spinNum = 0;
         colorCount=0;
         shouldMove = false;
@@ -73,9 +73,9 @@ public class HazyColorArm extends Subsystem {
         }
 
         //gotten to initColor again - means it's gone half a spin
-        String col = Robot.hazyColorSensor.getColor();
+        char col = Robot.hazyColorSensor.getColor();
         
-        if(!col.equals(candidateColor)){
+        if(col != candidateColor){
             //System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
             colorCount = 0;
             candidateColor = col;
@@ -83,9 +83,9 @@ public class HazyColorArm extends Subsystem {
             colorCount++;
             //System.out.println(colorCount+" "+ col+" current:"+currentColor);
         }
-        if(!candidateColor.equals(currentColor)){
+        if(candidateColor != currentColor){
             if(colorCount > 6){
-                if(col.equals(initColor) && !(col.equals(currentColor))){
+                if((col == initColor) && (col != currentColor)){
                    // System.out.println("spins ++++");
                     spinNum++;
                 }
@@ -127,13 +127,13 @@ public class HazyColorArm extends Subsystem {
         shouldMove = true;
     }
 
-    public void goToColor (String col) { //spins the wheel to a specified color col
+    public void goToColor (char col) { //spins the wheel to a specified color col
         
         System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
         if(shouldMove){
-            if (!Robot.hazyColorSensor.getColor().equals(col)) 
+            if (Robot.hazyColorSensor.getColor() != col) 
                 colorWheelTalon.set(ControlMode.PercentOutput, 0.2);
-            if(Robot.hazyColorSensor.getColor().equals(col))
+            if(Robot.hazyColorSensor.getColor() == col)
                 shouldMove = false;
         }
         else{

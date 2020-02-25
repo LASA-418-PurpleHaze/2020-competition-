@@ -6,8 +6,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpiutil.math.MathUtil;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import java.util.*;
 
@@ -17,6 +15,7 @@ public class HazyMecBase extends Subsystem{
     private TalonSRX leftFrontTalon;
     private TalonSRX rightBackTalon;
     private TalonSRX leftBackTalon;
+    private PigeonIMU pigeon;
 
     public static HazyMecBase instance;
     
@@ -24,7 +23,9 @@ public class HazyMecBase extends Subsystem{
       rightFrontTalon = new TalonSRX(RobotMap.RIGHTFRONTTALONPORT);
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
-      leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);      
+      leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT); 
+      pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
+         
       //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
     }
 
@@ -86,11 +87,8 @@ public class HazyMecBase extends Subsystem{
         rightBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[3]*-1);
     }
     
-    @Override
     public void Auto() {
-      private PigeonIMU pigeon;
-      pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
-      pigeon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      pigeon.configSelectedFeedbackSensor(FeedbackDevice.PigeonIMU);
       ArrayList<Double> ypr_deg = new ArrayList<Double>();
       //starting positions are from left to right on the perspective of the driver
       int position = 0;

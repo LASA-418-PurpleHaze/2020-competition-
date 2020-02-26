@@ -10,8 +10,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -74,8 +77,14 @@ public class Robot extends TimedRobot {
   public static CommandShooterSwallow commandShooterSwallow;
   public static CommandShooterDefault commandShooterDefault;
 
+ //IMU initialization
+  PigeonIMU _pigeon = new PigeonIMU(0);
+  int _loopCount = 0;
+
   //Serial Port 
   public static SerialPort hazyPort;
+public static Command CommandAuton;
+public static Subsystem HazyAuton;
 
   OI hazyOI; //OI object for all the buttons and their resulting commands
 
@@ -152,7 +161,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    HazyMecBase.Auto();
+    
+   double[] ypr = new double[3];
+  _pigeon.getYawPitchRoll(ypr);
+
   }
 
   @Override
@@ -163,7 +175,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
     hazyOI.runAllMethods();
-    
   }
 
   @Override

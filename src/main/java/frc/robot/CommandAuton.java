@@ -10,11 +10,13 @@ public class CommandAuton extends Command {
     
     @Override
     protected void initialize(){
-        //Robot.HazyAuton.initialize();
+
     }
     @Override
     protected void execute(){
-        //System.out.println(Robot.hazyColorSensor.getColor());
+        HazyAuton start = new HazyAuton();
+        start.initialize();
+        start.close();
     }
 
     @Override

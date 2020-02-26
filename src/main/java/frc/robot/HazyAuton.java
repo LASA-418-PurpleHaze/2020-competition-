@@ -15,23 +15,34 @@ public class HazyAuton extends Subsystem {
   private TalonSRX leftFrontTalon;
   private TalonSRX leftBackTalon;
   private TalonSRX rightBackTalon;
+  private PigeonIMU _pigeon;
+  private double[] ypr;
+  private static HazyAuton instance;
+
 
     public HazyAuton() {
       rightFrontTalon = new TalonSRX(RobotMap.RIGHTFRONTTALONPORT);
       leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
+      ypr = new double[3];
+      _pigeon = new PigeonIMU(0);
       //PigeonIMU _pigeon = new PigeonIMU(0);
     }
-    public void initialize (){
-      
+    public void initialize() {
+      StartGame();
+    }
+    public double UpdateYPR() {
+      _pigeon.getYawPitchRoll(ypr);
+      return ypr[2];
     }
     public void MoveSeven() {
       leftBackTalon.set(ControlMode.Position, -8957.83);
       rightBackTalon.set(ControlMode.Position, -8957.83);
     }
-    public void turn(Double deg, Double[] ypr_deg) {
-      while ( ypr_deg[2] != deg ) {
+    public void turn(Double deg) {
+      
+      while ( UpdateYPR() != deg ) {
         leftBackTalon.set(ControlMode.Position, -8957.83);
         rightFrontTalon.set(ControlMode.Position, 8957.83);
       }
@@ -43,22 +54,22 @@ public class HazyAuton extends Subsystem {
         Robot.commandShooterSpit.execute();
       }
     }
-    public void StartGame(Double[] ypr_deg) {
+    public void StartGame() {
       //starting positions are from left to right on the perspective of the driver
       int position = 0;
       //position 1
       if (position == 0) {
         MoveSeven();
-        turn(180.0, ypr_deg);
+        turn(180.0);
         ShootThat();
-      turn(180.0, ypr_deg);
+      turn(180.0);
       MoveSeven();
       }
       if (position == 1) {
         MoveSeven();
-        turn(225.0, ypr_deg);
+        turn(225.0);
         ShootThat();
-        turn(45.0, ypr_deg);
+        turn(45.0);
         MoveSeven();
         
 
@@ -75,53 +86,9 @@ public class HazyAuton extends Subsystem {
     {
         setDefaultCommand(Robot.CommandAuton);
     }
+    public static HazyAuton getInstance(){
+      if (instance==null)
+          instance = new HazyAuton();
+      return instance;
+  }
 }
-/* 
-    public void Auto() {
-      //starting positions are from left to right on the perspective of the driver
-      int position = 0;
-      if (position == 0) {
-        leftBackEncoder.set(ControlMode.Position, -8957.83);
-        while ( pigeon.getYawPitchRoll(ypr_deg) != 180) {
-          leftBackEncoder.set(ControlMode.Position, -8957.83);
-          rightFrontEncoder.set(ControlMode.Position, -8957.83);
-        }
-       //turn around
-       long t= System.currentTimeMillis();
-      long end = t+10000;
-      while(System.currentTimeMillis() < end) {
-        Robot.commandShooterSpit.execute();
-      }
-      leftBackEncoder.set(ControlMode.Position, -3839.07);
-
-
-      }
-      if (position == 1) {
-
-
-        leftBackEncoder.set(ControlMode.Position, -8957.83);
-        while ( pigeon.getYawPitchRoll(ypr_deg) != 45) {
-          leftBackEncoder.set(ControlMode.Position, -8957.83);
-          rightFrontEncoder.set(ControlMode.Position, -8957.83);
-        }
-        leftBackEncoder.set(ControlMode.Position, -8957.83);
-        while ( pigeon.getYawPitchRoll(ypr_deg) != -45) {
-          leftBackEncoder.set(ControlMode.Position, -8957.83);
-          rightFrontEncoder.set(ControlMode.Position, -8957.83);
-        }
-        long t= System.currentTimeMillis();
-        long end = t+10000;
-        while(System.currentTimeMillis() < end) {
-          Robot.commandShooterSpit.execute();
-        }
-
-
-      }
-      if (position == 2) {
-        leftBackEncoder.set(ControlMode.Position, -3839.07);
-
-      }
-
-    }
-
-*/

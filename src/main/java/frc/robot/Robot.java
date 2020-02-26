@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
   public static CommandSwallowIntake commandSwallowIntake;
   public static CommandIntakeDefault commandIntakeDefault;
   public static CommandSwitchIntakeDir commandSwitchIntakeDir;
+  public static CommandAuton commandauton;
   public static CommandStopSpinning commandStopSpinning;
   //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
 
@@ -78,8 +79,7 @@ public class Robot extends TimedRobot {
   public static CommandShooterDefault commandShooterDefault;
 
  //IMU initialization
-  PigeonIMU _pigeon = new PigeonIMU(0);
-  int _loopCount = 0;
+  
 
   //Serial Port 
   public static SerialPort hazyPort;
@@ -156,14 +156,11 @@ public static Subsystem HazyAuton;
   public void autonomousInit() {
     Robot.commandSwitchIntakeDir.execute();
     Robot.commandMoveIntakeDefault.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
-
+    Robot.commandauton.execute();
   }
 
   @Override
   public void autonomousPeriodic() {
-    
-   double[] ypr = new double[3];
-  _pigeon.getYawPitchRoll(ypr);
 
   }
 

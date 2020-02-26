@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandAuton extends Command {
     public CommandAuton() {
-        super.requires(Robot.HazyAuton);
+        super.requires(Robot.hazyAuton);
     }
     
     @Override
@@ -14,9 +14,7 @@ public class CommandAuton extends Command {
     }
     @Override
     protected void execute(){
-        HazyAuton start = new HazyAuton();
-        start.initialize();
-        start.close();
+        Robot.hazyAuton.startGame();
     }
 
     @Override

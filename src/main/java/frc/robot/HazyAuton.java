@@ -36,9 +36,9 @@ public class HazyAuton extends Subsystem {
       _pigeon.getYawPitchRoll(ypr);
       return ypr[2];
     }
-    public void MoveSeven() {
-      leftBackTalon.set(ControlMode.Position, -8957.83);
-      rightBackTalon.set(ControlMode.Position, -8957.83);
+    public void move(double feet) {
+      leftBackTalon.set(ControlMode.Position, feet*-1279.69);
+      rightBackTalon.set(ControlMode.Position, feet*-1279.69);
     }
     public void turn(Double deg) {
       
@@ -47,36 +47,36 @@ public class HazyAuton extends Subsystem {
         rightFrontTalon.set(ControlMode.Position, 8957.83);
       }
     }
-    public void ShootThat() {
+    public void shootThat() {
       long t= System.currentTimeMillis();
       long end = t+10000;
       while(System.currentTimeMillis() < end) {
         Robot.commandShooterSpit.execute();
       }
     }
-    public void StartGame() {
+    public void startGame() {
       //starting positions are from left to right on the perspective of the driver
       int position = 0;
       //position 1
       if (position == 0) {
-        MoveSeven();
+        move(7.0);
         turn(180.0);
-        ShootThat();
+        shootThat();
       turn(180.0);
-      MoveSeven();
+      move(7.0);
       }
       if (position == 1) {
-        MoveSeven();
+        move(7.0);
         turn(225.0);
-        ShootThat();
+        shootThat();
         turn(45.0);
-        MoveSeven();
+        move(7.0);
         
 
 
       }
       if (position == 2) {
-        MoveSeven();
+        move(7.0);
 
       }
     }
@@ -84,7 +84,7 @@ public class HazyAuton extends Subsystem {
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(Robot.CommandAuton);
+//        setDefaultCommand(Robot.commandAuton);
     }
     public static HazyAuton getInstance(){
       if (instance==null)

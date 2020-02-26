@@ -49,7 +49,6 @@ public class Robot extends TimedRobot {
   public static CommandSwallowIntake commandSwallowIntake;
   public static CommandIntakeDefault commandIntakeDefault;
   public static CommandSwitchIntakeDir commandSwitchIntakeDir;
-  public static CommandAuton commandauton;
   public static CommandStopSpinning commandStopSpinning;
   //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
 
@@ -83,8 +82,8 @@ public class Robot extends TimedRobot {
 
   //Serial Port 
   public static SerialPort hazyPort;
-public static Command CommandAuton;
-public static Subsystem HazyAuton;
+public static CommandAuton commandAuton;
+public static HazyAuton hazyAuton;
 
   OI hazyOI; //OI object for all the buttons and their resulting commands
 
@@ -145,7 +144,8 @@ public static Subsystem HazyAuton;
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
  
-
+    commandAuton = new CommandAuton();
+    hazyAuton = new HazyAuton();
     //Initialization Code for Serial Port
     //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
 
@@ -156,7 +156,7 @@ public static Subsystem HazyAuton;
   public void autonomousInit() {
     Robot.commandSwitchIntakeDir.execute();
     Robot.commandMoveIntakeDefault.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
-    Robot.commandauton.execute();
+    Robot.commandAuton.execute();
   }
 
   @Override

@@ -35,8 +35,7 @@ public class HazyColorArm extends Subsystem {
         colorCount=0;
         shouldMove = false;
 
-        colorToTravelTo = 0;
-        System.out.println("Created New Object");
+        colorToTravelTo = 0; 
     }
 
     public void foldUp(){
@@ -129,7 +128,7 @@ public class HazyColorArm extends Subsystem {
 
     public void goToColor (char col) { //spins the wheel to a specified color col
         
-        System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
+        //System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
         if(shouldMove){
             if (Robot.hazyColorSensor.getColor() != col) 
                 colorWheelTalon.set(ControlMode.PercentOutput, 0.2);

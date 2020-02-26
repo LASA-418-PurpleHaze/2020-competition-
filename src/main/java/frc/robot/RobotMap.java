@@ -52,5 +52,5 @@ public class RobotMap { //Static port variables
     public static final int ENDARMTALONPORT = 3;
 
     //Serial Port
-    public static final int SERIALPORTNUMBER = 0;
+    public static final int BAUDRATE = 115200;
 }

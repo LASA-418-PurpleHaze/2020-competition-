@@ -5,7 +5,6 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
@@ -87,9 +86,9 @@ public class HazyAuton extends Subsystem {
 //        setDefaultCommand(Robot.commandAuton);
     }
 
-    public static HazyAuton getInstance(){
-      if (instance==null)
-          instance = new HazyAuton();
-      return instance;
-  }
+  //   public static HazyAuton getInstance(){
+  //     if (instance==null)
+  //         instance = new HazyAuton();
+  //     return instance;
+  // }
 }

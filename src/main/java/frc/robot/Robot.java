@@ -8,13 +8,12 @@
 //Imports for the Robot
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Solenoid;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -81,9 +80,14 @@ public class Robot extends TimedRobot {
   
 
   //Serial Port 
-  public static SerialPort hazyPort;
-public static CommandAuton commandAuton;
-public static HazyAuton hazyAuton;
+  public static HazySerialPort hazySerialPort;
+  public static CommandGetData commandGetData;
+  public static Solenoid solenoidToLight; 
+
+
+  //auton
+  public static CommandAuton commandAuton;
+  public static HazyAuton hazyAuton;
 
   OI hazyOI; //OI object for all the buttons and their resulting commands
 
@@ -115,7 +119,6 @@ public static HazyAuton hazyAuton;
     commandSwitchIntakeDir = new CommandSwitchIntakeDir();
     commandStopSpinning = new CommandStopSpinning();
     Scheduler.getInstance().add(commandMoveIntakeDefault);
-    
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
@@ -144,10 +147,18 @@ public static HazyAuton hazyAuton;
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
  
-    commandAuton = new CommandAuton();
+    //Auton init
     hazyAuton = new HazyAuton();
+    commandAuton = new CommandAuton();
+    solenoidToLight = new Solenoid(0);
+    solenoidToLight.set(true);
+    
+
     //Initialization Code for Serial Port
-    //hazyPort = new SerialPort(RobotMap.SERIALPORTNUMBER,Port.kMXP);
+    hazySerialPort = new HazySerialPort();
+    commandGetData = new CommandGetData();
+    Scheduler.getInstance().add(commandGetData);
+
 
     hazyOI = new OI(); //OI object for all the buttons and their resulting commands
   }

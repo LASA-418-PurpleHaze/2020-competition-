@@ -15,6 +15,7 @@ public class RobotMap { //Static port variables
     public static final int LEFTFRONTTALONPORT = 2;
     public static final int RIGHTBACKTALONPORT = 1;
     public static final int LEFTBACKTALONPORT = 13;
+    public static final double TICKSPERFEET = 1279.69;
 
     //ColorSensor
     public static final I2C.Port COLORSENSORPORT = I2C.Port.kOnboard;

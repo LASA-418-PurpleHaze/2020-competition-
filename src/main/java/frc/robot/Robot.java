@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -80,8 +81,8 @@ public class Robot extends TimedRobot {
   
 
   //Serial Port 
-  public static HazySerialPort hazySerialPort;
-  public static CommandGetData commandGetData;
+  public static SerialPort hazyPort;
+  // public static CommandGetData commandGetData;
   public static Solenoid solenoidToLight; 
 
 
@@ -155,9 +156,10 @@ public class Robot extends TimedRobot {
     
 
     //Initialization Code for Serial Port
-    hazySerialPort = new HazySerialPort();
-    commandGetData = new CommandGetData();
-    Scheduler.getInstance().add(commandGetData);
+    hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
+    hazyPort.enableTermination();
+    // commandGetData = new CommandGetData();
+    //Scheduler.getInstance().add(commandGetData);
 
 
     hazyOI = new OI(); //OI object for all the buttons and their resulting commands
@@ -183,6 +185,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
     hazyOI.runAllMethods();
+    String data = hazyPort.readString();
+    if(!data.equals(""))
+      System.out.println(data);
   }
 
   @Override

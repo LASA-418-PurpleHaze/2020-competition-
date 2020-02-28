@@ -3,23 +3,28 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandAuton extends Command {
-    public CommandAuton() {
+public class CommandAutonTurn extends Command {
+    private double degs; 
+
+    public CommandAutonTurn(double in){
         super.requires(Robot.hazyAuton);
+        degs = in;
     }
     
     @Override
     protected void initialize(){
-
+        // Robot.hazyIntake.initialize();
     }
+
     @Override
     protected void execute(){
-        //Robot.hazyAuton.startGame();
+        Robot.hazyAuton.turn(degs);
+        //System.out.println("Pressed Drop Intake");
     }
 
     @Override
     protected boolean isFinished(){
-        return true;
+        return false;
     }
 
     @Override

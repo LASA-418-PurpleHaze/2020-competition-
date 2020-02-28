@@ -42,6 +42,8 @@ public class OI
         leftMidButton.whileHeld(Robot.commandSpitHighFeed);
 
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
+
+        leftThumbButton.whileHeld(Robot.commandFollowVision);
     }
         //Set commands to run on button press for the XBOX Controller - Operator
         //We need to talk with the Operator to see how they want this laid out

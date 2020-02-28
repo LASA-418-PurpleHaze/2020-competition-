@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandAuton extends Command {
-    public CommandAuton() {
+public class CommandToggleTurn extends Command {
+    public CommandToggleTurn() {
         super.requires(Robot.hazyAuton);
     }
     
@@ -14,7 +14,7 @@ public class CommandAuton extends Command {
     }
     @Override
     protected void execute(){
-        //Robot.hazyAuton.startGame();
+        Robot.hazyAuton.toggleTurn();
     }
 
     @Override

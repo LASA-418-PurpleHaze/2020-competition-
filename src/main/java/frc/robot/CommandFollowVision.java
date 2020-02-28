@@ -3,18 +3,21 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandAuton extends Command {
-    public CommandAuton() {
-        super.requires(Robot.hazyAuton);
+public class CommandFollowVision extends Command {
+    public CommandFollowVision(){
+        super.requires(Robot.hazyMecBase);
     }
     
     @Override
     protected void initialize(){
-
+        // Robot.hazyEndArm.initialize();
     }
+
     @Override
     protected void execute(){
-        //Robot.hazyAuton.startGame();
+        Robot.hazyMecBase.goToTarget();
+
+        //System.out.println("Pressed End Arm Down");
     }
 
     @Override

@@ -4,11 +4,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpiutil.math.MathUtil;
+
+import javax.lang.model.util.ElementScanner6;
+
 //import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import java.util.*;
+import edu.wpi.first.wpilibj.SerialPort;
 
 public class HazyMecBase extends Subsystem{
     
@@ -16,6 +18,8 @@ public class HazyMecBase extends Subsystem{
     private TalonSRX leftFrontTalon;
     private TalonSRX leftBackTalon;
     private TalonSRX rightBackTalon;
+    private double offset; 
+    private double distance;
     
     // PigeonIMU _pigeon = new PigeonIMU(0);
     // ArrayList<Double> ypr_deg = new ArrayList<Double>();
@@ -27,7 +31,8 @@ public class HazyMecBase extends Subsystem{
       leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
-       
+      Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
+      Robot.hazyPort.enableTermination();
       //pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
          
       //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
@@ -91,7 +96,34 @@ public class HazyMecBase extends Subsystem{
         rightBackTalon.set(ControlMode.PercentOutput, -wheelSpeeds[3]*-1);
     }
     
+    public void goToTarget(){
+        double travelDistance = RobotMap.SHOOTDISTANCE - distance;
+        double turnPower = RobotMap.VISIONTURN * offset;
+        double forwardPower = -travelDistance*RobotMap.VISIONSPEED;
+        leftFrontTalon.set(ControlMode.PercentOutput, clamp(forwardPower+turnPower));
+        leftBackTalon.set(ControlMode.PercentOutput,clamp(forwardPower+turnPower));
+        rightFrontTalon.set(ControlMode.PercentOutput, clamp(forwardPower-turnPower));
+        rightBackTalon.set(ControlMode.PercentOutput, clamp(forwardPower-turnPower));
+    }
 
+    public void readData(){
+      String data = Robot.hazyPort.readString();
+      if(!data.equals("")){
+        System.out.println(data);
+        offset = Double.parseDouble(data.substring(8,data.indexOf("distance")));
+        distance = Double.parseDouble(data.substring(data.indexOf("distance")+10));
+      }
+        
+    }
+
+    private double clamp(double input){
+      if(input>RobotMap.MAXVISIONSPEED)
+        return RobotMap.MAXVISIONSPEED; 
+      else if (input < -RobotMap.MAXVISIONSPEED)
+        return -RobotMap.MAXVISIONSPEED;
+      return input;
+    }
+    
     @Override
     public void initDefaultCommand()
     {

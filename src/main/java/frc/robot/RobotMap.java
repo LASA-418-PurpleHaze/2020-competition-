@@ -16,6 +16,10 @@ public class RobotMap { //Static port variables
     public static final int RIGHTBACKTALONPORT = 1;
     public static final int LEFTBACKTALONPORT = 13;
     public static final double TICKSPERFEET = 1279.69;
+    public static final double VISIONTURN = .3;
+    public static final double VISIONSPEED = .3;
+    public static final double SHOOTDISTANCE = 204;
+    
 
     //ColorSensor
     public static final I2C.Port COLORSENSORPORT = I2C.Port.kOnboard;
@@ -48,6 +52,12 @@ public class RobotMap { //Static port variables
     
     //IMU
     public static final int PIGEONIMU = 0;
+
+    //Auton
+    public static final int STARTINGPOSITION = 0;
+    public static final int TURNANGLE1 = 180;
+    public static final double PIGEONERROR = 5.0;
+    public static final double MAXVISIONSPEED = 0.4;
     //End Arm
     public static final int ENDARMTALONPORT = 3;
 

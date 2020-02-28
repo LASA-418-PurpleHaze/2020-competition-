@@ -9,9 +9,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -89,7 +88,12 @@ public class Robot extends TimedRobot {
   //auton
   public static CommandAuton commandAuton;
   public static HazyAuton hazyAuton;
-
+  public static CommandFollowVision commandFollowVision;
+  public static CommandAutonMove commandAutonMove;
+  public static CommandAutonTurn commandAutonTurn;
+  public static CommandToggleTurn commandToggleTurn;
+  public static CommandGroupAuton commandGroupAuton;
+  int count;
   OI hazyOI; //OI object for all the buttons and their resulting commands
 
   @Override
@@ -153,11 +157,15 @@ public class Robot extends TimedRobot {
     commandAuton = new CommandAuton();
     solenoidToLight = new Solenoid(0);
     solenoidToLight.set(true);
+    commandFollowVision = new CommandFollowVision();
+    commandAutonTurn = new CommandAutonTurn(180.0);
+    commandAutonMove = new CommandAutonMove(7.0);
+    commandToggleTurn = new CommandToggleTurn();
+    Scheduler.getInstance().add(commandAutonTurn);
     
 
     //Initialization Code for Serial Port
-    hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
-    hazyPort.enableTermination();
+    
     // commandGetData = new CommandGetData();
     //Scheduler.getInstance().add(commandGetData);
 
@@ -167,27 +175,40 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    Robot.commandSwitchIntakeDir.execute();
-    Robot.commandMoveIntakeDefault.execute(); //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
-    Robot.commandAuton.execute();
+    Scheduler.getInstance().removeAll();
+    Scheduler.getInstance().add(commandMecanum);
+    Scheduler.getInstance().add(commandMoveIntakeDefault);
+     //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
+    count = 0;
   }
 
   @Override
   public void autonomousPeriodic() {
-
+    Scheduler.getInstance().run();
+    if(count < 1){
+      Robot.commandSwitchIntakeDir.execute();
+      Robot.commandGroupAuton.start();
+      count += 1;
+    }
   }
 
   @Override
   public void teleopInit() {
+    Scheduler.getInstance().removeAll();
+    Scheduler.getInstance().add(commandMecanum);
+    Scheduler.getInstance().add(commandGoToColor);
+    Scheduler.getInstance().add(commandMoveIntakeDefault);
+    Scheduler.getInstance().add(commandEndArmDefault);
+    Scheduler.getInstance().add(commandLowFeedDefault);
+    Scheduler.getInstance().add(commandHighFeedDefault);
+
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
     hazyOI.runAllMethods();
-    String data = hazyPort.readString();
-    if(!data.equals(""))
-      System.out.println(data);
+    
   }
 
   @Override

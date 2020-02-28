@@ -16,6 +16,7 @@ public class CommandSwitchIntakeDir extends Command {
     @Override
     protected void execute(){
         Robot.hazyIntake.switchDir();
+        System.out.println("SWITHCINTAKEDIR");
     }
 
     @Override

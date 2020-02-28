@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -101,7 +103,7 @@ public class Robot extends TimedRobot {
     //Initialization Code for the Mechanum Drive
     hazyMecBase = new HazyMecBase();
     commandMecanum = new CommandMecanum();
-    Scheduler.getInstance().add(commandMecanum);
+    //Scheduler.getInstance().add(commandMecanum);
 
     //Initialization Code for the Color Sensor and Arm
     hazyColorSensor = new HazyColorSensor();
@@ -113,7 +115,7 @@ public class Robot extends TimedRobot {
     commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
     commandToggleColorArm = new CommandToggleColorArm();
-    Scheduler.getInstance().add(commandGoToColor);
+    //Scheduler.getInstance().add(commandGoToColor);
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
@@ -123,28 +125,28 @@ public class Robot extends TimedRobot {
     commandIntakeDefault = new CommandIntakeDefault();
     commandSwitchIntakeDir = new CommandSwitchIntakeDir();
     commandStopSpinning = new CommandStopSpinning();
-    Scheduler.getInstance().add(commandMoveIntakeDefault);
+    //Scheduler.getInstance().add(commandMoveIntakeDefault);
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
     commandEndArmUp = new CommandEndArmUp();
     commandEndArmDown = new CommandEndArmDown();
     commandEndArmDefault = new CommandEndArmDefault();
-    Scheduler.getInstance().add(commandEndArmDefault);
+    //Scheduler.getInstance().add(commandEndArmDefault);
 
     //Initialization Code for Low Ball Feeder
     hazyLowFeeder = new HazyLowFeeder();
     commandSwallowLowFeed = new CommandSwallowLowFeed();
     commandSpitLowFeed = new CommandSpitLowFeed();
     commandLowFeedDefault = new CommandLowFeedDefault();
-    Scheduler.getInstance().add(commandLowFeedDefault);
+    //Scheduler.getInstance().add(commandLowFeedDefault);
 
     //Initialization Code for High Ball Feeder
     hazyHighFeeder = new HazyHighFeeder();
     commandSwallowHighFeed = new CommandSwallowHighFeed();
     commandSpitHighFeed = new CommandSpitHighFeed();
     commandHighFeedDefault = new CommandHighFeedDefault();
-    Scheduler.getInstance().add(commandHighFeedDefault);
+    //Scheduler.getInstance().add(commandHighFeedDefault);
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
@@ -161,7 +163,8 @@ public class Robot extends TimedRobot {
     commandAutonTurn = new CommandAutonTurn(180.0);
     commandAutonMove = new CommandAutonMove(7.0);
     commandToggleTurn = new CommandToggleTurn();
-    Scheduler.getInstance().add(commandAutonTurn);
+    commandGroupAuton = new CommandGroupAuton();
+    //Scheduler.getInstance().add(commandAutonTurn);
     
 
     //Initialization Code for Serial Port
@@ -176,6 +179,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
+    //System.out.println("AUTOOOOOOOOOOOOOOO");
     Scheduler.getInstance().add(commandMecanum);
     Scheduler.getInstance().add(commandMoveIntakeDefault);
      //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
@@ -184,10 +188,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+    //System.out.println("AUTOOOOOLOOOOOPPPP");
+    //System.out.println(count);
     Scheduler.getInstance().run();
     if(count < 1){
-      Robot.commandSwitchIntakeDir.execute();
-      Robot.commandGroupAuton.start();
+      Robot.commandAutonMove.execute();
+      new WaitCommand(5);
+      Robot.commandAutonTurn.execute();
+      new WaitCommand(1);
+      //Robot.commandGroupAuton.start();
       count += 1;
     }
   }
@@ -201,7 +210,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().add(commandEndArmDefault);
     Scheduler.getInstance().add(commandLowFeedDefault);
     Scheduler.getInstance().add(commandHighFeedDefault);
-
+    System.out.println("TELEOPPPPPPPPPPPPP");
   }
 
   @Override

@@ -4,7 +4,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 
 public class HazyAuton extends Subsystem {
@@ -22,6 +24,15 @@ public class HazyAuton extends Subsystem {
       leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
+      rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
       ypr = new double[3];
       pigeon = new PigeonIMU(0);
       shouldTurn = false;
@@ -41,25 +52,22 @@ public class HazyAuton extends Subsystem {
  
 
     public void move(double feet) {
+      System.out.println("MOVE FUNCTION IN SUBSYSTEN");
       leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
       rightBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
     }
 
-    public void turn(double degs) {
+    public void turnRight() {
+      shouldTurn = true;
       if(shouldTurn) {
-        if(UpdateYPR() > degs + RobotMap.PIGEONERROR || UpdateYPR() > degs - RobotMap.PIGEONERROR){
-          leftBackTalon.set(ControlMode.Position, 7*RobotMap.TICKSPERFEET);
-          rightFrontTalon.set(ControlMode.Position, -7*RobotMap.TICKSPERFEET);   
-        }
-        if(UpdateYPR() < degs + RobotMap.PIGEONERROR && UpdateYPR() > degs - RobotMap.PIGEONERROR){
-          shouldTurn = false;
-          pigeon.setYaw(0.0);
-          pigeon.setAccumZAngle(0.0);
-        }
+        leftBackTalon.set(ControlMode.PercentOutput, 0.3);
+        rightBackTalon.set(ControlMode.PercentOutput, -0.3);
+        new WaitCommand(3);
+        shouldTurn = false;
       }
       if(!shouldTurn) {
         leftBackTalon.set(ControlMode.Position, 0);
-        rightFrontTalon.set(ControlMode.Position, 0);
+        rightBackTalon.set(ControlMode.Position, 0);
       }
     }
 

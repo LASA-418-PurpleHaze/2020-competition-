@@ -18,8 +18,7 @@ public class CommandAutonTurn extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyAuton.turn(degs);
-        //System.out.println("Pressed Drop Intake");
+        Robot.hazyAuton.turnRight();
     }
 
     @Override

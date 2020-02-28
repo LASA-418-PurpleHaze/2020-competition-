@@ -58,6 +58,10 @@ public class RobotMap { //Static port variables
     public static final int TURNANGLE1 = 180;
     public static final double PIGEONERROR = 5.0;
     public static final double MAXVISIONSPEED = 0.4;
+    public static final double DRIVEP = 1.0;
+    public static final double DRIVEI = 0.0;
+    public static final double DRIVED = 0.0;
+    public static final double DRIVEF = 0.0;
     //End Arm
     public static final int ENDARMTALONPORT = 3;
 

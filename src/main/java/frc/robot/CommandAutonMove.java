@@ -18,13 +18,13 @@ public class CommandAutonMove extends Command {
 
     @Override
     protected void execute(){
+        System.out.println("MOVE COMMAND RUNNING");
         Robot.hazyAuton.move(feet);
-        //System.out.println("Pressed Drop Intake");
     }
 
     @Override
     protected boolean isFinished(){
-        return false;
+        return true;
     }
 
     @Override

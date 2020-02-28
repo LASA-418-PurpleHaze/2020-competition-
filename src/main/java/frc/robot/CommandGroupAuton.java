@@ -14,14 +14,14 @@ public class CommandGroupAuton extends CommandGroup {
        addSequential(new WaitCommand(2));
        addSequential(Robot.commandHighFeedDefault);
        addSequential(new WaitCommand(2));
-       addSequential(Robot.commandSwallowHighFeed);
+       addSequential(new CommandSwallowHighFeed());
        addSequential(new WaitCommand(2));
-       addSequential(Robot.commandHighFeedDefault);
+       addSequential(new CommandHighFeedDefault());
        addSequential(new WaitCommand(2));
-       addSequential(Robot.commandSwallowHighFeed);
+       addSequential(new CommandSwallowHighFeed());
        addSequential(new WaitCommand(3));
-       addSequential(Robot.commandShooterDefault);
-       addSequential(Robot.commandToggleTurn);
-       addSequential(Robot.commandAutonMove);
+       addSequential(new CommandHighFeedDefault());
+       addSequential(new CommandAutonTurn(180.0));
+       addSequential(new CommandAutonMove(7.0));
     }
 }

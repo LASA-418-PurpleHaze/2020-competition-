@@ -45,12 +45,16 @@ public class HazyIntake extends Subsystem {
 
     public void moveIntake(){ //Functions actually used by commands
 
+        //System.out.println(inputLow.get());
+        //System.out.println(inputHigh.get());
         if(shouldMove && isUp){
             if(inputLow.get()){
-                liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);   
+                liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
+                //System.out.println("MOVING DOWN");   
             }
             
             if(!inputLow.get() && isUp){
+                System.out.println("Low Pressed");
                 shouldMove = false;
                 isUp = false;
             }
@@ -58,8 +62,11 @@ public class HazyIntake extends Subsystem {
         else if(shouldMove && !isUp){
             if(inputHigh.get())
                 liftTalon.set(ControlMode.PercentOutput, RobotMap.LIFTTALONSPEED);
+                //System.out.println("MOVING UP");
             
             if(!inputHigh.get()){
+                System.out.println("High Pressed");
+
                 shouldMove = false;
                 isUp = true;     
             }    

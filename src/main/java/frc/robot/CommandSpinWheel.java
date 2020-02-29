@@ -17,7 +17,7 @@ public class CommandSpinWheel extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyColorArm.spinWheel(4);
+        Robot.hazyColorArm.spinToggle();
         //System.out.println("Pressed Spin Color Wheel");
     }
 

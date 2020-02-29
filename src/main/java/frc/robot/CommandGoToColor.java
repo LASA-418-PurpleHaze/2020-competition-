@@ -22,6 +22,7 @@ public class CommandGoToColor extends Command {
         // }
 
         Robot.hazyColorArm.goToColor('B');
+        Robot.hazyColorArm.spinWheel(4);
     }
 
     @Override

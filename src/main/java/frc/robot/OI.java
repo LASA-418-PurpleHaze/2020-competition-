@@ -37,13 +37,14 @@ public class OI
         leftTrigger.whileHeld(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
         leftTrigger.whileHeld(Robot.commandSpitLowFeed);
         controller.getBButton().whenPressed(Robot.commandSwitchIntakeDir); //Whenever this button is pushed the intake is dropped or pulled up
-        
-        rightMidButton.whileHeld(Robot.commandSwallowHighFeed);
+        controller.getYButton().whenPressed(Robot.commandSpinWheel);
+        controller.getAButton().whileHeld(Robot.commandSwallowHighFeed);
         leftMidButton.whileHeld(Robot.commandSpitHighFeed);
 
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
 
         leftThumbButton.whileHeld(Robot.commandFollowVision);
+
     }
         //Set commands to run on button press for the XBOX Controller - Operator
         //We need to talk with the Operator to see how they want this laid out

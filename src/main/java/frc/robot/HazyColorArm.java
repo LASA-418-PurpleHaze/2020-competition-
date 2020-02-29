@@ -18,6 +18,7 @@ public class HazyColorArm extends Subsystem {
     private int spinTo;
     private int colorCount;
     private boolean shouldMove;
+    private boolean shouldSpin;
 
     private int colorToTravelTo; //The Color which the color sensor will stop onHaz
 
@@ -34,12 +35,12 @@ public class HazyColorArm extends Subsystem {
         spinNum = 0;
         colorCount=0;
         shouldMove = false;
-
+        shouldSpin = false;
         colorToTravelTo = 0; 
     }
 
     public void foldUp(){
-        elbowTalon.set(ControlMode.Position, -3700); //negative goes up (-3700)
+        elbowTalon.set(ControlMode.Position, -4300); //negative goes up (-3700)
     }
 
     public void foldDown(){
@@ -57,43 +58,47 @@ public class HazyColorArm extends Subsystem {
         colorWheelTalon.set(ControlMode.PercentOutput, 0);
     }
 
-   
+   public void spinToggle(){
+       shouldSpin = true;
+   }
     //spins the wheel a specified number of times spinTo
     public void spinWheel(int spinTo){
-        this.spinTo = spinTo;
-        //hasn't spun spinTo times yet, keep motor going
+        if(shouldSpin){
+            this.spinTo = spinTo;
+            //hasn't spun spinTo times yet, keep motor going
 
-        if(spinNum < spinTo*2){
-            if(spinNum < spinTo*2-2){
-                colorWheelTalon.set(ControlMode.PercentOutput, 0.4);
-            }else{
-                colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
-            }
-        }
-
-        //gotten to initColor again - means it's gone half a spin
-        char col = Robot.hazyColorSensor.getColor();
-        
-        if(col != candidateColor){
-            //System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
-            colorCount = 0;
-            candidateColor = col;
-        }else{
-            colorCount++;
-            //System.out.println(colorCount+" "+ col+" current:"+currentColor);
-        }
-        if(candidateColor != currentColor){
-            if(colorCount > 6){
-                if((col == initColor) && (col != currentColor)){
-                   // System.out.println("spins ++++");
-                    spinNum++;
+            if(spinNum < spinTo*2){
+                if(spinNum < spinTo*2-2){
+                    colorWheelTalon.set(ControlMode.PercentOutput, 0.4);
+                }else{
+                    colorWheelTalon.set(ControlMode.PercentOutput, 0.3);
                 }
-               // System.out.println("new color: " + col);
-                currentColor = col;
-                //System.out.println("spins: " + spinNum);
+            }
+
+            //gotten to initColor again - means it's gone half a spin
+            char col = Robot.hazyColorSensor.getColor();
+            
+            if(col != candidateColor){
+                //System.out.println("candidate switch! old: " +candidateColor+" new: "+col);
+                colorCount = 0;
+                candidateColor = col;
+            }else{
+                colorCount++;
+                //System.out.println(colorCount+" "+ col+" current:"+currentColor);
+            }
+            if(candidateColor != currentColor){
+                if(colorCount > 6){
+                    if((col == initColor) && (col != currentColor)){
+                    // System.out.println("spins ++++");
+                        spinNum++;
+                    }
+                // System.out.println("new color: " + col);
+                    currentColor = col;
+                    //System.out.println("spins: " + spinNum);
+                }
             }
         }
-        if(spinNum >= spinTo*2 ){ //has spun spinTo times, turn motor off
+        if(!shouldSpin){ //has spun spinTo times, turn motor off
             colorWheelTalon.set(ControlMode.PercentOutput, 0);
         }
     }

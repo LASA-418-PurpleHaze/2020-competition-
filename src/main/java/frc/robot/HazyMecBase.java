@@ -97,6 +97,7 @@ public class HazyMecBase extends Subsystem{
     }
     
     public void goToTarget(){
+        Robot.solenoidToLight.set(true);
         double travelDistance = RobotMap.SHOOTDISTANCE - distance;
         double turnPower = RobotMap.VISIONTURN * offset;
         double forwardPower = -travelDistance*RobotMap.VISIONSPEED;
@@ -110,8 +111,13 @@ public class HazyMecBase extends Subsystem{
       String data = Robot.hazyPort.readString();
       if(!data.equals("")){
         System.out.println(data);
+        try{
         offset = Double.parseDouble(data.substring(8,data.indexOf("distance")));
         distance = Double.parseDouble(data.substring(data.indexOf("distance")+10));
+        }
+        catch (Exception e){
+          e.printStackTrace();
+        }
       }
         
     }

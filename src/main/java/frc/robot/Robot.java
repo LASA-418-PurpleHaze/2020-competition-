@@ -158,12 +158,12 @@ public class Robot extends TimedRobot {
     hazyAuton = new HazyAuton();
     commandAuton = new CommandAuton();
     solenoidToLight = new Solenoid(0);
-    solenoidToLight.set(true);
+    
     commandFollowVision = new CommandFollowVision();
     commandAutonTurn = new CommandAutonTurn(180.0);
     commandAutonMove = new CommandAutonMove(7.0);
     commandToggleTurn = new CommandToggleTurn();
-    commandGroupAuton = new CommandGroupAuton();
+    //commandGroupAuton = new CommandGroupAuton();
     //Scheduler.getInstance().add(commandAutonTurn);
     
 
@@ -180,8 +180,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     Scheduler.getInstance().removeAll();
     //System.out.println("AUTOOOOOOOOOOOOOOO");
-    Scheduler.getInstance().add(commandMecanum);
     Scheduler.getInstance().add(commandMoveIntakeDefault);
+    Scheduler.getInstance().add(commandAutonTurn);
      //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
     count = 0;
   }
@@ -194,7 +194,7 @@ public class Robot extends TimedRobot {
     if(count < 1){
       Robot.commandAutonMove.execute();
       new WaitCommand(5);
-      Robot.commandAutonTurn.execute();
+      Robot.commandToggleTurn.execute();
       new WaitCommand(1);
       //Robot.commandGroupAuton.start();
       count += 1;

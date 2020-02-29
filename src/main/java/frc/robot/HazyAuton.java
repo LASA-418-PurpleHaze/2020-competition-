@@ -58,7 +58,6 @@ public class HazyAuton extends Subsystem {
     }
 
     public void turnRight() {
-      shouldTurn = true;
       if(shouldTurn) {
         leftBackTalon.set(ControlMode.PercentOutput, 0.3);
         rightBackTalon.set(ControlMode.PercentOutput, -0.3);

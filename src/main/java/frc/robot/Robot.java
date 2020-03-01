@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.Timer;
 
 
 /**
@@ -95,6 +96,7 @@ public class Robot extends TimedRobot {
   public static CommandAutonTurn commandAutonTurn;
   public static CommandToggleTurn commandToggleTurn;
   public static CommandGroupAuton commandGroupAuton;
+  public static Timer hazyTime;
   int count;
   OI hazyOI; //OI object for all the buttons and their resulting commands
 
@@ -158,7 +160,7 @@ public class Robot extends TimedRobot {
     hazyAuton = new HazyAuton();
     commandAuton = new CommandAuton();
     solenoidToLight = new Solenoid(0);
-    
+    hazyTime = new Timer();
     commandFollowVision = new CommandFollowVision();
     commandAutonTurn = new CommandAutonTurn(180.0);
     commandAutonMove = new CommandAutonMove(7.0);
@@ -182,6 +184,7 @@ public class Robot extends TimedRobot {
     //System.out.println("AUTOOOOOOOOOOOOOOO");
     Scheduler.getInstance().add(commandMoveIntakeDefault);
     Scheduler.getInstance().add(commandAutonTurn);
+    Scheduler.getInstance().add(commandHighFeedDefault);
      //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
     count = 0;
   }
@@ -193,9 +196,15 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     if(count < 1){
       Robot.commandAutonMove.execute();
-      new WaitCommand(5);
-      Robot.commandToggleTurn.execute();
-      new WaitCommand(1);
+      // new WaitCommand(0.5);
+      Robot.hazyShooter.shooterSpit();
+      for(int i = 0; i < 3; i++){
+        Robot.commandSwallowHighFeed.execute();
+        new WaitCommand(2);
+        Robot.commandHighFeedDefault.execute();
+        new WaitCommand(2);
+      }
+      Robot.commandShooterDefault.execute();
       //Robot.commandGroupAuton.start();
       count += 1;
     }

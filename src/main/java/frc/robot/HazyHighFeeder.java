@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HazyHighFeeder extends Subsystem {
 
     private TalonSRX highFeederTalon; 
-
+    
     public HazyHighFeeder(){
         highFeederTalon = new TalonSRX(RobotMap.HIGHFEEDERTALON);
     }

@@ -1,31 +1,31 @@
-//Imports fot the Command
-package frc.robot;
+// //Imports fot the Command
+// package frc.robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandAutonTurn extends Command {
-    private double degs; 
+// public class CommandAutonTurn extends Command {
+//     private double degs; 
 
-    public CommandAutonTurn(double in){
-        super.requires(Robot.hazyAuton);
-        degs = in;
-    }
+//     public CommandAutonTurn(double in){
+//         super.requires(Robot.hazyAuton);
+//         degs = in;
+//     }
     
-    @Override
-    protected void initialize(){
-        // Robot.hazyIntake.initialize();
-    }
+//     @Override
+//     protected void initialize(){
+//         // Robot.hazyIntake.initialize();
+//     }
 
-    @Override
-    protected void execute(){
-        Robot.hazyAuton.turnRight();
-    }
+//     @Override
+//     protected void execute(){
+//         Robot.hazyAuton.turnRight();
+//     }
 
-    @Override
-    protected boolean isFinished(){
-        return false;
-    }
+//     @Override
+//     protected boolean isFinished(){
+//         return false;
+//     }
 
-    @Override
-    protected void interrupted(){}
-}
+//     @Override
+//     protected void interrupted(){}
+// }

@@ -24,17 +24,28 @@ public class HazyAuton extends Subsystem {
       leftBackTalon = new TalonSRX(RobotMap.LEFTBACKTALONPORT);
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
+
+      rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      rightFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
       rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
       rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
       rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
 
+      leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      leftFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
       leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
       leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
       leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
-      ypr = new double[3];
-      pigeon = new PigeonIMU(0);
+      // ypr = new double[3];
+      // pigeon = new PigeonIMU(0);
       shouldTurn = false;
 
       //PigeonIMU _pigeon = new PigeonIMU(0);
@@ -53,22 +64,32 @@ public class HazyAuton extends Subsystem {
 
     public void move(double feet) {
       System.out.println("MOVE FUNCTION IN SUBSYSTEN");
-      leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
-      rightBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      leftFrontTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      //leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      //rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
+      rightFrontTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
     }
 
-    public void turnRight() {
-      if(shouldTurn) {
-        leftBackTalon.set(ControlMode.PercentOutput, 0.3);
-        rightBackTalon.set(ControlMode.PercentOutput, -0.3);
-        new WaitCommand(3);
-        shouldTurn = false;
-      }
-      if(!shouldTurn) {
-        leftBackTalon.set(ControlMode.Position, 0);
-        rightBackTalon.set(ControlMode.Position, 0);
-      }
+    public void resetEncoders(){
+      leftFrontTalon.setSelectedSensorPosition(0);
+      leftBackTalon.setSelectedSensorPosition(0);
+      rightFrontTalon.setSelectedSensorPosition(0);
+      rightBackTalon.setSelectedSensorPosition(0);
+
     }
+
+    // public void turnRight() {
+    //   if(shouldTurn) {
+    //     leftBackTalon.set(ControlMode.PercentOutput, 0.3);
+    //     rightBackTalon.set(ControlMode.PercentOutput, -0.3);
+    //     new WaitCommand(3);
+    //     shouldTurn = false;
+    //   }
+    //   if(!shouldTurn) {
+    //     leftBackTalon.set(ControlMode.Position, 0);
+    //     rightBackTalon.set(ControlMode.Position, 0);
+    //   }
+    // }
 
     public void toggleTurn() {
       shouldTurn = true;

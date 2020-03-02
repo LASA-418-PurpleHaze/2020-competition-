@@ -93,9 +93,9 @@ public class Robot extends TimedRobot {
   public static HazyAuton hazyAuton;
   public static CommandFollowVision commandFollowVision;
   public static CommandAutonMove commandAutonMove;
-  public static CommandAutonTurn commandAutonTurn;
+  // public static CommandAutonTurn commandAutonTurn;
   public static CommandToggleTurn commandToggleTurn;
-  public static CommandGroupAuton commandGroupAuton;
+  // public static CommandGroupAuton commandGroupAuton;
   public static Timer hazyTime;
   int count;
   OI hazyOI; //OI object for all the buttons and their resulting commands
@@ -162,7 +162,7 @@ public class Robot extends TimedRobot {
     solenoidToLight = new Solenoid(0);
     hazyTime = new Timer();
     commandFollowVision = new CommandFollowVision();
-    commandAutonTurn = new CommandAutonTurn(180.0);
+    // commandAutonTurn = new CommandAutonTurn(180.0);
     commandAutonMove = new CommandAutonMove(7.0);
     commandToggleTurn = new CommandToggleTurn();
     //commandGroupAuton = new CommandGroupAuton();
@@ -180,11 +180,32 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    Scheduler.getInstance().removeAll();
+    hazyAuton.resetEncoders();
+
+    // Scheduler.getInstance().removeAll();
     //System.out.println("AUTOOOOOOOOOOOOOOO");
-    Scheduler.getInstance().add(commandMoveIntakeDefault);
-    Scheduler.getInstance().add(commandAutonTurn);
-    Scheduler.getInstance().add(commandHighFeedDefault);
+    // Scheduler.getInstance().add(commandMoveIntakeDefault);
+    // Scheduler.getInstance().add(commandAutonTurn);
+    // Scheduler.getInstance().add(commandHighFeedDefault);
+
+    commandAutonMove.execute();
+      // new WaitCommand(0.5);
+    System.out.println("AFTER MOVe");
+    commandShooterSpit.execute();
+    double milStart = java.lang.System.currentTimeMillis();
+    while (java.lang.System.currentTimeMillis() < milStart + 2000) {}
+    for(int i = 0; i < 3; i++){
+      milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 1000) {
+        commandSwallowHighFeed.execute();
+      }
+      milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 2000) {
+        commandHighFeedDefault.execute();
+      }
+      new WaitCommand(50);
+    }
+    commandShooterDefault.execute();
      //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
     count = 0;
   }
@@ -193,21 +214,12 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     //System.out.println("AUTOOOOOLOOOOOPPPP");
     //System.out.println(count);
-    Scheduler.getInstance().run();
-    if(count < 1){
-      Robot.commandAutonMove.execute();
-      // new WaitCommand(0.5);
-      Robot.hazyShooter.shooterSpit();
-      for(int i = 0; i < 3; i++){
-        Robot.commandSwallowHighFeed.execute();
-        new WaitCommand(2);
-        Robot.commandHighFeedDefault.execute();
-        new WaitCommand(2);
-      }
-      Robot.commandShooterDefault.execute();
-      //Robot.commandGroupAuton.start();
-      count += 1;
-    }
+    // Scheduler.getInstance().run();
+    // if(count < 1){
+      
+    //   //Robot.commandGroupAuton.start();
+    //   count += 1;
+    // }
   }
 
   @Override

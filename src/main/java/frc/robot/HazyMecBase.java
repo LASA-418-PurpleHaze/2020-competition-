@@ -34,7 +34,27 @@ public class HazyMecBase extends Subsystem{
       Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
       Robot.hazyPort.enableTermination();
       //pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
-         
+      
+      // rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      // rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      // rightFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      // rightFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      // rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      // rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      // rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      // rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      // leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      // leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      // leftFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      // leftFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      // leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      // leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      // leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      // leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+
       //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
     }
 

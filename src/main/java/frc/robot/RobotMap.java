@@ -15,7 +15,9 @@ public class RobotMap { //Static port variables
     public static final int LEFTFRONTTALONPORT = 2;
     public static final int RIGHTBACKTALONPORT = 1;
     public static final int LEFTBACKTALONPORT = 13;
-    public static final double TICKSPERFEET = 1279.69;
+    public static final double TICKSPERFEET = 3000.0;
+    
+
     public static final double VISIONTURN = .3;
     public static final double VISIONSPEED = .3;
     public static final double SHOOTDISTANCE = 204;
@@ -58,7 +60,7 @@ public class RobotMap { //Static port variables
     public static final int TURNANGLE1 = 180;
     public static final double PIGEONERROR = 5.0;
     public static final double MAXVISIONSPEED = 0.4;
-    public static final double DRIVEP = 1.0;
+    public static final double DRIVEP = 0.08;
     public static final double DRIVEI = 0.0;
     public static final double DRIVED = 0.0;
     public static final double DRIVEF = 0.0;

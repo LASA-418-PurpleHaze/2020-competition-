@@ -38,11 +38,11 @@ public class OI
         leftTrigger.whileHeld(Robot.commandSpitLowFeed);
         controller.getBButton().whenPressed(Robot.commandSwitchIntakeDir); //Whenever this button is pushed the intake is dropped or pulled up
         controller.getYButton().whenPressed(Robot.commandSpinWheel);
-        controller.getAButton().whileHeld(Robot.commandSwallowHighFeed);
-        leftMidButton.whileHeld(Robot.commandSpitHighFeed);
+        //controller.getAButton().whileHeld(Robot.commandSwallowHighFeed);
+        
 
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
-
+        rightThumbButton.whileHeld(Robot.commandPreciseMecanum);
         leftThumbButton.whileHeld(Robot.commandFollowVision);
 
     }
@@ -63,6 +63,10 @@ public class OI
             Robot.commandFoldUp.execute();
         if(controller.getHazyDPad().getBot())
             Robot.commandFoldDown.execute();
+        if(controller.getHazyDPad().getLeft())
+            Robot.commandSpitHighFeed.execute();
+        if(controller.getHazyDPad().getRight())
+            Robot.commandSwallowHighFeed.execute();
     }   
     
     //Getter methods for all our input devices

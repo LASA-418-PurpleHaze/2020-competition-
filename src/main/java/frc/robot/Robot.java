@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
   //Variables for the Mecanum Drive
   public static HazyMecBase hazyMecBase; 
   public static CommandMecanum commandMecanum;
+  public static CommandPreciseMecanum commandPreciseMecanum;
 
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
@@ -105,6 +106,7 @@ public class Robot extends TimedRobot {
     //Initialization Code for the Mechanum Drive
     hazyMecBase = new HazyMecBase();
     commandMecanum = new CommandMecanum();
+    commandPreciseMecanum = new CommandPreciseMecanum();
     //Scheduler.getInstance().add(commandMecanum);
 
     //Initialization Code for the Color Sensor and Arm

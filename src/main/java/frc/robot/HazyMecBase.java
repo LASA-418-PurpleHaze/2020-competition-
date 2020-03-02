@@ -119,12 +119,10 @@ public class HazyMecBase extends Subsystem{
     public void goToTarget(){
         Robot.solenoidToLight.set(true);
         double travelDistance = RobotMap.SHOOTDISTANCE - distance;
-        double turnPower = RobotMap.VISIONTURN * offset;
-        double forwardPower = -travelDistance*RobotMap.VISIONSPEED;
-        leftFrontTalon.set(ControlMode.PercentOutput, clamp(forwardPower+turnPower));
-        leftBackTalon.set(ControlMode.PercentOutput,clamp(forwardPower+turnPower));
-        rightFrontTalon.set(ControlMode.PercentOutput, clamp(forwardPower-turnPower));
-        rightBackTalon.set(ControlMode.PercentOutput, clamp(forwardPower-turnPower));
+        double turnPower = clamp(RobotMap.VISIONTURN * offset);
+        double forwardPower =clamp( -travelDistance*RobotMap.VISIONSPEED);
+        System.out.println("turn: " + turnPower + " forward: " + forwardPower);
+        driveCartesian(0, -forwardPower, -turnPower);
     }
 
     public void readData(){

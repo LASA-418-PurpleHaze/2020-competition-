@@ -15,6 +15,7 @@ public class CommandFollowVision extends Command {
 
     @Override
     protected void execute(){
+        Robot.hazyMecBase.readData();
         Robot.hazyMecBase.goToTarget();
 
         //System.out.println("Pressed End Arm Down");

@@ -1,6 +1,8 @@
 //Imports fot the Subsystem and its functions
 package frc.robot;
 
+import java.util.Arrays;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -19,6 +21,7 @@ public class HazyColorArm extends Subsystem {
     private int colorCount;
     private boolean shouldMove;
     private boolean shouldSpin;
+    private char[] colors = {'R', 'G', 'B', 'Y'};
 
     private int colorToTravelTo; //The Color which the color sensor will stop onHaz
 
@@ -36,7 +39,7 @@ public class HazyColorArm extends Subsystem {
         colorCount=0;
         shouldMove = false;
         shouldSpin = false;
-        colorToTravelTo = 0; 
+        colorToTravelTo = 0;
     }
 
     public void foldUp(){
@@ -131,9 +134,11 @@ public class HazyColorArm extends Subsystem {
         shouldMove = true;
     }
 
-    public void goToColor (char col) { //spins the wheel to a specified color col
-        
+    public void goToColor (char col) { //spins the wheel to a specified color c
         //System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
+        int i = Arrays.binarySearch(colors, col);
+        col = colors[(i+2)%4];
+        // that was because the actaul sensor on the field is 2 down from where we gotta go
         if(shouldMove){
             if (Robot.hazyColorSensor.getColor() != col) 
                 colorWheelTalon.set(ControlMode.PercentOutput, 0.2);

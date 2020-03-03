@@ -39,6 +39,7 @@ public class OI{
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
         rightThumbButton.whileHeld(Robot.commandPreciseMecanum);
         leftThumbButton.whileHeld(Robot.commandFollowVision);
+        leftThumbButton.whenInactive(Robot.commandToggleDelay);
 
     }
 

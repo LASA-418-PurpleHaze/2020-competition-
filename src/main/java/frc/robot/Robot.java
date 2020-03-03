@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
   public static HazyMecBase hazyMecBase; 
   public static CommandMecanum commandMecanum;
   public static CommandPreciseMecanum commandPreciseMecanum;
+  public static CommandToggleDelay commandToggleDelay;
 
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
@@ -43,7 +44,6 @@ public class Robot extends TimedRobot {
   public static CommandMoveIntakeDefault commandMoveIntakeDefault;
   public static CommandSpitIntake commandSpitIntake;
   public static CommandSwallowIntake commandSwallowIntake;
-  public static CommandIntakeDefault commandIntakeDefault;
   public static CommandSwitchIntakeDir commandSwitchIntakeDir;
   public static CommandStopSpinning commandStopSpinning;
   //public static CommandSpinIntakeDefault commandSpinIntakeDefault;
@@ -96,6 +96,8 @@ public class Robot extends TimedRobot {
     hazyMecBase = new HazyMecBase();
     commandMecanum = new CommandMecanum();
     commandPreciseMecanum = new CommandPreciseMecanum();
+    commandToggleDelay = new CommandToggleDelay();
+
     
     //Initialization Code for the Color Sensor and Arm
     hazyColorSensor = new HazyColorSensor();
@@ -113,7 +115,6 @@ public class Robot extends TimedRobot {
     commandMoveIntakeDefault = new CommandMoveIntakeDefault();
     commandSpitIntake = new CommandSpitIntake();
     commandSwallowIntake = new CommandSwallowIntake();
-    commandIntakeDefault = new CommandIntakeDefault();
     commandSwitchIntakeDir = new CommandSwitchIntakeDir();
     commandStopSpinning = new CommandStopSpinning();
    
@@ -156,13 +157,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    
+  
+    commandSwitchIntakeDir.execute();
     hazyAuton.resetEncoders();
     commandAutonMove.execute();
     commandShooterSpit.execute();
     double milStart = java.lang.System.currentTimeMillis();
 
-    while (java.lang.System.currentTimeMillis() < milStart + 2000){}
+    while (java.lang.System.currentTimeMillis() < milStart + 5000){
+    }
 
     for(int i = 0; i < 3; i++){
       
@@ -181,7 +184,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    commandMoveIntakeDefault.execute();
+  }
 
   @Override
   public void teleopInit() {

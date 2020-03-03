@@ -15,7 +15,7 @@ public class CommandPreciseMecanum extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyMecBase.driveCartesian(-.5* OI.getLeftX(), .5 * OI.getLeftY(), -.5 * OI.getRightX());
+        Robot.hazyMecBase.driveCartesian(-.25* OI.getLeftX(), .25 * OI.getLeftY(), -.25 * OI.getRightX());
         Robot.hazyMecBase.readData();
         Robot.solenoidToLight.set(false);
     }

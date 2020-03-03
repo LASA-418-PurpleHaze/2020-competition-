@@ -14,7 +14,9 @@ public class HazyMecBase extends Subsystem{
     private TalonSRX leftBackTalon;
     private TalonSRX rightBackTalon;
     private double offset; 
+    private boolean delayed;
     private double distance;
+    private double milStart;
     public static HazyMecBase instance;
     
     public HazyMecBase(){
@@ -24,6 +26,7 @@ public class HazyMecBase extends Subsystem{
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
       Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
       Robot.hazyPort.enableTermination();
+      delayed=true;
     }
 
     public void initialize(){}
@@ -85,21 +88,44 @@ public class HazyMecBase extends Subsystem{
     }
     
     public void goToTarget(){
-        Robot.solenoidToLight.set(true);
-        double travelDistance = RobotMap.SHOOTDISTANCE - distance;
+      Robot.solenoidToLight.set(true);
+
+      if (delayed){
+        milStart = java.lang.System.currentTimeMillis();
+        delayed = false;
+      }
+      if(java.lang.System.currentTimeMillis() > milStart + RobotMap.VISIONDELAY){
+        double travelDistance;
+        if(distance == -1.0)
+          travelDistance = 0.0;
+        else
+          travelDistance = RobotMap.SHOOTDISTANCE - distance;
+
         double turnPower = clamp(RobotMap.VISIONTURN * offset);
         double forwardPower =clamp( -travelDistance*RobotMap.VISIONSPEED);
         System.out.println("turn: " + turnPower + " forward: " + forwardPower);
         driveCartesian(0, -forwardPower, -turnPower);
+      }
+    }
+
+    public void toggleDelayed(){
+      delayed = true;
     }
 
     public void readData(){
       String data = Robot.hazyPort.readString();
-      if(!data.equals("")){
-        System.out.println(data);
+      System.out.println(data);
+      if(data.equals("none")){
+        offset = 0.0;
+        distance = -1.0;
+      }
+      if(!data.equals("") && !data.equals("none")){
         try{
         offset = Double.parseDouble(data.substring(8,data.indexOf("distance")));
         distance = Double.parseDouble(data.substring(data.indexOf("distance")+10));
+        if(distance > 2000)
+          distance = -1;   
+        
         }
         catch (Exception e){
           e.printStackTrace();

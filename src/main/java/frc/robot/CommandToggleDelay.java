@@ -3,26 +3,25 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandIntakeDefault extends Command {
-    public CommandIntakeDefault(){
-        super.requires(Robot.hazyIntake);
+public class CommandToggleDelay extends Command {
+    public CommandToggleDelay(){
+        super.requires(Robot.hazyMecBase);
     }
-
+    
     @Override
     protected void initialize(){
+        // Robot.hazyColorArm.initialize();
         // Robot.hazyColorSensor.initialize();
     }
 
     @Override
-    protected void execute(){
-        Robot.hazyIntake.intakeStopLift();
-        Robot.hazyIntake.intakeStopSpin();
-        Robot.hazyIntake.printButtons();
+    protected void execute(){ 
+        Robot.hazyMecBase.toggleDelayed();
     }
 
     @Override
     protected boolean isFinished(){
-        return false;
+        return true;
     }
 
     @Override

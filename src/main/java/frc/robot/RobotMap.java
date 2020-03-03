@@ -16,7 +16,7 @@ public class RobotMap { //Static port variables
     public static final int RIGHTBACKTALONPORT = 1;
     public static final int LEFTBACKTALONPORT = 13;
     public static final double TICKSPERFEET = 3000.0;
-    
+    public static final int VISIONDELAY = 500;
 
     public static final double VISIONTURN = .001;
     public static final double VISIONSPEED = .007;

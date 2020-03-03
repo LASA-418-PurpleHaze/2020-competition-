@@ -136,8 +136,10 @@ public class HazyColorArm extends Subsystem {
 
     public void goToColor (char col) { //spins the wheel to a specified color c
         //System.out.println(Robot.hazyColorSensor.getColor() + "- "+ col);
+        //System.out.println("old: " + col);
         int i = Arrays.binarySearch(colors, col);
         col = colors[(i+2)%4];
+        //System.out.println("new: " + col);
         // that was because the actaul sensor on the field is 2 down from where we gotta go
         if(shouldMove){
             if (Robot.hazyColorSensor.getColor() != col) 

@@ -5,10 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-
-
-public class OI
-{
+public class OI{
     //Declare and initialize all input devices
     public static Joystick leftJoystick = new Joystick(RobotMap.LEFTJOYSTICKPORT);
     public static Joystick rightJoystick = new Joystick(RobotMap.RIGHTJOYSTICKPORT);
@@ -39,17 +36,13 @@ public class OI
         controller.getBButton().whenPressed(Robot.commandSwitchIntakeDir); //Whenever this button is pushed the intake is dropped or pulled up
         controller.getYButton().whenPressed(Robot.commandSpinWheel);
         //controller.getAButton().whileHeld(Robot.commandSwallowHighFeed);
-        
-
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
         rightThumbButton.whileHeld(Robot.commandPreciseMecanum);
         leftThumbButton.whileHeld(Robot.commandFollowVision);
 
     }
-        //Set commands to run on button press for the XBOX Controller - Operator
-        //We need to talk with the Operator to see how they want this laid out
 
-    public void runAllMethods(){
+    public void runMethods(){
         //Logic for the Shooter
         if(controller.getHazyTriggers().getRightAxis()) //Shoots the ball with the bottom right trigger
             Robot.commandShooterSpit.execute(); 
@@ -63,6 +56,8 @@ public class OI
             Robot.commandFoldUp.execute();
         if(controller.getHazyDPad().getBot())
             Robot.commandFoldDown.execute();
+        
+        //Logic for High Feeder
         if(controller.getHazyDPad().getLeft())
             Robot.commandSpitHighFeed.execute();
         if(controller.getHazyDPad().getRight())

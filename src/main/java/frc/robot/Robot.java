@@ -9,13 +9,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.Timer;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,10 +22,7 @@ import edu.wpi.first.wpilibj.Timer;
  * project.
  */
 public class Robot extends TimedRobot {
-  /**
-   * This function is run when the robot is first started up and should be used
-   * for any initialization code.
-   */
+
   //Variables for the Mecanum Drive
   public static HazyMecBase hazyMecBase; 
   public static CommandMecanum commandMecanum;
@@ -37,11 +31,10 @@ public class Robot extends TimedRobot {
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
   public static HazyColorArm hazyColorArm;
-  public static CommandColor commandColor;
+  // public static CommandColor commandColor;
   public static CommandFoldUp commandFoldUp;
   public static CommandFoldDown commandFoldDown;
   public static CommandSpinWheel commandSpinWheel;
-  public static CommandGoToColor commandGoToColor;
   public static CommandColorArmDefault commandColorArmDefault;
   public static CommandToggleColorArm commandToggleColorArm;
 
@@ -80,26 +73,22 @@ public class Robot extends TimedRobot {
   public static CommandShooterSwallow commandShooterSwallow;
   public static CommandShooterDefault commandShooterDefault;
 
- //IMU initialization
-  
-
   //Serial Port 
   public static SerialPort hazyPort;
-  // public static CommandGetData commandGetData;
+
+  //Vision Light
   public static Solenoid solenoidToLight; 
 
-
-  //auton
-  public static CommandAuton commandAuton;
+  //Autonomous
   public static HazyAuton hazyAuton;
   public static CommandFollowVision commandFollowVision;
   public static CommandAutonMove commandAutonMove;
-  // public static CommandAutonTurn commandAutonTurn;
   public static CommandToggleTurn commandToggleTurn;
-  // public static CommandGroupAuton commandGroupAuton;
   public static Timer hazyTime;
-  int count;
+  
+  //OI
   OI hazyOI; //OI object for all the buttons and their resulting commands
+
 
   @Override
   public void robotInit() {
@@ -107,19 +96,17 @@ public class Robot extends TimedRobot {
     hazyMecBase = new HazyMecBase();
     commandMecanum = new CommandMecanum();
     commandPreciseMecanum = new CommandPreciseMecanum();
-    //Scheduler.getInstance().add(commandMecanum);
-
+    
     //Initialization Code for the Color Sensor and Arm
     hazyColorSensor = new HazyColorSensor();
     hazyColorArm = new HazyColorArm();
-    commandColor = new CommandColor();
+    //commandColor = new CommandColor();
     commandFoldUp = new CommandFoldUp();
     commandFoldDown = new CommandFoldDown();
     commandSpinWheel = new CommandSpinWheel();
-    commandGoToColor = new CommandGoToColor();
     commandColorArmDefault = new CommandColorArmDefault();
     commandToggleColorArm = new CommandToggleColorArm();
-    //Scheduler.getInstance().add(commandGoToColor);
+    
 
     //Initialization Code for the Intake
     hazyIntake = new HazyIntake();
@@ -129,28 +116,25 @@ public class Robot extends TimedRobot {
     commandIntakeDefault = new CommandIntakeDefault();
     commandSwitchIntakeDir = new CommandSwitchIntakeDir();
     commandStopSpinning = new CommandStopSpinning();
-    //Scheduler.getInstance().add(commandMoveIntakeDefault);
+   
 
     //Initialization Code for End Arm
     hazyEndArm = new HazyEndArm();
     commandEndArmUp = new CommandEndArmUp();
     commandEndArmDown = new CommandEndArmDown();
     commandEndArmDefault = new CommandEndArmDefault();
-    //Scheduler.getInstance().add(commandEndArmDefault);
 
     //Initialization Code for Low Ball Feeder
     hazyLowFeeder = new HazyLowFeeder();
     commandSwallowLowFeed = new CommandSwallowLowFeed();
     commandSpitLowFeed = new CommandSpitLowFeed();
     commandLowFeedDefault = new CommandLowFeedDefault();
-    //Scheduler.getInstance().add(commandLowFeedDefault);
 
     //Initialization Code for High Ball Feeder
     hazyHighFeeder = new HazyHighFeeder();
     commandSwallowHighFeed = new CommandSwallowHighFeed();
     commandSpitHighFeed = new CommandSpitHighFeed();
     commandHighFeedDefault = new CommandHighFeedDefault();
-    //Scheduler.getInstance().add(commandHighFeedDefault);
 
     //Initialization Code for Shooter
     hazyShooter = new HazyShooter();
@@ -158,96 +142,67 @@ public class Robot extends TimedRobot {
     commandShooterSwallow = new CommandShooterSwallow();
     commandShooterDefault =  new CommandShooterDefault();
  
-    //Auton init
+    //Initialization Code for Autonomous
     hazyAuton = new HazyAuton();
-    commandAuton = new CommandAuton();
     solenoidToLight = new Solenoid(0);
     hazyTime = new Timer();
     commandFollowVision = new CommandFollowVision();
-    // commandAutonTurn = new CommandAutonTurn(180.0);
     commandAutonMove = new CommandAutonMove(7.0);
     commandToggleTurn = new CommandToggleTurn();
-    //commandGroupAuton = new CommandGroupAuton();
-    //Scheduler.getInstance().add(commandAutonTurn);
-    
 
-    //Initialization Code for Serial Port
-    
-    // commandGetData = new CommandGetData();
-    //Scheduler.getInstance().add(commandGetData);
-
-
-    hazyOI = new OI(); //OI object for all the buttons and their resulting commands
+    //OI object for all the buttons and their resulting commands
+    hazyOI = new OI(); 
   }
 
   @Override
   public void autonomousInit() {
+    
     hazyAuton.resetEncoders();
-
-    // Scheduler.getInstance().removeAll();
-    //System.out.println("AUTOOOOOOOOOOOOOOO");
-    // Scheduler.getInstance().add(commandMoveIntakeDefault);
-    // Scheduler.getInstance().add(commandAutonTurn);
-    // Scheduler.getInstance().add(commandHighFeedDefault);
-
     commandAutonMove.execute();
-      // new WaitCommand(0.5);
-    System.out.println("AFTER MOVe");
     commandShooterSpit.execute();
     double milStart = java.lang.System.currentTimeMillis();
-    while (java.lang.System.currentTimeMillis() < milStart + 2000) {}
+
+    while (java.lang.System.currentTimeMillis() < milStart + 2000){}
+
     for(int i = 0; i < 3; i++){
-      milStart = java.lang.System.currentTimeMillis();
+      
+      milStart = java.lang.System.currentTimeMillis(); 
       while (java.lang.System.currentTimeMillis() < milStart + 1000) {
         commandSwallowHighFeed.execute();
       }
+
       milStart = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < milStart + 2000) {
         commandHighFeedDefault.execute();
       }
-      new WaitCommand(50);
     }
+    
     commandShooterDefault.execute();
-     //When the robot is originally run then the first thing that the robot will do is drop fown the Intake for the Robot
-    count = 0;
   }
 
   @Override
-  public void autonomousPeriodic() {
-    //System.out.println("AUTOOOOOLOOOOOPPPP");
-    //System.out.println(count);
-    // Scheduler.getInstance().run();
-    // if(count < 1){
-      
-    //   //Robot.commandGroupAuton.start();
-    //   count += 1;
-    // }
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
     Scheduler.getInstance().removeAll();
     Scheduler.getInstance().add(commandMecanum);
-    Scheduler.getInstance().add(commandGoToColor);
+    Scheduler.getInstance().add(commandColorArmDefault);
     Scheduler.getInstance().add(commandMoveIntakeDefault);
     Scheduler.getInstance().add(commandEndArmDefault);
     Scheduler.getInstance().add(commandLowFeedDefault);
     Scheduler.getInstance().add(commandHighFeedDefault);
-    System.out.println("TELEOPPPPPPPPPPPPP");
   }
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run(); //Scheduler for the Mechanum Drive
-    hazyOI.runAllMethods();
-    
+    Scheduler.getInstance().run();
+    hazyOI.runMethods();   
   }
 
   @Override
-  public void testInit() {
-  }
+  public void testInit() {}
 
   @Override
-  public void testPeriodic() {
-  }
+  public void testPeriodic() {}
 }

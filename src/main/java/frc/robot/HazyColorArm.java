@@ -160,6 +160,6 @@ public class HazyColorArm extends Subsystem {
     
     @Override
     public void initDefaultCommand(){
-        setDefaultCommand(Robot.commandGoToColor);
+        setDefaultCommand(Robot.commandColorArmDefault);
     }
 }

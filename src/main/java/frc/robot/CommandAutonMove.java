@@ -18,7 +18,6 @@ public class CommandAutonMove extends Command {
 
     @Override
     protected void execute(){
-        System.out.println("MOVE COMMAND RUNNING");
         Robot.hazyAuton.move(feet);
     }
 

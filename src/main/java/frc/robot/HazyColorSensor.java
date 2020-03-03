@@ -60,6 +60,6 @@ public class HazyColorSensor extends Subsystem {
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(Robot.commandColor);
+        //setDefaultCommand(Robot.commandColor);
     }
 }

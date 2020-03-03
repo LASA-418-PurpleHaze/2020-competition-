@@ -1,13 +1,8 @@
 //Imports fot the Subsystem and its functions
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpiutil.math.MathUtil;
-
-import javax.lang.model.util.ElementScanner6;
-
-//import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -20,10 +15,6 @@ public class HazyMecBase extends Subsystem{
     private TalonSRX rightBackTalon;
     private double offset; 
     private double distance;
-    
-    // PigeonIMU _pigeon = new PigeonIMU(0);
-    // ArrayList<Double> ypr_deg = new ArrayList<Double>();
-
     public static HazyMecBase instance;
     
     public HazyMecBase(){
@@ -33,34 +24,9 @@ public class HazyMecBase extends Subsystem{
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
       Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
       Robot.hazyPort.enableTermination();
-      //pigeon = new PigeonIMU(RobotMap.PIGEONIMU);
-      
-      // rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-      // rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
-      // rightFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
-      // rightFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
-
-      // rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-      // rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
-      // rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
-      // rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
-
-      // leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-      // leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
-      // leftFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
-      // leftFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
-
-      // leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-      // leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
-      // leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
-      // leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
-
-      //mecDrive = new MecanumDrive(leftFrontTalon,leftBackTalon,rightFrontTalon,rightBackTalon);
     }
 
-    public void initialize(){
-      //all initialization code should be done in this initialize function and not the default constructor
-    }
+    public void initialize(){}
 
     public static HazyMecBase getInstance(){
       if (instance==null)
@@ -70,12 +36,14 @@ public class HazyMecBase extends Subsystem{
     
     protected void normalize(double[] wheelSpeeds) {
       double maxMagnitude = Math.abs(wheelSpeeds[0]);
+      
       for (int i = 1; i < wheelSpeeds.length; i++) {
         double temp = Math.abs(wheelSpeeds[i]);
         if (maxMagnitude < temp) {
           maxMagnitude = temp;
         }
       }
+
       if (maxMagnitude > 1.0) {
         for (int i = 0; i < wheelSpeeds.length; i++) {
         wheelSpeeds[i] = wheelSpeeds[i] / maxMagnitude;
@@ -149,8 +117,7 @@ public class HazyMecBase extends Subsystem{
     }
     
     @Override
-    public void initDefaultCommand()
-    {
+    public void initDefaultCommand(){
         setDefaultCommand(Robot.commandMecanum);
     }
 }

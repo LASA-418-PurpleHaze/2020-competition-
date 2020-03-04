@@ -150,9 +150,6 @@ public class Robot extends TimedRobot {
     commandFollowVision = new CommandFollowVision();
     commandAutonMove = new CommandAutonMove(7.0);
     commandToggleTurn = new CommandToggleTurn();
-
-    //OI object for all the buttons and their resulting commands
-    hazyOI = new OI(); 
   }
 
   @Override
@@ -162,15 +159,20 @@ public class Robot extends TimedRobot {
     hazyAuton.resetEncoders();
     commandAutonMove.execute();
     commandShooterSpit.execute();
+    commandToggleDelay.execute();
+    
     double milStart = java.lang.System.currentTimeMillis();
-
-    while (java.lang.System.currentTimeMillis() < milStart + 5000){
+    while (java.lang.System.currentTimeMillis() < milStart + 4000){
+      commandFollowVision.execute();
     }
+
+    milStart = java.lang.System.currentTimeMillis();
+    while (java.lang.System.currentTimeMillis() < milStart + 1000){}
 
     for(int i = 0; i < 3; i++){
       
       milStart = java.lang.System.currentTimeMillis(); 
-      while (java.lang.System.currentTimeMillis() < milStart + 1000) {
+      while (java.lang.System.currentTimeMillis() < milStart + 750) {
         commandSwallowHighFeed.execute();
       }
 
@@ -179,7 +181,7 @@ public class Robot extends TimedRobot {
         commandHighFeedDefault.execute();
       }
     }
-    
+    Robot.solenoidToLight.set(false);
     commandShooterDefault.execute();
   }
 
@@ -197,6 +199,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().add(commandEndArmDefault);
     Scheduler.getInstance().add(commandLowFeedDefault);
     Scheduler.getInstance().add(commandHighFeedDefault);
+    hazyOI = new OI(); //OI object for all the buttons and their resulting commands
   }
 
   @Override

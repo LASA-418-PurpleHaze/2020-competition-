@@ -14,12 +14,12 @@ public class HazyEndArm extends Subsystem {
     
     public void foldUp() {  //This command will cause the motor to either reel the arm in or extend it out depending on wether or not the operator has set the direction of isUp
         endArmTalon.set(ControlMode.PercentOutput, 1);
-        System.out.println("End Arm Going Up");
+        //System.out.println("End Arm Going Up");
     }
 
     public void foldDown() {  
         endArmTalon.set(ControlMode.PercentOutput, -1);
-        System.out.println("End Arm Going Down");
+        //System.out.println("End Arm Going Down");
     }
 
     public void stopMotors(){

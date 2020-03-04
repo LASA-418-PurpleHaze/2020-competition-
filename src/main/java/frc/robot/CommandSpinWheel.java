@@ -17,13 +17,14 @@ public class CommandSpinWheel extends Command {
 
     @Override
     protected void execute(){
+        Robot.hazyColorArm.setInitColor();
         Robot.hazyColorArm.spinToggle();
         //System.out.println("Pressed Spin Color Wheel");
     }
 
     @Override
     protected boolean isFinished(){
-        return Robot.hazyColorArm.spinWheelIsFinished();
+        return true;
     }
 
     @Override

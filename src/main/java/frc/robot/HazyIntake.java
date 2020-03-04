@@ -85,7 +85,7 @@ public class HazyIntake extends Subsystem {
     }
 
     public void intakeSwallow(){
-        System.out.println("Swallowing");
+        //System.out.println("Swallowing");
         spinVictor.set(ControlMode.PercentOutput, RobotMap.SPINVICTORSPEED);
     }
 

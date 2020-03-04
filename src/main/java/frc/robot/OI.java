@@ -34,12 +34,11 @@ public class OI{
         leftTrigger.whileHeld(Robot.commandSpitIntake); //Will allow the driver to spit with the intake whenever the button is pushed
         leftTrigger.whileHeld(Robot.commandSpitLowFeed);
         controller.getBButton().whenPressed(Robot.commandSwitchIntakeDir); //Whenever this button is pushed the intake is dropped or pulled up
-        controller.getYButton().whenPressed(Robot.commandSpinWheel);
-        //controller.getAButton().whileHeld(Robot.commandSwallowHighFeed);
         controller.getXButton().whenPressed(Robot.commandToggleColorArm);
-        rightThumbButton.whileHeld(Robot.commandPreciseMecanum);
-        leftThumbButton.whileHeld(Robot.commandFollowVision);
-        leftThumbButton.whenInactive(Robot.commandToggleDelay);
+        controller.getYButton().whenPressed(Robot.commandSpinWheel);
+        leftThumbButton.whileHeld(Robot.commandPreciseMecanum);
+        rightThumbButton.whileHeld(Robot.commandFollowVision);
+        rightThumbButton.whenInactive(Robot.commandToggleDelay);
 
     }
 

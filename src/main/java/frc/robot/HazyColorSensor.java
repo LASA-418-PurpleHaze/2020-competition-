@@ -53,7 +53,7 @@ public class HazyColorSensor extends Subsystem {
                 col = 'G';
             return col;
         }
-        System.out.println("icky bad no color");
+        //System.out.println("icky bad no color");
         return ' '; 
     }
     

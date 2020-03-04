@@ -18,11 +18,11 @@ public class RobotMap { //Static port variables
     public static final double TICKSPERFEET = 3000.0;
     public static final int VISIONDELAY = 500;
 
+    //Vision
     public static final double VISIONTURN = .001;
     public static final double VISIONSPEED = .007;
     public static final double SHOOTDISTANCE = 204;
     
-
     //ColorSensor
     public static final I2C.Port COLORSENSORPORT = I2C.Port.kOnboard;
 
@@ -45,8 +45,7 @@ public class RobotMap { //Static port variables
     //Ball Feeders
     public static final int LOWFEEDERTALON = 15;
     public static final int HIGHFEEDERTALON = 14;
-    public static final double FEEDERSPEED = .5;
-
+    public static final double FEEDERSPEED = 0.7;
 
     //Shooter
     public static final int SHOOTERTALONPORT = 12;
@@ -64,6 +63,7 @@ public class RobotMap { //Static port variables
     public static final double DRIVEI = 0.0;
     public static final double DRIVED = 0.0;
     public static final double DRIVEF = 0.0;
+    
     //End Arm
     public static final int ENDARMTALONPORT = 3;
 

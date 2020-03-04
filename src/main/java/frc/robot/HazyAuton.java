@@ -62,7 +62,7 @@ public class HazyAuton extends Subsystem {
  
 
     public void move(double feet) {
-      System.out.println("MOVE FUNCTION IN SUBSYSTEN");
+      //System.out.println("MOVE FUNCTION IN SUBSYSTEN");
       leftFrontTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
       //leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
       //rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);

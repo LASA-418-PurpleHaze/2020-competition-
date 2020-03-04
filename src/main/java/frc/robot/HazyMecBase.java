@@ -103,7 +103,7 @@ public class HazyMecBase extends Subsystem{
 
         double turnPower = clamp(RobotMap.VISIONTURN * offset);
         double forwardPower =clamp( -travelDistance*RobotMap.VISIONSPEED);
-        System.out.println("turn: " + turnPower + " forward: " + forwardPower);
+        //System.out.println("turn: " + turnPower + " forward: " + forwardPower);
         driveCartesian(0, -forwardPower, -turnPower);
       }
     }
@@ -114,7 +114,7 @@ public class HazyMecBase extends Subsystem{
 
     public void readData(){
       String data = Robot.hazyPort.readString();
-      System.out.println(data);
+      //System.out.println(data);
       if(data.equals("none")){
         offset = 0.0;
         distance = -1.0;

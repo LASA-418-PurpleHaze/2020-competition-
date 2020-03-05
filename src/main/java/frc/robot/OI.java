@@ -39,6 +39,8 @@ public class OI{
         leftThumbButton.whileHeld(Robot.commandPreciseMecanum);
         rightThumbButton.whileHeld(Robot.commandFollowVision);
         rightThumbButton.whenInactive(Robot.commandToggleDelay);
+        rightMidButton.whileHeld(Robot.commandTurnVision);
+        rightMidButton.whenInactive(Robot.commandToggleTurnDelay);
 
     }
 

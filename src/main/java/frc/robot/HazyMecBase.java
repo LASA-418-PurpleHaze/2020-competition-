@@ -15,6 +15,7 @@ public class HazyMecBase extends Subsystem{
     private TalonSRX rightBackTalon;
     private double offset; 
     private boolean delayed;
+    private boolean turnDelay;
     private double distance;
     private double milStart;
     public static HazyMecBase instance;
@@ -27,6 +28,7 @@ public class HazyMecBase extends Subsystem{
       Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
       Robot.hazyPort.enableTermination();
       delayed=true;
+      turnDelay = true;
     }
 
     public void initialize(){}
@@ -108,13 +110,31 @@ public class HazyMecBase extends Subsystem{
       }
     }
 
+    public void turnToTarget(){
+      Robot.solenoidToLight.set(true);
+
+      if (delayed){
+        milStart = java.lang.System.currentTimeMillis();
+        delayed = false;
+      }
+      if(java.lang.System.currentTimeMillis() > milStart + RobotMap.VISIONDELAY){
+        double turnPower = clamp(RobotMap.VISIONTURN * offset);
+        //System.out.println("turn: " + turnPower + " forward: " + forwardPower);
+        driveCartesian(0, 0, -turnPower);
+      }
+    }
+
     public void toggleDelayed(){
       delayed = true;
     }
 
+    public void toggleTurnDelay(){
+      turnDelay = true;
+    }
+
     public void readData(){
       String data = Robot.hazyPort.readString();
-      //System.out.println(data);
+      System.out.println(data);
       if(data.equals("none")){
         offset = 0.0;
         distance = -1.0;

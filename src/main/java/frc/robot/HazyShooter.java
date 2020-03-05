@@ -5,12 +5,15 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 public class HazyShooter extends Subsystem {
 
-    private TalonSRX shooterTalon;
+    private static TalonSRX shooterTalon;
     private static HazyIntake instance;
+    
+  private static SmartDashboard smartdashboard;
 
     public HazyShooter(){
         shooterTalon = new TalonSRX(RobotMap.SHOOTERTALONPORT);
@@ -24,6 +27,11 @@ public class HazyShooter extends Subsystem {
         if (instance==null)
             instance = new HazyIntake();
         return instance;
+    }
+    public static void UpdateRPM() {
+        //System.out.println("SmartDashboard is a go");
+        SmartDashboard.putNumber("TPR", shooterTalon.getSelectedSensorVelocity());
+
     }
 
     public void shooterSpit(){ //Functions actually used by commands

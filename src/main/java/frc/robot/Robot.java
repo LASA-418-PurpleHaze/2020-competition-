@@ -28,6 +28,8 @@ public class Robot extends TimedRobot {
   public static CommandMecanum commandMecanum;
   public static CommandPreciseMecanum commandPreciseMecanum;
   public static CommandToggleDelay commandToggleDelay;
+  public static CommandTurnVision commandTurnVision;
+  public static CommandToggleTurnDelay commandToggleTurnDelay;
 
   //Variables for the Color Sensor and Arm
   public static HazyColorSensor hazyColorSensor;
@@ -97,6 +99,8 @@ public class Robot extends TimedRobot {
     commandMecanum = new CommandMecanum();
     commandPreciseMecanum = new CommandPreciseMecanum();
     commandToggleDelay = new CommandToggleDelay();
+    commandTurnVision = new CommandTurnVision();
+    commandToggleTurnDelay = new CommandToggleTurnDelay();
 
     
     //Initialization Code for the Color Sensor and Arm
@@ -206,6 +210,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     hazyOI.runMethods();   
+    Robot.hazyShooter.UpdateRPM();
   }
 
   @Override

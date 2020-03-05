@@ -31,21 +31,27 @@ public class HazyMecBase extends Subsystem{
       rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
       rightFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
       rightFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+      rightFrontTalon.configNeutralDeadband(0.01);
 
       rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
       rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
       rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+      rightBackTalon.configNeutralDeadband(0.01);
 
       leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
       leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
       leftFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
       leftFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+      leftFrontTalon.configNeutralDeadband(0.01);
+
 
       leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
       leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
       leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+      leftBackTalon.configNeutralDeadband(0.01);
+
       Robot.hazyPort.enableTermination();
       delayed=true;
       turnDelay = true;
@@ -58,7 +64,16 @@ public class HazyMecBase extends Subsystem{
           instance = new HazyMecBase();
       return instance;
     }
-    
+    double wierdBoi(double in){
+      if(Math.abs(in)<20){
+        return in;
+      }
+      if (Math.abs(in)<2000){
+        return in*2;
+      }
+      return in;
+
+    }
     protected void normalize(double[] wheelSpeeds) {
       double maxMagnitude = Math.abs(wheelSpeeds[0]);
       

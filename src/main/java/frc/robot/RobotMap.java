@@ -20,7 +20,7 @@ public class RobotMap { //Static port variables
 
     //Vision
     public static final double VISIONTURN = .001;
-    public static final double VISIONVELTURN = 10.0;
+    public static final double VISIONVELTURN = 15.0;
     public static final double VISIONSPEED = .007;
     public static final double SHOOTDISTANCE = 204;
     

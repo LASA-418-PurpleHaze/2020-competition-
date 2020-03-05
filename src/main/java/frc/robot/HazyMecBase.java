@@ -4,6 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.SerialPort;
 
@@ -26,6 +27,25 @@ public class HazyMecBase extends Subsystem{
       leftFrontTalon = new TalonSRX(RobotMap.LEFTFRONTTALONPORT);
       rightBackTalon = new TalonSRX(RobotMap.RIGHTBACKTALONPORT);
       Robot.hazyPort = new SerialPort(RobotMap.BAUDRATE, SerialPort.Port.kMXP);
+      rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      rightFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      rightBackTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftFrontTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      leftFrontTalon.config_kD(0, RobotMap.DRIVED, 30);
+
+      leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftBackTalon.config_kI(0, RobotMap.DRIVEI, 30);
+      leftBackTalon.config_kD(0, RobotMap.DRIVED, 30);
       Robot.hazyPort.enableTermination();
       delayed=true;
       turnDelay = true;
@@ -118,9 +138,12 @@ public class HazyMecBase extends Subsystem{
         delayed = false;
       }
       if(java.lang.System.currentTimeMillis() > milStart + RobotMap.VISIONDELAY){
-        double turnPower = clamp(RobotMap.VISIONTURN * offset);
-        //System.out.println("turn: " + turnPower + " forward: " + forwardPower);
-        driveCartesian(0, 0, -turnPower);
+        double turnPower = RobotMap.VISIONVELTURN * offset;
+        System.out.println("turn: " + turnPower );
+        rightFrontTalon.set(ControlMode.Velocity,turnPower);
+        rightBackTalon.set(ControlMode.Velocity,turnPower);
+        leftFrontTalon.set(ControlMode.Velocity,turnPower);
+        leftBackTalon.set(ControlMode.Velocity,turnPower);
       }
     }
 

@@ -28,7 +28,7 @@ public class HazyShooter extends Subsystem {
             instance = new HazyIntake();
         return instance;
     }
-    public static void UpdateRPM() {
+    public void UpdateRPM() {
         //System.out.println("SmartDashboard is a go");
         SmartDashboard.putNumber("TPR", shooterTalon.getSelectedSensorVelocity());
 
@@ -44,6 +44,10 @@ public class HazyShooter extends Subsystem {
 
     public void stopShooter(){
         shooterTalon.set(ControlMode.PercentOutput, 0);
+    }
+
+    public double getShooterRPM(){
+        return shooterTalon.getSelectedSensorVelocity();
     }
 
     @Override

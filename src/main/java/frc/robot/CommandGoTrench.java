@@ -3,12 +3,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandAutonMove extends Command {
-    private double feet; 
+public class CommandGoTrench extends Command { 
 
-    public CommandAutonMove(double in){
+    public CommandGoTrench(){
         super.requires(Robot.hazyAuton);
-        feet = in;
     }
     
     @Override
@@ -18,7 +16,7 @@ public class CommandAutonMove extends Command {
 
     @Override
     protected void execute(){
-        Robot.hazyAuton.move(feet);
+        Robot.hazyAuton.goToTrench();
     }
 
     @Override

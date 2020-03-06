@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.cameraserver.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -84,7 +85,11 @@ public class Robot extends TimedRobot {
   //Autonomous
   public static HazyAuton hazyAuton;
   public static CommandFollowVision commandFollowVision;
-  public static CommandAutonMove commandAutonMove;
+  public static CommandAutonZero commandAutonZero;
+  public static CommandAutonOne commandAutonOne;
+  public static CommandAutonTwo commandAutonTwo;
+  public static CommandAutonThree commandAutonThree;
+  public static CommandGoTrench commandGoTrench;
   public static CommandToggleTurn commandToggleTurn;
   public static Timer hazyTime;
   
@@ -152,41 +157,22 @@ public class Robot extends TimedRobot {
     solenoidToLight = new Solenoid(0);
     hazyTime = new Timer();
     commandFollowVision = new CommandFollowVision();
-    commandAutonMove = new CommandAutonMove(7.0);
+    commandAutonZero = new CommandAutonZero();
+    commandAutonOne = new CommandAutonOne();
+    commandAutonTwo = new CommandAutonTwo();
+    commandAutonThree = new CommandAutonThree();
+    commandGoTrench = new CommandGoTrench();
     commandToggleTurn = new CommandToggleTurn();
-  }
+    CameraServer.getInstance().startAutomaticCapture();  }
 
   @Override
   public void autonomousInit() {
-  
     commandSwitchIntakeDir.execute();
-    hazyAuton.resetEncoders();
-    commandAutonMove.execute();
-    commandShooterSpit.execute();
-    commandToggleDelay.execute();
-    
-    double milStart = java.lang.System.currentTimeMillis();
-    while (java.lang.System.currentTimeMillis() < milStart + 4000){
-      commandFollowVision.execute();
-    }
-
-    milStart = java.lang.System.currentTimeMillis();
-    while (java.lang.System.currentTimeMillis() < milStart + 1000){}
-
-    for(int i = 0; i < 3; i++){
-      
-      milStart = java.lang.System.currentTimeMillis(); 
-      while (java.lang.System.currentTimeMillis() < milStart + 750) {
-        commandSwallowHighFeed.execute();
-      }
-
-      milStart = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < milStart + 2000) {
-        commandHighFeedDefault.execute();
-      }
-    }
-    Robot.solenoidToLight.set(false);
-    commandShooterDefault.execute();
+    //commandAutonZero.execute();
+    commandAutonOne.execute();
+    //commandAutonTwo.execute();
+    //commandAutonThree.execute();
+    commandGoTrench.execute();
   }
 
   @Override

@@ -6,6 +6,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.Timer;
 
 
 public class HazyAuton extends Subsystem {
@@ -50,22 +51,11 @@ public class HazyAuton extends Subsystem {
       //PigeonIMU _pigeon = new PigeonIMU(0);
     }
 
-    // public void initialize() {
-    //   startGame();
-    // }
-
-    public double UpdateYPR() {
-      pigeon.getYawPitchRoll(ypr);
-      return ypr[2];
-    }
-
- 
-
     public void move(double feet) {
       //System.out.println("MOVE FUNCTION IN SUBSYSTEN");
       leftFrontTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
-      //leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
-      //rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
+      leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
       rightFrontTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
     }
 
@@ -77,11 +67,148 @@ public class HazyAuton extends Subsystem {
 
     }
 
+    public void strafeLeft(double feet){
+      rightFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+      leftFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+      rightBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
+      leftBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
+    }
+
+    public void strafeRight(double feet){
+      rightFrontTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
+      leftFrontTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
+      rightBackTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+      leftBackTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+    }
+
+    public void autonZero(){
+      double delay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+      resetEncoders();
+      move(RobotMap.INITIALFEET);
+    }
+
+    public void autonOne(){
+      //Start lined up to the target
+      double delay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+
+      resetEncoders();
+      move(RobotMap.INITIALFEET);
+      Robot.commandShooterSpit.execute();
+      Robot.commandToggleDelay.execute();
+    
+      double milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 4000){
+        Robot.commandFollowVision.execute();
+      }
+
+      milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 1000){}
+
+      int count = 0;
+      boolean wasGreater = false;
+      while(count < 3){
+        if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.swallow();
+          wasGreater = true;
+        }
+        else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.stop();
+          if(wasGreater)
+            count += 1;
+        }
+      }
+      Robot.solenoidToLight.set(false);
+      Robot.commandShooterDefault.execute();
+    }
+
+    public void autonTwo(){
+      //start in the middle of the field (13.5 feet from either edge)
+      double delay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+      resetEncoders();
+      move(RobotMap.INITIALFEET);
+      strafeRight(5.4);
+
+      double milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 4000){
+        Robot.commandFollowVision.execute();
+      }
+
+      
+      milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 1000){}
+
+      int count = 0;
+      boolean wasGreater = false;
+      while(count < 3){
+        if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.swallow();
+          wasGreater = true;
+        }
+        else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.stop();
+          if(wasGreater)
+            count += 1;
+        }
+      }
+
+      Robot.solenoidToLight.set(false);
+      Robot.commandShooterDefault.execute();
+    }
+
+    public void autonThree(){
+      //start in the middle of the field (13.5 feet from either edge)
+      double delay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+      resetEncoders();
+      move(RobotMap.INITIALFEET);
+      strafeLeft(7.5);
+      
+      double milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 4000){
+        Robot.commandFollowVision.execute();
+      }
+
+      milStart = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < milStart + 1000){}
+      int count = 0;
+      boolean wasGreater = false;
+      while(count < 3){
+        if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.swallow();
+          wasGreater = true;
+        }
+        else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          Robot.hazyHighFeeder.stop();
+          if(wasGreater)
+            count += 1;
+        }
+      }
+        milStart = java.lang.System.currentTimeMillis(); 
+        while (java.lang.System.currentTimeMillis() < milStart + 750) {
+          Robot.commandSwallowHighFeed.execute();
+        
+
+        milStart = java.lang.System.currentTimeMillis();
+        while (java.lang.System.currentTimeMillis() < milStart + 2000) {
+          Robot.commandHighFeedDefault.execute();
+        }
+      }
+      Robot.solenoidToLight.set(false);
+      Robot.commandShooterDefault.execute();
+    }
+    
+    
     // public void turnRight() {
     //   if(shouldTurn) {
     //     leftBackTalon.set(ControlMode.PercentOutput, 0.3);
     //     rightBackTalon.set(ControlMode.PercentOutput, -0.3);
-    //     new WaitCommand(3);
+    //     double milStart = java.lang.System.currentTimeMillis();
+    //     while (java.lang.System.currentTimeMillis() < milStart + 4000){
+    //       Robot.commandFollowVision.execute();
+    // }
     //     shouldTurn = false;
     //   }
     //   if(!shouldTurn) {
@@ -90,44 +217,33 @@ public class HazyAuton extends Subsystem {
     //   }
     // }
 
+    public void turn180(){
+      rightFrontTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
+      rightBackTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
+      leftFrontTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
+      leftBackTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
+
+    }
+
+    public void goToTrench(){
+      resetEncoders();
+      turn180();
+      strafeLeft(5.57);
+      Robot.commandSwallowIntake.execute();
+      move(16.3);
+      double delay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay + 3000){}
+      Robot.hazyIntake.intakeStopSpin();
+    }
+    
     public void toggleTurn() {
       shouldTurn = true;
 
     }
 
-    // public void shootThat() {
-    //   long t = System.currentTimeMillis();
-    //   long end = t+10000;
-    //   while(System.currentTimeMillis() < end) {
-    //     Robot.commandShooterSpit.execute();
-    //   }
-    // }
-
-    // public void startGame() {
-    //   //starting positions are from left to right on the perspective of the driver
-    //   int position = RobotMap.STARTINGPOSITION;
-    //   //position 1
-    //   if (position == 1) {
-    //     move(7.0);
-    //     turn(225.0);
-    //     shootThat();
-    //     turn(45.0);
-    //     move(7.0);
-    //   }
-    //   if (position == 2) {
-    //     move(7.0);
-    //   }
-    // }
-    
     @Override
     public void initDefaultCommand()
     {
 //        setDefaultCommand(Robot.commandAuton);
     }
-
-  //   public static HazyAuton getInstance(){
-  //     if (instance==null)
-  //         instance = new HazyAuton();
-  //     return instance;
-  // }
 }

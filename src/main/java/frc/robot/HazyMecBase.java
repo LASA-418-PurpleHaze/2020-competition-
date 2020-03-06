@@ -153,7 +153,7 @@ public class HazyMecBase extends Subsystem{
         delayed = false;
       }
       if(java.lang.System.currentTimeMillis() > milStart + RobotMap.VISIONDELAY){
-        double turnPower = RobotMap.VISIONVELTURN * offset;
+        double turnPower = RobotMap.VISIONVELTURN * (offset-RobotMap.RIGHTSIDEOFFSET);
         System.out.println("turn: " + turnPower );
         rightFrontTalon.set(ControlMode.Velocity,turnPower);
         rightBackTalon.set(ControlMode.Velocity,turnPower);

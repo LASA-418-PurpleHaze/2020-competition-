@@ -128,7 +128,7 @@ public class HazyAuton extends Subsystem {
     
       double milStart = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < milStart + 4000){
-        //Robot.commandFollowVision.execute();
+        Robot.commandFollowVision.execute();
       }
 
       milStart = java.lang.System.currentTimeMillis();
@@ -261,6 +261,16 @@ public class HazyAuton extends Subsystem {
     // }
 
     public void turn180(){
+      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+
+      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+
+      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      
       rightFrontTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
       rightBackTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
       leftFrontTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);

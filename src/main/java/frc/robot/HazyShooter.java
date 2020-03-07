@@ -47,7 +47,7 @@ public class HazyShooter extends Subsystem {
     }
 
     public double getShooterRPM(){
-        return shooterTalon.getSelectedSensorVelocity();
+        return -shooterTalon.getSelectedSensorVelocity();
     }
 
     @Override

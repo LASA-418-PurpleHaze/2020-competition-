@@ -147,7 +147,10 @@ public class HazyMecBase extends Subsystem{
 
     public void turnToTarget(){
       Robot.solenoidToLight.set(true);
-
+      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       if (delayed){
         milStart = java.lang.System.currentTimeMillis();
         delayed = false;

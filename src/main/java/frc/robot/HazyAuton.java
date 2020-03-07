@@ -53,6 +53,15 @@ public class HazyAuton extends Subsystem {
 
     public void move(double feet) {
       //System.out.println("MOVE FUNCTION IN SUBSYSTEN");
+      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+
+      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+
+
+      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
       leftFrontTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
       leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
       rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
@@ -68,17 +77,36 @@ public class HazyAuton extends Subsystem {
     }
 
     public void strafeLeft(double feet){
-      rightFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
-      leftFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
-      rightBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
-      leftBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
-    }
+      rightFrontTalon.config_kP(0, RobotMap.STRAFEP, 30);
 
-    public void strafeRight(double feet){
+      rightBackTalon.config_kP(0, RobotMap.STRAFEP, 30);
+
+
+      leftFrontTalon.config_kP(0, RobotMap.STRAFEP, 30);
+
+
+      leftBackTalon.config_kP(0, RobotMap.STRAFEP, 30);
+
+
       rightFrontTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
       leftFrontTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
       rightBackTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
       leftBackTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+    }
+
+    public void strafeRight(double feet){
+      rightFrontTalon.config_kP(0, RobotMap.STRAFEP, 30);
+ 
+
+      rightBackTalon.config_kP(0, RobotMap.STRAFEP, 30);
+
+      leftFrontTalon.config_kP(0, RobotMap.STRAFEP, 30);
+
+      leftBackTalon.config_kP(0, RobotMap.STRAFEP, 30);
+      rightFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+      leftFrontTalon.set(ControlMode.Position, feet * RobotMap.SIDETICKSPERFEET);
+      rightBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
+      leftBackTalon.set(ControlMode.Position, feet * -RobotMap.SIDETICKSPERFEET);
     }
 
     public void autonZero(){
@@ -100,7 +128,7 @@ public class HazyAuton extends Subsystem {
     
       double milStart = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < milStart + 4000){
-        Robot.commandFollowVision.execute();
+        //Robot.commandFollowVision.execute();
       }
 
       milStart = java.lang.System.currentTimeMillis();
@@ -109,14 +137,19 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
+        System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
-          if(wasGreater)
+          if(wasGreater){
             count += 1;
+            wasGreater = false;
+          }
         }
       }
       Robot.solenoidToLight.set(false);
@@ -143,14 +176,19 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
+        System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
-          if(wasGreater)
+          if(wasGreater){
             count += 1;
+            wasGreater = false;
+          }
         }
       }
 
@@ -176,14 +214,19 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
+        System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+          //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+          System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
-          if(wasGreater)
+          if(wasGreater){
             count += 1;
+            wasGreater = false;
+          }
         }
       }
         milStart = java.lang.System.currentTimeMillis(); 

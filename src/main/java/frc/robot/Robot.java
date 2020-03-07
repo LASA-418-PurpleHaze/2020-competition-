@@ -167,12 +167,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    hazyAuton.resetEncoders();
     commandSwitchIntakeDir.execute();
-    //commandAutonZero.execute();
+    // //commandAutonZero.execute();
     commandAutonOne.execute();
-    //commandAutonTwo.execute();
-    //commandAutonThree.execute();
-    commandGoTrench.execute();
+    // //commandAutonTwo.execute();
+    // //commandAutonThree.execute();
+    // commandGoTrench.execute();\
+    
   }
 
   @Override

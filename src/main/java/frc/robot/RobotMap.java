@@ -65,7 +65,11 @@ public class RobotMap { //Static port variables
     public static final double DRIVEI = 0.0;
     public static final double DRIVED = 0.0;
     public static final double DRIVEF = 0.0;
-    public static final double SIDETICKSPERFEET = 4000.0;
+    public static final double STRAFEP = 1.0;
+    public static final double STRAFEI = 0.0;
+    public static final double STRAFED = 0.0;
+    public static final double STRAFEF = 0.0;
+    public static final double SIDETICKSPERFEET = 4600.0;
     public static final double INITIALFEET = 7.0;
     public static final double STARTAUTONDELAY = 1000.0;
     public static final double TURN180TICKS = 5000.0;

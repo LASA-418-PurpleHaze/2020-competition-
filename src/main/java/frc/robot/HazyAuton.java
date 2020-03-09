@@ -262,18 +262,18 @@ public class HazyAuton extends Subsystem {
     // }
 
     public void turn180(){
-      rightFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightFrontTalon.config_kP(0, RobotMap.TURNP, 30);
 
-      rightBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
-
-
-      leftFrontTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      rightBackTalon.config_kP(0, RobotMap.TURNP, 30);
 
 
-      leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
+      leftFrontTalon.config_kP(0, RobotMap.TURNP, 30);
 
-      rightFrontTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
-      rightBackTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
+
+      leftBackTalon.config_kP(0, RobotMap.TURNP, 30);
+
+      rightFrontTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
+      rightBackTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
       leftFrontTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
       leftBackTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);
 
@@ -282,9 +282,14 @@ public class HazyAuton extends Subsystem {
     public void goToTrench(){
       resetEncoders();
       turn180();
+      double delay0 = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay0 + 3000){}
+      resetEncoders();
       strafeLeft(5.57);
       Robot.commandSwallowIntake.execute();
-      move(16.3);
+      resetEncoders();
+     // move(16.3);
+      move(2.0);
       double delay = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < delay + 3000){}
       Robot.hazyIntake.intakeStopSpin();

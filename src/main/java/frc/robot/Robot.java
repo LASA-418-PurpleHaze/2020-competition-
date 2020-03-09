@@ -90,6 +90,7 @@ public class Robot extends TimedRobot {
   public static CommandAutonTwo commandAutonTwo;
   public static CommandAutonThree commandAutonThree;
   public static CommandGoTrench commandGoTrench;
+  public static CommandAuton180 commandAuton180;
   public static CommandToggleTurn commandToggleTurn;
   public static Timer hazyTime;
   
@@ -163,23 +164,26 @@ public class Robot extends TimedRobot {
     commandAutonThree = new CommandAutonThree();
     commandGoTrench = new CommandGoTrench();
     commandToggleTurn = new CommandToggleTurn();
+    commandAuton180 = new CommandAuton180();
     CameraServer.getInstance().startAutomaticCapture();  }
 
   @Override
   public void autonomousInit() {
     hazyAuton.resetEncoders();
-    commandSwitchIntakeDir.execute();
+    //commandSwitchIntakeDir.execute();
+    //commandAuton180.execute();
     // //commandAutonZero.execute();
-    commandAutonOne.execute();
+    //commandAutonOne.execute();
     // //commandAutonTwo.execute();
     // //commandAutonThree.execute();
-    // commandGoTrench.execute();\
+    commandGoTrench.execute();
+    //hazyAuton.strafeLeft(2);
     
   }
 
   @Override
   public void autonomousPeriodic() {
-    commandMoveIntakeDefault.execute();
+    //commandMoveIntakeDefault.execute();
   }
 
   @Override

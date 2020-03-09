@@ -69,14 +69,14 @@ public class RobotMap { //Static port variables
     public static final double STRAFEI = 0.0;
     public static final double STRAFED = 0.0;
     public static final double STRAFEF = 0.0;
-    public static final double VISIONP = 0.08;
-    public static final double VISIONI = 0.0;
-    public static final double VISIOND = 0.0;
-    public static final double VISIONF = 0.0;
+    public static final double TURNP = 0.18;
+    public static final double TURNI = 0.0;
+    public static final double TURND = 0.0;
+    public static final double TURNF = 0.0;
     public static final double SIDETICKSPERFEET = 4600.0;
     public static final double INITIALFEET = 7.0;
     public static final double STARTAUTONDELAY = 1000.0;
-    public static final double TURN180TICKS = 36386.0;
+    public static final double TURN180TICKS = 18193.0;
     public static final double SHOOTRPM = 30000.0;
     //End Arm
     public static final int ENDARMTALONPORT = 3;

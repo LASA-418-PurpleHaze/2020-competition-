@@ -125,10 +125,11 @@ public class HazyAuton extends Subsystem {
       move(RobotMap.INITIALFEET);
       Robot.commandShooterSpit.execute();
       Robot.commandToggleDelay.execute();
-    
+      // double delay1 = java.lang.System.currentTimeMillis();
+      // while(java.lang.System.currentTimeMillis() < delay1 + 3000){}
       double milStart = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < milStart + 4000){
-        Robot.commandFollowVision.execute();
+        //Robot.commandFollowVision.execute();
       }
 
       milStart = java.lang.System.currentTimeMillis();
@@ -137,14 +138,14 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
-        System.out.println("IN LOOP");
+        //System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
           //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
-          System.out.println("SLOWED");
+          //System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
           if(wasGreater){
             count += 1;
@@ -176,14 +177,14 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
-        System.out.println("IN LOOP");
+        //System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
           //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
-          System.out.println("SLOWED");
+          //System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
           if(wasGreater){
             count += 1;
@@ -214,14 +215,14 @@ public class HazyAuton extends Subsystem {
       int count = 0;
       boolean wasGreater = false;
       while(count < 3){
-        System.out.println("IN LOOP");
+        //System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
           //System.out.println("MOVING UP");
           Robot.hazyHighFeeder.swallow();
           wasGreater = true;
         }
         else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
-          System.out.println("SLOWED");
+          //System.out.println("SLOWED");
           Robot.hazyHighFeeder.stop();
           if(wasGreater){
             count += 1;
@@ -270,7 +271,7 @@ public class HazyAuton extends Subsystem {
 
 
       leftBackTalon.config_kP(0, RobotMap.DRIVEP, 30);
-      
+
       rightFrontTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
       rightBackTalon.set(ControlMode.Position, RobotMap.TURN180TICKS);
       leftFrontTalon.set(ControlMode.Position, -RobotMap.TURN180TICKS);

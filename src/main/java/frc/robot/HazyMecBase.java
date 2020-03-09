@@ -7,6 +7,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
+
 
 public class HazyMecBase extends Subsystem{
     
@@ -19,6 +21,7 @@ public class HazyMecBase extends Subsystem{
     private boolean turnDelay;
     private double distance;
     private double milStart;
+    private double lastData;
     public static HazyMecBase instance;
     
     public HazyMecBase(){
@@ -137,10 +140,18 @@ public class HazyMecBase extends Subsystem{
           travelDistance = 0.0;
         else
           travelDistance = RobotMap.SHOOTDISTANCE - distance;
-
+        //System.out.println(java.lang.System.currentTimeMillis()-lastData);
         double turnPower = clamp(RobotMap.VISIONTURN * offset);
+        if(turnPower > -0.105 && turnPower < 0.0 && Math.abs(offset) >= 10.0)
+          turnPower = -0.105;
+        else if(turnPower < 0.105 && turnPower > 0.0 && Math.abs(offset) >= 10.0)
+          turnPower = 0.105;
+        
+        if(Math.abs(offset) < 10.0)
+          turnPower = 0.0;
+        
         double forwardPower =clamp( -travelDistance*RobotMap.VISIONSPEED);
-        //System.out.println("turn: " + turnPower + " forward: " + forwardPower);
+        System.out.println("turn: " + turnPower + " forward: " + forwardPower);
         driveCartesian(0, -forwardPower, -turnPower);
       }
     }
@@ -157,7 +168,6 @@ public class HazyMecBase extends Subsystem{
       }
       if(java.lang.System.currentTimeMillis() > milStart + RobotMap.VISIONDELAY){
         double turnPower = RobotMap.VISIONVELTURN * (offset-RobotMap.RIGHTSIDEOFFSET);
-        System.out.println("turn: " + turnPower );
         rightFrontTalon.set(ControlMode.Velocity,turnPower);
         rightBackTalon.set(ControlMode.Velocity,turnPower);
         leftFrontTalon.set(ControlMode.Velocity,turnPower);
@@ -175,7 +185,8 @@ public class HazyMecBase extends Subsystem{
 
     public void readData(){
       String data = Robot.hazyPort.readString();
-      System.out.println(data);
+      
+      //System.out.println(data);
       if(data.equals("none")){
         offset = 0.0;
         distance = -1.0;
@@ -187,7 +198,11 @@ public class HazyMecBase extends Subsystem{
         if(distance > 2000)
           distance = -1;   
         
+        
+        else{
+          lastData = java.lang.System.currentTimeMillis();
         }
+      }
         catch (Exception e){
           e.printStackTrace();
         }

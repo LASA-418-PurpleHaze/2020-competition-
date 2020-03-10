@@ -175,8 +175,8 @@ public class Robot extends TimedRobot {
     // //commandAutonZero.execute();
     //commandAutonOne.execute();
     // //commandAutonTwo.execute();
-    // //commandAutonThree.execute();
-    commandGoTrench.execute();
+    commandAutonThree.execute();
+    //commandGoTrench.execute();
     //hazyAuton.strafeLeft(2);
     
   }
@@ -203,6 +203,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     hazyOI.runMethods();   
     Robot.hazyShooter.UpdateRPM();
+    hazyIntake.printButtons();
   }
 
   @Override

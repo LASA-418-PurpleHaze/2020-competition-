@@ -68,6 +68,24 @@ public class HazyAuton extends Subsystem {
       rightFrontTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
     }
 
+    public void moveTrench(double feet) {
+      //System.out.println("MOVE FUNCTION IN SUBSYSTEN");
+      rightFrontTalon.config_kP(0, RobotMap.TRENCHP, 30);
+
+      rightBackTalon.config_kP(0, RobotMap.TRENCHP, 30);
+
+
+      leftFrontTalon.config_kP(0, RobotMap.TRENCHP, 30);
+
+
+      leftBackTalon.config_kP(0, RobotMap.TRENCHP, 30);
+
+      leftFrontTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      leftBackTalon.set(ControlMode.Position, feet*-RobotMap.TICKSPERFEET);
+      rightBackTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
+      rightFrontTalon.set(ControlMode.Position, feet*RobotMap.TICKSPERFEET);
+    }
+
     public void resetEncoders(){
       leftFrontTalon.setSelectedSensorPosition(0);
       leftBackTalon.setSelectedSensorPosition(0);
@@ -201,10 +219,22 @@ public class HazyAuton extends Subsystem {
       //start in the middle of the field (13.5 feet from either edge)
       double delay = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+      Robot.hazyIntake.moveIntakeDownAuton();
+      double intakeDelay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < intakeDelay + 750.0){}
+      Robot.hazyIntake.stopIntakeAuton();
+      Robot.commandSwallowIntake.execute();
+      intakeDelay = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < intakeDelay + 1000.0){}
       resetEncoders();
-      move(RobotMap.INITIALFEET);
-      strafeLeft(7.5);
-      
+      moveTrench(-13.6);
+      Robot.commandShooterSpit.execute();
+      double delay2 = java.lang.System.currentTimeMillis();
+      while (java.lang.System.currentTimeMillis() < delay2 + 3000.0){}
+      resetEncoders();
+      turn180();
+      Robot.commandStopSpinning.execute();
+      Robot.commandToggleDelay.execute();
       double milStart = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < milStart + 4000){
         Robot.commandFollowVision.execute();
@@ -230,16 +260,7 @@ public class HazyAuton extends Subsystem {
           }
         }
       }
-        milStart = java.lang.System.currentTimeMillis(); 
-        while (java.lang.System.currentTimeMillis() < milStart + 750) {
-          Robot.commandSwallowHighFeed.execute();
-        
-
-        milStart = java.lang.System.currentTimeMillis();
-        while (java.lang.System.currentTimeMillis() < milStart + 2000) {
-          Robot.commandHighFeedDefault.execute();
-        }
-      }
+    
       Robot.solenoidToLight.set(false);
       Robot.commandShooterDefault.execute();
     }

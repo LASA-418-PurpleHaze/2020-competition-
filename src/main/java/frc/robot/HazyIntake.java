@@ -43,6 +43,13 @@ public class HazyIntake extends Subsystem {
         shouldMove = true;
     }
 
+    public void moveIntakeDownAuton(){
+        liftTalon.set(ControlMode.PercentOutput, -RobotMap.LIFTTALONSPEED);
+    }
+    
+    public void stopIntakeAuton(){
+        liftTalon.set(ControlMode.PercentOutput, 0);
+    }
     public void moveIntake(){ //Functions actually used by commands
 
         //System.out.println(inputLow.get());
@@ -78,6 +85,10 @@ public class HazyIntake extends Subsystem {
         }
    
 
+    }
+
+    public boolean getBottomButton(){
+        return shouldMove;
     }
 
     public void intakeStopLift(){

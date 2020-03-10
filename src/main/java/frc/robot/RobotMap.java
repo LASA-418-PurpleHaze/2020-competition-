@@ -65,6 +65,10 @@ public class RobotMap { //Static port variables
     public static final double DRIVEI = 0.0;
     public static final double DRIVED = 0.0;
     public static final double DRIVEF = 0.0;
+    public static final double TRENCHP = 0.08;
+    public static final double TRENCHI = 0.0;
+    public static final double TRENCHD = 0.0;
+    public static final double TRENCHF = 0.0;
     public static final double STRAFEP = 1.0;
     public static final double STRAFEI = 0.0;
     public static final double STRAFED = 0.0;
@@ -75,7 +79,7 @@ public class RobotMap { //Static port variables
     public static final double TURNF = 0.0;
     public static final double SIDETICKSPERFEET = 4600.0;
     public static final double INITIALFEET = 7.0;
-    public static final double STARTAUTONDELAY = 1000.0;
+    public static final double STARTAUTONDELAY = 500.0;
     public static final double TURN180TICKS = 18193.0;
     public static final double SHOOTRPM = 30000.0;
     //End Arm

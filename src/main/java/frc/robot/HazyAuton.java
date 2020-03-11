@@ -175,45 +175,45 @@ public class HazyAuton extends Subsystem {
       Robot.commandShooterDefault.execute();
     }
 
-    public void autonTwo(){
-      //start in the middle of the field (13.5 feet from either edge)
-      double delay = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
-      resetEncoders();
-      move(RobotMap.INITIALFEET);
-      strafeRight(5.4);
+    // public void autonTwo(){
+    //   //start in the middle of the field (13.5 feet from either edge)
+    //   double delay = java.lang.System.currentTimeMillis();
+    //   while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+    //   resetEncoders();
+    //   move(RobotMap.INITIALFEET);
+    //   strafeRight(5.4);
 
-      double milStart = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < milStart + 4000){
-        Robot.commandFollowVision.execute();
-      }
+    //   double milStart = java.lang.System.currentTimeMillis();
+    //   while (java.lang.System.currentTimeMillis() < milStart + 4000){
+    //     Robot.commandFollowVision.execute();
+    //   }
 
       
-      milStart = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < milStart + 1000){}
+    //   milStart = java.lang.System.currentTimeMillis();
+    //   while (java.lang.System.currentTimeMillis() < milStart + 1000){}
 
-      int count = 0;
-      boolean wasGreater = false;
-      while(count < 3){
-        //System.out.println("IN LOOP");
-        if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
-          //System.out.println("MOVING UP");
-          Robot.hazyHighFeeder.swallow();
-          wasGreater = true;
-        }
-        else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
-          //System.out.println("SLOWED");
-          Robot.hazyHighFeeder.stop();
-          if(wasGreater){
-            count += 1;
-            wasGreater = false;
-          }
-        }
-      }
+    //   int count = 0;
+    //   boolean wasGreater = false;
+    //   while(count < 3){
+    //     //System.out.println("IN LOOP");
+    //     if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){
+    //       //System.out.println("MOVING UP");
+    //       Robot.hazyHighFeeder.swallow();
+    //       wasGreater = true;
+    //     }
+    //     else if(Robot.hazyShooter.getShooterRPM() < RobotMap.SHOOTRPM){
+    //       //System.out.println("SLOWED");
+    //       Robot.hazyHighFeeder.stop();
+    //       if(wasGreater){
+    //         count += 1;
+    //         wasGreater = false;
+    //       }
+    //     }
+    //   }
 
-      Robot.solenoidToLight.set(false);
-      Robot.commandShooterDefault.execute();
-    }
+    //   Robot.solenoidToLight.set(false);
+    //   Robot.commandShooterDefault.execute();
+    // }
 
     public void autonThree(){
       //start in front of the trench run to pick up two more to shoot 5
@@ -234,8 +234,7 @@ public class HazyAuton extends Subsystem {
       resetEncoders();
       moveTrench(-13.6);
 
-      double delay2 = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < delay2 + 5000.0){}//Amount of time to wait for robot to travel down the trench to pick up balls
+      while (Math.abs(rightBackTalon.getSelectedSensorPosition()) < Math.abs(13.6 * RobotMap.TICKSPERFEET)){}
 
       resetEncoders();
       turn180();

@@ -13,7 +13,7 @@ public class HazyShooter extends Subsystem {
     private static TalonSRX shooterTalon;
     private static HazyIntake instance;
     
-  private static SmartDashboard smartdashboard;
+    private static SmartDashboard smartdashboard;
 
     public HazyShooter(){
         shooterTalon = new TalonSRX(RobotMap.SHOOTERTALONPORT);

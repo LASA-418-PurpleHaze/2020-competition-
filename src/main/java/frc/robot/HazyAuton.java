@@ -216,34 +216,44 @@ public class HazyAuton extends Subsystem {
     }
 
     public void autonThree(){
-      //start in the middle of the field (13.5 feet from either edge)
+      //start in front of the trench run to pick up two more to shoot 5
       double delay = java.lang.System.currentTimeMillis();
       while (java.lang.System.currentTimeMillis() < delay + RobotMap.STARTAUTONDELAY){}
+
       Robot.hazyIntake.moveIntakeDownAuton();
+      
       double intakeDelay = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < intakeDelay + 750.0){}
+      while (java.lang.System.currentTimeMillis() < intakeDelay + 750.0){} //Amount of time the intake motor will drop the intake
+
       Robot.hazyIntake.stopIntakeAuton();
       Robot.commandSwallowIntake.execute();
+
       intakeDelay = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < intakeDelay + 1000.0){}
+      while (java.lang.System.currentTimeMillis() < intakeDelay + 1000.0){}//Amount of time to wait after intake is dropped to start moving
+
       resetEncoders();
       moveTrench(-13.6);
-      Robot.commandShooterSpit.execute();
+
       double delay2 = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < delay2 + 3000.0){}
+      while (java.lang.System.currentTimeMillis() < delay2 + 5000.0){}//Amount of time to wait for robot to travel down the trench to pick up balls
+
       resetEncoders();
       turn180();
       Robot.commandStopSpinning.execute();
       Robot.commandToggleDelay.execute();
+      Robot.commandShooterSpit.execute();
+
       double milStart = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < milStart + 4000){
+      while (java.lang.System.currentTimeMillis() < milStart + 4000){ //Amount of time for robot to use vision to lock on
         Robot.commandFollowVision.execute();
       }
 
       milStart = java.lang.System.currentTimeMillis();
-      while (java.lang.System.currentTimeMillis() < milStart + 1000){}
+      while (java.lang.System.currentTimeMillis() < milStart + 1000){}//Amount of time to wait between locking on with vision and shooting
+
       int count = 0;
       boolean wasGreater = false;
+
       while(count < 3){
         //System.out.println("IN LOOP");
         if(Robot.hazyShooter.getShooterRPM() >= RobotMap.SHOOTRPM){

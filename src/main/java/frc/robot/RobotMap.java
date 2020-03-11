@@ -58,25 +58,22 @@ public class RobotMap { //Static port variables
 
     //Auton
     public static final int STARTINGPOSITION = 0;
+    
     public static final int TURNANGLE1 = 180;
-    public static final double PIGEONERROR = 5.0;
-    public static final double MAXVISIONSPEED = 0.3;
+    
+    public static final double MAXVISIONSPEED = 0.5;
+    
     public static final double DRIVEP = 0.08;
     public static final double DRIVEI = 0.0;
     public static final double DRIVED = 0.0;
     public static final double DRIVEF = 0.0;
+    
     public static final double TRENCHP = 0.08;
-    public static final double TRENCHI = 0.0;
-    public static final double TRENCHD = 0.0;
-    public static final double TRENCHF = 0.0;
+    
     public static final double STRAFEP = 1.0;
-    public static final double STRAFEI = 0.0;
-    public static final double STRAFED = 0.0;
-    public static final double STRAFEF = 0.0;
+    
     public static final double TURNP = 0.18;
-    public static final double TURNI = 0.0;
-    public static final double TURND = 0.0;
-    public static final double TURNF = 0.0;
+    
     public static final double SIDETICKSPERFEET = 4600.0;
     public static final double INITIALFEET = 7.0;
     public static final double STARTAUTONDELAY = 500.0;
